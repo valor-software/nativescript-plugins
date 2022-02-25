@@ -57,7 +57,7 @@ export class NativeBridge extends NativeBridgeDefinition {
       this.nativeWs.send(data);
       return;
     }
-    throw new Error('Method not implemented.');
+    throw new Error('Unsupported data type');
   }
   closeWithCodeReason(statusCode: number, closeReason: string) {
     this.nativeWs.close(statusCode, closeReason);
