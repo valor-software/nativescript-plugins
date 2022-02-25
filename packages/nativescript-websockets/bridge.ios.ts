@@ -55,29 +55,19 @@ export class NativeBridge extends NativeBridgeDefinition {
     }
 
     // Load and set the cookie header.
-    // NSArray<NSHTTPCookie *> *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:components.URL];
-    // request.allHTTPHeaderFields = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
+    const cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage.cookiesForURL(components.URL);
+    request.allHTTPHeaderFields = NSHTTPCookie.requestHeaderFieldsWithCookies(cookies);
 
-    // // Load supplied headers
-    // if ([options.headers() isKindOfClass:NSDictionary.class]) {
-    //   NSDictionary *headers = (NSDictionary *)options.headers();
-    //   [headers enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL *stop) {
-    //     [request addValue:[RCTConvert NSString:value] forHTTPHeaderField:key];
-    //   }];
-    // }
+    // Load supplied headers
+    for(const k of headers.headers) {
+        request.addValueForHTTPHeaderField(headers.headers[k], k);
+    }
 
     const webSocket = RCTSRWebSocket.alloc().initWithURLRequestProtocols(request, protocols);
     this.nativeSocket = webSocket;
     this.delegate = RCTSRWebSocketDelegateImpl.initWithOwner(this);
     webSocket.setDelegateDispatchQueue(dispatch_get_current_queue());
     webSocket.delegate = this.delegate;
-    // [webSocket setDelegateDispatchQueue:[self methodQueue]];
-    // webSocket.delegate = self;
-    // webSocket.reactTag = @(socketID);
-    // if (!_sockets) {
-    //   _sockets = [NSMutableDictionary new];
-    // }
-    // _sockets[@(socketID)] = webSocket;
     webSocket.open();
   }
 
