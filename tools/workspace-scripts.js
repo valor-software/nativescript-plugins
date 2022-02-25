@@ -63,7 +63,14 @@ module.exports = {
     // packages
     // build output is always in dist/packages
     '@valor-software': {
-      'build-all': {
+      // @valor-software/nativescript-websockets
+			'nativescript-websockets': {
+				build: {
+					script: 'nx run nativescript-websockets:build.all',
+					description: '@valor-software/nativescript-websockets: Build',
+				},
+			},
+			'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
       },
@@ -73,7 +80,11 @@ module.exports = {
       description: '_____________  Focus (VS Code supported)  _____________',
     },
     focus: {
-      reset: {
+      'nativescript-websockets': {
+				script: 'nx run nativescript-websockets:focus',
+				description: 'Focus on @valor-software/nativescript-websockets',
+			},
+			reset: {
         script: 'nx g @nativescript/plugin-tools:focus-packages',
         description: 'Reset Focus',
       },

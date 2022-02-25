@@ -1,7 +1,8 @@
 {
   "main": "./src/main.ts",
   "dependencies": {
-    "@nativescript/core": "file:../../node_modules/@nativescript/core"
+    "@nativescript/core": "file:../../node_modules/@nativescript/core",
+    "@valor-software/nativescript-websockets": "file:../../dist/packages/nativescript-websockets"
   },
   "devDependencies": {
     "@nativescript/android": "~8.1.1",

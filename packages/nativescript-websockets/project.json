@@ -1,0 +1,58 @@
+{
+  "root": "packages/nativescript-websockets",
+  "projectType": "library",
+  "sourceRoot": "packages/nativescript-websockets",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "outputPath": "dist/packages/nativescript-websockets",
+        "tsConfig": "packages/nativescript-websockets/tsconfig.json",
+        "packageJson": "packages/nativescript-websockets/package.json",
+        "main": "packages/nativescript-websockets/index.d.ts",
+        "assets": [
+          "packages/nativescript-websockets/*.md",
+          "packages/nativescript-websockets/index.d.ts",
+          "LICENSE",
+          {
+            "glob": "**/*",
+            "input": "packages/nativescript-websockets/platforms/",
+            "output": "./platforms/"
+          }
+        ]
+      }
+    },
+    "build.all": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": ["dist/packages/nativescript-websockets"],
+      "options": {
+        "commands": ["node tools/scripts/build-finish.ts nativescript-websockets"],
+        "parallel": false
+      },
+      "dependsOn": [
+        {
+          "target": "build.all",
+          "projects": "dependencies"
+        },
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ]
+    },
+    "focus": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["nx g @nativescript/plugin-tools:focus-packages nativescript-websockets"],
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/nativescript-websockets/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

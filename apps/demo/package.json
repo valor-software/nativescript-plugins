@@ -4,7 +4,8 @@
   "license": "SEE LICENSE IN <your-license-filename>",
   "repository": "<fill-your-repository-here>",
   "dependencies": {
-    "@nativescript/core": "file:../../node_modules/@nativescript/core"
+    "@nativescript/core": "file:../../node_modules/@nativescript/core",
+    "@valor-software/nativescript-websockets": "file:../../packages/nativescript-websockets"
   },
   "devDependencies": {
     "@nativescript/android": "~8.1.1",

@@ -5,7 +5,7 @@ npm run setup
 npm start
 ```
 
-- @valor-software
+- [@valor-software/nativescript-websockets](packages/nativescript-websockets/README.md)
 
 # How to use?
 
