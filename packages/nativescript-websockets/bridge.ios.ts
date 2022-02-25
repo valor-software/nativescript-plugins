@@ -37,6 +37,9 @@ class RCTSRWebSocketDelegateImpl extends NSObject implements RCTSRWebSocketDeleg
 }
 export class NativeBridge extends NativeBridgeDefinition {
   nativeSocket: RCTSRWebSocket;
+  // store the delegate so it isn't garbage collected
+  // TODO: fix the iOS runtime so we don't need this
+  delegate: RCTSRWebSocketDelegateImpl;
   _connect(url, protocols, headers, socketId) {
     const nativeUrl = NSURL.URLWithString(url);
     const request = NSMutableURLRequest.requestWithURL(nativeUrl);
@@ -65,8 +68,9 @@ export class NativeBridge extends NativeBridgeDefinition {
 
     const webSocket = RCTSRWebSocket.alloc().initWithURLRequestProtocols(request, protocols);
     this.nativeSocket = webSocket;
+    this.delegate = RCTSRWebSocketDelegateImpl.initWithOwner(this);
     webSocket.setDelegateDispatchQueue(dispatch_get_current_queue());
-    webSocket.delegate = RCTSRWebSocketDelegateImpl.initWithOwner(this);
+    webSocket.delegate = this.delegate;
     // [webSocket setDelegateDispatchQueue:[self methodQueue]];
     // webSocket.delegate = self;
     // webSocket.reactTag = @(socketID);
