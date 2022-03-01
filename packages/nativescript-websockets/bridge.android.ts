@@ -45,9 +45,9 @@ export class NativeBridge extends NativeBridgeDefinition {
   }
   send(data: string | ArrayBuffer | ArrayBufferView | Blob): void {
     if (data instanceof ArrayBuffer || ArrayBuffer.isView(data)) {
-      const byteBuffer = Array.create('byte', data.byteLength);;
+      const byteBuffer = Array.create('byte', data.byteLength);
       const view = new Uint8Array(data instanceof ArrayBuffer ? data : data.buffer);
-      for(let i = 0; i < view.length; i++) {
+      for (let i = 0; i < view.length; i++) {
         byteBuffer[i] = view[i];
       }
       this.nativeWs.send(okio.ByteString.of(byteBuffer));
@@ -72,10 +72,10 @@ export class NativeBridge extends NativeBridgeDefinition {
   public onMessage(param0: okhttp3.WebSocket, param1: okio.ByteString): void;
   public onMessage(param0: okhttp3.WebSocket, param1: string): void;
   public onMessage(ws: okhttp3.WebSocket, data: okio.ByteString | string): void {
-    if(data instanceof okio.ByteString) {
+    if (data instanceof okio.ByteString) {
       // const arrayBuffer = new ArrayBuffer(data.size());
       const bufferView = new Uint8Array(data.size());
-      for(let i= 0; i < data.size(); i++) {
+      for (let i = 0; i < data.size(); i++) {
         bufferView[i] = data.getByte(i);
       }
       const arrayBuffer = bufferView.buffer;
@@ -86,8 +86,8 @@ export class NativeBridge extends NativeBridgeDefinition {
   }
   public onFailure(param0: okhttp3.WebSocket, param1: java.lang.Throwable, param2: okhttp3.Response): void {
     let message = param1.getLocalizedMessage();
-    if(!message) {
-      if(param1 instanceof java.io.EOFException) {
+    if (!message) {
+      if (param1 instanceof java.io.EOFException) {
         message = 'The remote server closed the connection.';
       }
     }

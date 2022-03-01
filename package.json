@@ -43,7 +43,8 @@
   },
   "lint-staged": {
     "**/*.{js,ts,scss,json,html}": [
-      "npx prettier --write"
+      "nx format:write --files",
+      "nx affected:lint --fix --files"
     ]
   }
 }

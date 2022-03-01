@@ -59,8 +59,8 @@ export class NativeBridge extends NativeBridgeDefinition {
     request.allHTTPHeaderFields = NSHTTPCookie.requestHeaderFieldsWithCookies(cookies);
 
     // Load supplied headers
-    for(const k of headers.headers) {
-        request.addValueForHTTPHeaderField(headers.headers[k], k);
+    for (const k of headers.headers) {
+      request.addValueForHTTPHeaderField(headers.headers[k], k);
     }
 
     const webSocket = RCTSRWebSocket.alloc().initWithURLRequestProtocols(request, protocols);

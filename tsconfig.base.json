@@ -9,10 +9,7 @@
     "noEmitHelpers": true,
     "target": "es2017",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -23,16 +20,9 @@
       }
     ],
     "paths": {
-      "@demo/shared": [
-        "tools/demo/index.ts"
-      ],
-      "@valor-software/nativescript-websockets": [
-        "packages/nativescript-websockets/index.d.ts"
-      ]
+      "@demo/shared": ["tools/demo/index.ts"],
+      "@valor-software/nativescript-websockets": ["packages/nativescript-websockets/index.d.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

@@ -1,7 +1,3 @@
-import { NativeBridgeDefinition } from "./websocket.definition";
+import { NativeBridgeDefinition } from './websocket.definition';
 
-
-
-declare class NativeBridge extends NativeBridgeDefinition {
-
-}
+declare class NativeBridge extends NativeBridgeDefinition {}
