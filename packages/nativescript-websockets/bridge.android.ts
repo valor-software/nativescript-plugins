@@ -27,6 +27,39 @@ class WebSocketListenerImpl extends okhttp3.WebSocketListener {
   }
 }
 
+function getDefaultOrigin(uri: string) {
+  try {
+    let defaultOrigin;
+    let scheme = '';
+
+    const requestURI = new java.net.URI(uri);
+    switch (requestURI.getScheme()) {
+      case 'wss':
+        scheme += 'https';
+        break;
+      case 'ws':
+        scheme += 'http';
+        break;
+      case 'http':
+      case 'https':
+        scheme += requestURI.getScheme();
+        break;
+      default:
+        break;
+    }
+
+    if (requestURI.getPort() != -1) {
+      defaultOrigin = `${scheme}://${requestURI.getHost()}:${requestURI.getPort()}`;
+    } else {
+      defaultOrigin = `${scheme}://${requestURI.getHost()}`;
+    }
+
+    return defaultOrigin;
+  } catch (e) {
+    throw new java.lang.IllegalArgumentException('Unable to set ' + uri + ' as default origin header');
+  }
+}
+
 export class NativeBridge extends NativeBridgeDefinition {
   client!: okhttp3.OkHttpClient;
   listener!: WebSocketListenerImpl;
@@ -48,6 +81,10 @@ export class NativeBridge extends NativeBridgeDefinition {
     if (protocols.length > 0) {
       requestBuilder.addHeader('Sec-WebSocket-Protocol', protocols.join(','));
     }
+    if (!headers.headers['origin']) {
+      requestBuilder.addHeader('origin', getDefaultOrigin(url));
+    }
+    // TODO: cookies? There isn't a default cookie jar in android/nativescript
 
     this.listener = new WebSocketListenerImpl(this);
     this.nativeWs = this.client.newWebSocket(requestBuilder.build(), this.listener);
