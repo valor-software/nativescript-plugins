@@ -109,7 +109,7 @@ export class NativeBridge extends NativeBridgeDefinition {
     this.nativeWs.close(statusCode, closeReason);
   }
   sendPing() {
-    //
+    this.nativeWs.send(okio.ByteString.EMPTY);
   }
 
   public onClosed(ws: okhttp3.WebSocket, code: number, reason: string): void {
