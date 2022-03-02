@@ -6,7 +6,14 @@ ns plugin add @valor-software/nativescript-websockets
 
 ## Usage
 
-// TODO
+To use this plugin simply add this to your `polyfills.ts` on angular (before importing zone.js) or on your entrypoint (app.ts, main.ts) on other flavors:
+
+```ts
+import '@valor-software/nativescript-websockets';
+```
+
+Beware that import order matters! If needed you can also add the plugin to your bundle directly with webpack.
+
 
 ## License
 
