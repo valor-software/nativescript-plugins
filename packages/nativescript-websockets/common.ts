@@ -15,6 +15,8 @@ export type MessageEvent = { data: any };
 
 export type WebSocketEventType = 'open' | 'close' | 'error' | 'message' | 'ping' | 'pong';
 
+export type HeaderType = { headers: { [key: string]: unknown } };
+
 export class WebSocketEvent {
   constructor(type: 'open');
   constructor(type: 'message', eventInitDict: MessageEvent);

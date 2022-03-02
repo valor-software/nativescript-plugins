@@ -26,8 +26,6 @@ const CLOSE_NORMAL = 1000;
 
 const WEBSOCKET_EVENTS = ['close', 'error', 'message', 'open'];
 
-let nextWebSocketId = 0;
-
 type WebSocketEventDefinitions = {
   websocketOpen: [{ id: number; protocol: string }];
   websocketClosed: [{ id: number; code: number; reason: string }];
@@ -56,21 +54,21 @@ class WebSocket extends Observable implements WebSocketPolyfill {
   CLOSING: number = CLOSING;
   CLOSED: number = CLOSED;
 
-  _socketId: number;
+  // _socketId: number;
   //    _eventEmitter: NativeEventEmitter<WebSocketEventDefinitions>;
   //    _subscriptions: Array<EventSubscription>;
   _binaryType: BinaryType;
 
   /* eslint-disable @typescript-eslint/ban-types */
-  onclose: Function;
-  onerror: Function;
-  onmessage: Function;
-  onopen: Function;
+  onclose?: Function;
+  onerror?: Function;
+  onmessage?: Function;
+  onopen?: Function;
   /* eslint-enable @typescript-eslint/ban-types */
 
-  bufferedAmount: number;
-  extension: string;
-  protocol: string;
+  bufferedAmount?: number;
+  extension?: string;
+  protocol?: string;
   readyState: number = CONNECTING;
   url: string;
 
@@ -81,8 +79,12 @@ class WebSocket extends Observable implements WebSocketPolyfill {
     if (typeof protocols === 'string') {
       protocols = [protocols];
     }
+    if (!Array.isArray(protocols)) {
+      protocols = [];
+    }
 
-    const { headers = {}, ...unrecognized } = options || ({} as any);
+    const { headers = {}, ...unrecognized } = options || ({} as { headers: { origin?: string; [key: string]: unknown }; [key: string]: unknown });
+    this._binaryType = 'arraybuffer';
 
     // Preserve deprecated backwards compatibility for the 'origin' option
     if (unrecognized && typeof unrecognized.origin === 'string') {
@@ -102,18 +104,13 @@ class WebSocket extends Observable implements WebSocketPolyfill {
       console.warn('Unrecognized WebSocket connection option(s) `' + Object.keys(unrecognized).join('`, `') + '`. ' + 'Did you mean to put these under `headers`?');
     }
 
-    if (!Array.isArray(protocols)) {
-      protocols = null;
-    }
-
     //  this._eventEmitter = new NativeEventEmitter(
     //    // T88715063: NativeEventEmitter only used this parameter on iOS. Now it uses it on all platforms, so this code was modified automatically to preserve its behavior
     //    // If you want to use the native module on other platforms, please remove this condition and test its behavior
     //    Platform.OS !== 'ios' ? null : NativeWebSocketModule,
     //  );
-    this._socketId = nextWebSocketId++;
     this._registerEvents();
-    this.nativeBridge._connect(url, protocols, { headers }, this._socketId);
+    this.nativeBridge._connect(url, protocols, { headers });
     //  NativeWebSocketModule.connect(url, protocols, {headers}, this._socketId);
   }
 

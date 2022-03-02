@@ -1,4 +1,5 @@
-import { NativeBridgeDefinition, WebSocketPolyfill } from './websocket.definition';
+import { HeaderType } from './common';
+import { NativeBridgeDefinition } from './websocket.definition';
 
 @NativeClass()
 class WebSocketListenerImpl extends okhttp3.WebSocketListener {
@@ -6,14 +7,13 @@ class WebSocketListenerImpl extends okhttp3.WebSocketListener {
   constructor(owner: NativeBridge) {
     super();
     this.owner = new WeakRef(owner);
-    return global.__native(this);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (global as any).__native(this);
   }
   public onClosed(param0: okhttp3.WebSocket, param1: number, param2: string): void {
     this.owner.get()?.onClosed(param0, param1, param2);
   }
-  public onMessage(param0: okhttp3.WebSocket, param1: okio.ByteString): void;
-  public onMessage(param0: okhttp3.WebSocket, param1: string): void;
-  public onMessage(param0: any, param1: any): void {
+  public onMessage(param0: okhttp3.WebSocket, param1: string | okio.ByteString): void {
     this.owner.get()?.onMessage(param0, param1);
   }
   public onFailure(param0: okhttp3.WebSocket, param1: java.lang.Throwable, param2: okhttp3.Response): void {
@@ -28,10 +28,11 @@ class WebSocketListenerImpl extends okhttp3.WebSocketListener {
 }
 
 export class NativeBridge extends NativeBridgeDefinition {
-  client: okhttp3.OkHttpClient;
-  listener: WebSocketListenerImpl;
-  nativeWs: okhttp3.WebSocket;
-  _connect(url: string, protocols: string, headers: any, socketId: number): void {
+  client!: okhttp3.OkHttpClient;
+  listener!: WebSocketListenerImpl;
+  nativeWs!: okhttp3.WebSocket;
+  _connect(url: string, protocols: string[], headers: HeaderType): void {
+    protocols = protocols || [];
     this.client = new okhttp3.OkHttpClient.Builder()
       .connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
       .writeTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
@@ -39,6 +40,14 @@ export class NativeBridge extends NativeBridgeDefinition {
       .build();
     const requestBuilder = new okhttp3.Request.Builder();
     requestBuilder.url(url);
+
+    for (const header of Object.keys(headers.headers)) {
+      requestBuilder.addHeader(header, `${headers.headers[header]}`);
+    }
+
+    if (protocols.length > 0) {
+      requestBuilder.addHeader('Sec-WebSocket-Protocol', protocols.join(','));
+    }
 
     this.listener = new WebSocketListenerImpl(this);
     this.nativeWs = this.client.newWebSocket(requestBuilder.build(), this.listener);
@@ -69,8 +78,6 @@ export class NativeBridge extends NativeBridgeDefinition {
   public onClosed(ws: okhttp3.WebSocket, code: number, reason: string): void {
     this.ws._websocketClosed(code, reason, true);
   }
-  public onMessage(param0: okhttp3.WebSocket, param1: okio.ByteString): void;
-  public onMessage(param0: okhttp3.WebSocket, param1: string): void;
   public onMessage(ws: okhttp3.WebSocket, data: okio.ByteString | string): void {
     if (data instanceof okio.ByteString) {
       // const arrayBuffer = new ArrayBuffer(data.size());

@@ -8,6 +8,7 @@
  * @flow
  */
 
+import { HeaderType } from './common';
 import { NativeBridgeDefinition } from './websocket.definition';
 
 @NativeClass
@@ -18,7 +19,7 @@ class RCTSRWebSocketDelegateImpl extends NSObject implements RCTSRWebSocketDeleg
     instance.owner = new WeakRef(owner);
     return instance;
   }
-  public owner: WeakRef<NativeBridge>;
+  public owner!: WeakRef<NativeBridge>;
   webSocketDidCloseWithCodeReasonWasClean?(webSocket: RCTSRWebSocket, code: number, reason: string, wasClean: boolean): void {
     this.owner.get()?._websocketClosed(code, reason, wasClean);
   }
@@ -28,7 +29,7 @@ class RCTSRWebSocketDelegateImpl extends NSObject implements RCTSRWebSocketDeleg
   webSocketDidOpen(webSocket: RCTSRWebSocket): void {
     this.owner.get()?._websocketOpen();
   }
-  webSocketDidReceiveMessage(webSocket: RCTSRWebSocket, message: any): void {
+  webSocketDidReceiveMessage(webSocket: RCTSRWebSocket, message: unknown): void {
     this.owner.get()?._websocketMessage(message);
   }
   webSocketDidReceivePong?(webSocket: RCTSRWebSocket, pongPayload: NSData): void {
@@ -36,11 +37,11 @@ class RCTSRWebSocketDelegateImpl extends NSObject implements RCTSRWebSocketDeleg
   }
 }
 export class NativeBridge extends NativeBridgeDefinition {
-  nativeSocket: RCTSRWebSocket;
+  nativeSocket!: RCTSRWebSocket;
   // store the delegate so it isn't garbage collected
   // TODO: fix the iOS runtime so we don't need this
-  delegate: RCTSRWebSocketDelegateImpl;
-  _connect(url, protocols, headers, socketId) {
+  delegate!: RCTSRWebSocketDelegateImpl;
+  _connect(url: string, protocols: string[], headers: HeaderType) {
     const nativeUrl = NSURL.URLWithString(url);
     const request = NSMutableURLRequest.requestWithURL(nativeUrl);
     // NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
@@ -59,8 +60,8 @@ export class NativeBridge extends NativeBridgeDefinition {
     request.allHTTPHeaderFields = NSHTTPCookie.requestHeaderFieldsWithCookies(cookies);
 
     // Load supplied headers
-    for (const k of headers.headers) {
-      request.addValueForHTTPHeaderField(headers.headers[k], k);
+    for (const k of Object.keys(headers.headers)) {
+      request.addValueForHTTPHeaderField(`${headers.headers[k]}`, k);
     }
 
     const webSocket = RCTSRWebSocket.alloc().initWithURLRequestProtocols(request, protocols);
@@ -100,7 +101,8 @@ export class NativeBridge extends NativeBridgeDefinition {
     this.nativeSocket.closeWithCodeReason(statusCode, closeReason);
   }
   sendPing() {
-    this.nativeSocket.sendPing(null);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.nativeSocket.sendPing(null!);
   }
 
   _websocketOpen() {
@@ -109,11 +111,11 @@ export class NativeBridge extends NativeBridgeDefinition {
   _websocketClosed(code: number, reason: string, wasClean: boolean) {
     this.ws._websocketClosed(code, reason, wasClean);
   }
-  _websocketMessage(message: any) {
+  _websocketMessage(message: unknown) {
     if (message instanceof NSData) {
       message = interop.bufferFromData(message);
     }
-    this.ws._websocketMessage(message);
+    this.ws._websocketMessage(message as string | ArrayBuffer);
   }
   _websocketPong(pongPayload: NSData) {
     //
