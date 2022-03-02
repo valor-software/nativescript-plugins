@@ -6,6 +6,8 @@ set -e
 PACKAGENAME=NativeScriptWebSockets
 OUTPUTPATH=$(PWD)/build
 COPYPATH=$(PWD)/../../platforms/ios/
+# make xcode builds deterministic
+export ZERO_AR_DATE=1
 
 rm -rf $OUTPUTPATH
 
