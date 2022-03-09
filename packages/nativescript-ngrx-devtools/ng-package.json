@@ -1,0 +1,8 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/packages/nativescript-ngrx-devtools",
+  "lib": {
+    "entryFile": "src/index.ts"
+  },
+  "assets": ["nativescript.webpack.js", "README.md"]
+}

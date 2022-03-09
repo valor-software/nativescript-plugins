@@ -43,3 +43,4 @@ Thumbs.db
 *.tgz
 packages/**/angular/dist
 packages/*/native-src/ios/build
+.angular

@@ -3,6 +3,7 @@
   "projects": {
     "demo": "apps/demo",
     "demo-angular": "apps/demo-angular",
+    "nativescript-ngrx-devtools": "packages/nativescript-ngrx-devtools",
     "nativescript-websockets": "packages/nativescript-websockets"
   }
 }
