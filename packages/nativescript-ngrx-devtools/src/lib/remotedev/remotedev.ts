@@ -17,7 +17,6 @@ export class RemoteDev {
     port: 8000,
     secure: false,
     autoReconnect: true,
-    realtime: true,
     ackTimeout: 10000,
     connectTimeout: 10000,
     defaultHosts: typeof __NS_DEV_HOST_IPS__ !== 'undefined' ? __NS_DEV_HOST_IPS__ : [],
@@ -254,8 +253,7 @@ export class RemoteDev {
       this.channel.watch(this.propagateMessage);
       this.socket.on(channelName, this.propagateMessage);
       // send START/STOP
-      this.propagateMessage({ type: this.options.realtime ? 'START' : 'STOP' });
-      // setTimeout(() => this.propagateMessage({ type: `START` }), 1000);
+      this.propagateMessage({ type: 'START' });
     });
   }
 

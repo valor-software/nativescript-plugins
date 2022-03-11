@@ -2,7 +2,9 @@ import { Component, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptCommonModule, NativeScriptRouterModule } from '@nativescript/angular';
 import { createAction, createReducer, createSelector, on, Store, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { NativescriptNgrxDevtoolsModule } from '@valor/nativescript-ngrx-devtools';
+import { NativeScriptNgrxDevtoolsModule } from '@valor/nativescript-ngrx-devtools';
+
+declare const __DEV__: boolean;
 
 interface CountState {
   count: number;
@@ -67,8 +69,7 @@ export class NativeScriptNgrxDevtoolsComponent {
         },
       }
     ),
-    StoreDevtoolsModule.instrument({ maxAge: 20 }),
-    NativescriptNgrxDevtoolsModule.forRoot({}),
+    ...(__DEV__ ? [StoreDevtoolsModule.instrument({ maxAge: 20 }), NativeScriptNgrxDevtoolsModule.forRoot()] : []),
   ],
   declarations: [NativeScriptNgrxDevtoolsComponent],
   schemas: [NO_ERRORS_SCHEMA],

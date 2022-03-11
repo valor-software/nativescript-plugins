@@ -1,5 +1,4 @@
 export interface RemoteDevToolsProxyOptions {
-  realtime?: boolean;
   hostname?: string;
   port?: number;
   autoReconnect?: boolean;

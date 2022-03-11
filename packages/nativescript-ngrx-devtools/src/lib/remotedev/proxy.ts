@@ -44,7 +44,6 @@ export class RemoteDevToolsProxy implements ReduxDevtoolsExtension {
 
   constructor(@Optional() @Inject(REMOTE_DEVTOOLS_PROXY_OPTIONS) customOptions: RemoteDevToolsProxyOptions = {}, private ngZone: NgZone) {
     this.options = {
-      realtime: true,
       hostname: 'localhost',
       port: 8000,
       autoReconnect: true,
