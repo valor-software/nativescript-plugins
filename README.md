@@ -1,11 +1,11 @@
-# @valor-software/\* plugins
+# @valor/\* plugins
 
 ```
 npm run setup
 npm start
 ```
 
-- [@valor-software/nativescript-websockets](packages/nativescript-websockets/README.md)
+- [@valor/nativescript-websockets](packages/nativescript-websockets/README.md)
 
 # How to use?
 

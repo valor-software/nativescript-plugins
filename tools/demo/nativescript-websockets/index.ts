@@ -1,5 +1,5 @@
 import { DemoSharedBase } from '../utils';
-import '@valor-software/nativescript-websockets';
+import '@valor/nativescript-websockets';
 import { isAndroid } from '@nativescript/core';
 
 export class DemoSharedNativescriptWebsockets extends DemoSharedBase {

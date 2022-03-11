@@ -21,7 +21,7 @@
     ],
     "paths": {
       "@demo/shared": ["tools/demo/index.ts"],
-      "@valor-software/nativescript-websockets": ["packages/nativescript-websockets/index.d.ts"]
+      "@valor/nativescript-websockets": ["packages/nativescript-websockets/index.d.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

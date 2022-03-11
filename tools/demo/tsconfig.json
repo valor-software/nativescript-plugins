@@ -3,9 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@valor-software/*": [
-        "../../packages/*"
-      ]
+      "@valor/*": ["../../packages/*"]
     }
   }
 }

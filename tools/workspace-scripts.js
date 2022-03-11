@@ -57,20 +57,20 @@ module.exports = {
       },
     },
     '⚙️': {
-      script: `npx cowsay "@valor-software/* packages will keep your ⚙️ cranking"`,
-      description: '_____________  @valor-software/*  _____________',
+      script: `npx cowsay "@valor/* packages will keep your ⚙️ cranking"`,
+      description: '_____________  @valor/*  _____________',
     },
     // packages
     // build output is always in dist/packages
-    '@valor-software': {
-      // @valor-software/nativescript-websockets
-			'nativescript-websockets': {
-				build: {
-					script: 'nx run nativescript-websockets:build.all',
-					description: '@valor-software/nativescript-websockets: Build',
-				},
-			},
-			'build-all': {
+    '@valor': {
+      // @valor/nativescript-websockets
+      'nativescript-websockets': {
+        build: {
+          script: 'nx run nativescript-websockets:build.all',
+          description: '@valor/nativescript-websockets: Build',
+        },
+      },
+      'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
       },
@@ -81,10 +81,10 @@ module.exports = {
     },
     focus: {
       'nativescript-websockets': {
-				script: 'nx run nativescript-websockets:focus',
-				description: 'Focus on @valor-software/nativescript-websockets',
-			},
-			reset: {
+        script: 'nx run nativescript-websockets:focus',
+        description: 'Focus on @valor/nativescript-websockets',
+      },
+      reset: {
         script: 'nx g @nativescript/plugin-tools:focus-packages',
         description: 'Reset Focus',
       },
