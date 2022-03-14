@@ -7,7 +7,7 @@ This plugin allows you to use NgRx devtools with NativeScript.
 Firstly, run:
 
 ```bash
-npm i @valor/nativescript-ngrx-devtools
+npm i @valor/nativescript-ngrx-devtools @valor/nativescript-websockets
 ```
 
 Import `@valor/nativescript-websockets` in your `polyfills.ts`:
