@@ -11,7 +11,7 @@ import { decrement, increment, RootState, selectCount } from './nativescript-ngr
     <button (tap)="decrement()" text="Decrement"></button>
   </StackLayout>`,
 })
-export class NativeScriptNgrxDevtoolsComponent {
+export class NativeScriptNgRxDevtoolsComponent {
   count$ = this.store.select(selectCount);
   constructor(public store: Store<RootState>) {}
 
@@ -25,8 +25,8 @@ export class NativeScriptNgrxDevtoolsComponent {
 }
 
 @NgModule({
-  imports: [NativeScriptCommonModule, NativeScriptRouterModule.forChild([{ path: '', component: NativeScriptNgrxDevtoolsComponent }])],
-  declarations: [NativeScriptNgrxDevtoolsComponent],
+  imports: [NativeScriptCommonModule, NativeScriptRouterModule.forChild([{ path: '', component: NativeScriptNgRxDevtoolsComponent }])],
+  declarations: [NativeScriptNgRxDevtoolsComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })
-export class NativeScriptNgrxDevtoolsDemoModule {}
+export class NativeScriptNgRxDevtoolsDemoModule {}

@@ -238,7 +238,11 @@ export class RemoteDev {
 
     return new Promise<void>((resolve, reject) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.socket.emit('login', 'master', (error: Error, channelName: any) => {
+      if (this.channel || !this.socket) {
+        reject();
+        return;
+      }
+      this.socket.emit('login', 'master', (error: Error, channelName: string) => {
         if (!this.socket) {
           reject();
           return;
@@ -251,7 +255,8 @@ export class RemoteDev {
         let hasStarted = false;
 
         this.channel = this.socket.subscribe(channelName);
-        const messageHandler = (message) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const messageHandler = (message: any) => {
           this.propagateMessage(message);
           if (message?.type === 'START' && !hasStarted) {
             hasStarted = true;

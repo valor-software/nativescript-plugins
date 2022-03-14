@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'nativescript-websockets', loadChildren: () => import('./plugin-demos/nativescript-websockets.module').then((m) => m.NativescriptWebsocketsModule) },
-  { path: 'nativescript-ngrx-devtools', loadChildren: () => import('./plugin-demos/nativescript-ngrx-devtools.module').then((m) => m.NativeScriptNgrxDevtoolsDemoModule) },
+  { path: 'nativescript-ngrx-devtools', loadChildren: () => import('./plugin-demos/nativescript-ngrx-devtools.module').then((m) => m.NativeScriptNgRxDevtoolsDemoModule) },
 ];
 
 @NgModule({

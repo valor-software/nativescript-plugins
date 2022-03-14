@@ -4,8 +4,8 @@ import { REMOTE_DEVTOOLS_PROXY_OPTIONS, RemoteDevToolsProxy } from './remotedev/
 import { RemoteDevToolsProxyOptions } from './remotedev/model';
 
 @NgModule({})
-export class NativeScriptNgrxDevtoolsModule {
-  public static forRoot(options: RemoteDevToolsProxyOptions = {}): ModuleWithProviders<NativeScriptNgrxDevtoolsModule> {
+export class NativeScriptNgRxDevtoolsModule {
+  public static forRoot(options: RemoteDevToolsProxyOptions = {}): ModuleWithProviders<NativeScriptNgRxDevtoolsModule> {
     const instrumentProviders = StoreDevtoolsModule.instrument().providers || [];
     let devtoolsExtensionToken: InjectionToken<unknown> | null = null;
     for (const provider of instrumentProviders) {
@@ -21,7 +21,7 @@ export class NativeScriptNgrxDevtoolsModule {
       throw new Error('Unable to find Redux Devtools Extension token');
     }
     return {
-      ngModule: NativeScriptNgrxDevtoolsModule,
+      ngModule: NativeScriptNgRxDevtoolsModule,
       providers: [
         {
           provide: REMOTE_DEVTOOLS_PROXY_OPTIONS,

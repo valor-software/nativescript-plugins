@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { createAction, createReducer, createSelector, on, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { NativeScriptNgrxDevtoolsModule } from '@valor/nativescript-ngrx-devtools';
+import { NativeScriptNgRxDevtoolsModule } from '@valor/nativescript-ngrx-devtools';
 
 export interface CountState {
   count: number;
@@ -40,8 +40,8 @@ export const selectCount = createSelector(selectCounter, (counter) => counter.co
         },
       }
     ),
-    ...(__DEV__ ? [StoreDevtoolsModule.instrument({ maxAge: 20 }), NativeScriptNgrxDevtoolsModule.forRoot()] : []),
+    ...(__DEV__ ? [StoreDevtoolsModule.instrument({ maxAge: 20 }), NativeScriptNgRxDevtoolsModule.forRoot()] : []),
   ],
   exports: [StoreModule],
 })
-export class AppNgrxModule {}
+export class AppNgRxModule {}
