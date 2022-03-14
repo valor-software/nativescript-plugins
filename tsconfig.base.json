@@ -21,6 +21,7 @@
     ],
     "paths": {
       "@demo/shared": ["tools/demo/index.ts"],
+      "@valor/nativescript-ngrx-devtools": ["packages/nativescript-ngrx-devtools/src/index.ts"],
       "@valor/nativescript-websockets": ["packages/nativescript-websockets/index.d.ts"]
     }
   },

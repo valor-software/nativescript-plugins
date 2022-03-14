@@ -3,9 +3,11 @@
   "compilerOptions": {
     "paths": {
       "~/*": ["src/*"],
-      "@demo/shared": ["tools/demo/index.ts"]
+      "@demo/shared": ["tools/demo/index.ts"],
+      "@valor/nativescript-ngrx-devtools": ["packages/nativescript-ngrx-devtools/src/index.ts"],
+      "@valor/nativescript-websockets": ["packages/nativescript-websockets/index.ts"]
     }
   },
   "files": ["./references.d.ts", "./src/main.ts", "./src/polyfills.ts"],
-  "include": ["../../packages/**/references.d.ts"]
+  "include": ["../../packages/**/references.d.ts", "../../**/*.android.ts", "../../**/*.ios.ts"]
 }

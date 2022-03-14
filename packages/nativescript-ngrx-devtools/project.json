@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "root": "packages/nativescript-ngrx-devtools",
+  "sourceRoot": "packages/nativescript-ngrx-devtools/src",
+  "prefix": "valor",
+  "targets": {
+    "build.all": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/packages/nativescript-ngrx-devtools"],
+      "options": {
+        "project": "packages/nativescript-ngrx-devtools/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/nativescript-ngrx-devtools/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/nativescript-ngrx-devtools/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/nativescript-ngrx-devtools"],
+      "options": {
+        "jestConfig": "packages/nativescript-ngrx-devtools/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/nativescript-ngrx-devtools/src/**/*.ts", "packages/nativescript-ngrx-devtools/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}
