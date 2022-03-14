@@ -1,36 +1,7 @@
 import { Component, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptCommonModule, NativeScriptRouterModule } from '@nativescript/angular';
-import { createAction, createReducer, createSelector, on, Store, StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { NativeScriptNgrxDevtoolsModule } from '@valor/nativescript-ngrx-devtools';
-
-declare const __DEV__: boolean;
-
-interface CountState {
-  count: number;
-}
-
-interface RootState {
-  counter: CountState;
-}
-
-const increment = createAction('[Counter] Increment');
-const decrement = createAction('[Counter] Decrement');
-const initialize = createAction('[Counter] Initialize');
-
-const initialState: CountState = { count: 0 };
-
-const reducer = createReducer(
-  {
-    count: 0,
-  },
-  on(increment, (state) => ({ ...state, count: state.count + 1 })),
-  on(decrement, (state) => ({ ...state, count: state.count - 1 }))
-);
-
-const selectCounter = (state: RootState) => state.counter;
-
-const selectCount = createSelector(selectCounter, (counter) => counter.count);
+import { Store } from '@ngrx/store';
+import { decrement, increment, RootState, selectCount } from './nativescript-ngrx-devtools.ngrx';
 
 @Component({
   selector: 'nativescript-ngrx-devtools',
@@ -42,9 +13,7 @@ const selectCount = createSelector(selectCounter, (counter) => counter.count);
 })
 export class NativeScriptNgrxDevtoolsComponent {
   count$ = this.store.select(selectCount);
-  constructor(public store: Store<RootState>) {
-    this.store.dispatch(initialize());
-  }
+  constructor(public store: Store<RootState>) {}
 
   increment() {
     this.store.dispatch(increment());
@@ -56,21 +25,7 @@ export class NativeScriptNgrxDevtoolsComponent {
 }
 
 @NgModule({
-  imports: [
-    NativeScriptCommonModule,
-    NativeScriptRouterModule.forChild([{ path: '', component: NativeScriptNgrxDevtoolsComponent }]),
-    StoreModule.forRoot(
-      {
-        counter: reducer,
-      },
-      {
-        initialState: {
-          counter: initialState,
-        },
-      }
-    ),
-    ...(__DEV__ ? [StoreDevtoolsModule.instrument({ maxAge: 20 }), NativeScriptNgrxDevtoolsModule.forRoot()] : []),
-  ],
+  imports: [NativeScriptCommonModule, NativeScriptRouterModule.forChild([{ path: '', component: NativeScriptNgrxDevtoolsComponent }])],
   declarations: [NativeScriptNgrxDevtoolsComponent],
   schemas: [NO_ERRORS_SCHEMA],
 })

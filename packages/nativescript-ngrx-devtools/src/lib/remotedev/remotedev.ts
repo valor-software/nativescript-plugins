@@ -1,16 +1,16 @@
 import * as socketCluster from 'socketcluster-client';
 import { stringify } from 'jsan';
-import { EMPTY, firstValueFrom, from, map, mergeAll, Observable, of, timer } from 'rxjs';
-import { first, catchError, concatMap, mapTo } from 'rxjs/operators';
+import { EMPTY, firstValueFrom, from, map, mergeAll, Observable, of, Subject, throwError, timer } from 'rxjs';
+import { first, catchError, concatMap, mapTo, retryWhen, switchMap, takeUntil } from 'rxjs/operators';
 import type { SCChannel } from 'sc-channel';
 import { RemoteDevToolsProxyOptions } from './model';
+import type { ReduxDevtoolsExtensionConfig } from '@ngrx/store-devtools/src/extension';
 declare const __NS_DEV_HOST_IPS__: string[];
 
 export type ChangeListener = (change: unknown) => void;
 
 export class RemoteDev {
-  private static instance: RemoteDev | null;
-  private static listeners: { [key: string]: Array<ChangeListener> } = {};
+  private listeners: { [key: string]: Array<ChangeListener> } = {};
 
   private defaultOptions: Required<RemoteDevToolsProxyOptions> = {
     hostname: 'localhost',
@@ -26,23 +26,37 @@ export class RemoteDev {
   private socket: socketCluster.SCClientSocket | null = null;
   private channel: SCChannel | null = null;
   private connectionPromise: Promise<unknown> | null = null;
+  private disposed = false;
+  private disposed$ = new Subject<void>();
 
-  private constructor(options: RemoteDevToolsProxyOptions = {}) {
+  constructor(options: RemoteDevToolsProxyOptions = {}, private extensionConfig: ReduxDevtoolsExtensionConfig) {
     this.configure(options);
+    this.id = extensionConfig.name || this.generateId();
   }
 
-  public static getInstance(options = {}): RemoteDev {
-    if (!RemoteDev.instance) {
-      const instance = new RemoteDev(options);
-      instance.id = instance.generateId();
-
-      RemoteDev.instance = instance;
+  async dispose() {
+    this.disposed = true;
+    this.disposed$.next();
+    this.disposed$.complete();
+    if (!this.socket) {
+      try {
+        await this.connectionPromise;
+      } catch (e) {
+        // ignore
+      }
     }
-
-    return RemoteDev.instance;
+    if (this.channel) {
+      this.channel.unwatch();
+      this.channel.unsubscribe();
+      this.socket?.off(this.channel.name);
+    }
+    this.socket?.disconnect();
   }
 
   public async connect() {
+    if (this.disposed) {
+      return;
+    }
     if (this.isSocketConnected()) {
       return;
     }
@@ -50,6 +64,7 @@ export class RemoteDev {
       this.connectionPromise = this._connect();
     }
     await this.connectionPromise;
+    this.connectionPromise = null;
   }
   private async _connect() {
     const createSocket = (hostname: string) => {
@@ -79,46 +94,32 @@ export class RemoteDev {
 
     const hostnameArray = [this.options.hostname, ...this.options.defaultHosts];
     try {
+      // TODO: maybe change this to a more elegant RxJS solution with ReplaySubject for actions so we can avoid this mess
       const socket = await firstValueFrom(
         from(hostnameArray).pipe(
           // try a new connection every 200ms
           concatMap((hostname, i) => (i == 0 ? of(hostname) : timer(200).pipe(mapTo(hostname)))),
           map((host) => createSocket(host).pipe(catchError(() => EMPTY))),
           mergeAll(),
-          first()
+          first(),
+          retryWhen((errors) =>
+            errors.pipe(
+              switchMap((e) => {
+                if (this.options.autoReconnect) {
+                  return timer(1000);
+                }
+                return throwError(() => e);
+              })
+            )
+          ),
+          takeUntil(this.disposed$)
         )
       );
       this.socket = socket;
-      this.watchSocket();
-    } catch (e) {
-      console.log('Unable to open socket');
-      throw e;
+      await this.watchSocket();
     } finally {
       this.connectionPromise = null;
     }
-    // from(__NS_DEV_HOST_IPS__).pipe(
-    //   map((host) => createSocket(host)),
-    //   mergeAll(),
-    //   first()
-    // ).subscribe((socket) => {
-    //     this.socket = socket;
-    //     this.watchSocket();
-    // });
-
-    // this.socket = socketCluster.create({
-    //   hostname: '127.0.0.1',
-    //   port: this.options.port,
-    //   secure: !!this.options.secure,
-    // });
-    // this.socket.on('connect', () => {
-    //   console.log('connect');
-    // });
-
-    // this.socket.on('error', (error) => {
-    //   console.error('NGRX-DEVTOOLS: ', error.message);
-    // });
-
-    // this.watchSocket();
   }
 
   public subscribe(listener: ChangeListener) {
@@ -126,7 +127,7 @@ export class RemoteDev {
       return;
     }
 
-    const listeners = RemoteDev.listeners;
+    const listeners = this.listeners;
     if (!listeners[this.id]) {
       listeners[this.id] = [];
     }
@@ -140,7 +141,7 @@ export class RemoteDev {
   }
 
   public unsubscribe() {
-    delete RemoteDev.listeners[this.id];
+    delete this.listeners[this.id];
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -186,10 +187,6 @@ export class RemoteDev {
       await this.connect();
     } catch (e) {
       // ignore, we failed to open the socket
-      return;
-    }
-
-    if (!action) {
       return;
     }
 
@@ -239,32 +236,51 @@ export class RemoteDev {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.socket.emit('login', 'master', (error: Error, channelName: any) => {
-      if (!this.socket) {
-        return;
-      }
-      if (error) {
-        console.error(error.message);
-        return;
-      }
+    return new Promise<void>((resolve, reject) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.socket.emit('login', 'master', (error: Error, channelName: any) => {
+        if (!this.socket) {
+          reject();
+          return;
+        }
+        if (error) {
+          reject(error);
+          console.error(error.message);
+          return;
+        }
+        let hasStarted = false;
 
-      this.channel = this.socket.subscribe(channelName);
-      this.channel.watch(this.propagateMessage);
-      this.socket.on(channelName, this.propagateMessage);
-      // send START/STOP
-      this.propagateMessage({ type: 'START' });
+        this.channel = this.socket.subscribe(channelName);
+        const messageHandler = (message) => {
+          this.propagateMessage(message);
+          if (message?.type === 'START' && !hasStarted) {
+            hasStarted = true;
+            resolve();
+          }
+        };
+        this.channel.watch(messageHandler);
+        this.socket.on(channelName, messageHandler);
+        // send START/STOP
+        setTimeout(() => {
+          if (!this.isSocketConnected() || hasStarted) {
+            return;
+          }
+          // this is required because sometimes start is not sent (when devtools is open before the app)
+          // but when devtools opens after app start it sends it
+          messageHandler({ type: 'START' });
+        }, 1000);
+        // resolve();
+      });
     });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private propagateMessage(message: any) {
-    console.log('propagate', message);
     if (!message.payload) {
       message.payload = message.action;
     }
 
-    const listeners = RemoteDev.listeners;
+    const listeners = this.listeners;
 
     Object.keys(listeners).map((id) => {
       if (message.instanceId && message.instanceId !== id) {
