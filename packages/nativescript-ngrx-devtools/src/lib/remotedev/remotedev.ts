@@ -1,11 +1,16 @@
-import * as socketCluster from 'socketcluster-client';
-import { stringify } from 'jsan';
-import { EMPTY, firstValueFrom, from, map, mergeAll, Observable, of, Subject, throwError, timer } from 'rxjs';
-import { first, catchError, concatMap, mapTo, retryWhen, switchMap, takeUntil } from 'rxjs/operators';
-import type { SCChannel } from 'sc-channel';
-import { RemoteDevToolsProxyOptions } from './model';
 import type { ReduxDevtoolsExtensionConfig } from '@ngrx/store-devtools/src/extension';
+import { stringify } from 'jsan';
+import { EMPTY, from, Observable, of, Subject, throwError, timer } from 'rxjs';
+import { catchError, concatMap, first, map, mapTo, mergeAll, retryWhen, switchMap, takeUntil } from 'rxjs/operators';
+import type { SCChannel } from 'sc-channel';
+import * as socketCluster from 'socketcluster-client';
+import { RemoteDevToolsProxyOptions } from './model';
 declare const __NS_DEV_HOST_IPS__: string[];
+
+// rxjs 7, making it easier to migrate when we ditch rxjs 6
+function firstValueFrom<T>(source: Observable<T>): Promise<T> {
+  return source.toPromise();
+}
 
 export type ChangeListener = (change: unknown) => void;
 
