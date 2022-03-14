@@ -4,6 +4,6 @@
   "lib": {
     "entryFile": "src/index.ts"
   },
-  "assets": ["nativescript.webpack.js", "README.md"],
+  "assets": ["nativescript.webpack.js", "package-alias-plugin.js", "README.md"],
   "allowedNonPeerDependencies": ["jsan", "socketcluster-client"]
 }
