@@ -1,1 +1,2 @@
 apps/**/*_off
+packages/**/platforms/ios/NativeScriptWebSockets.xcframework/Info.plist

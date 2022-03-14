@@ -1,5 +1,5 @@
 {
-  "name": "@valor-software/nativescript-websockets",
+  "name": "@valor/nativescript-websockets",
   "version": "1.0.0",
   "description": "Add a plugin description",
   "main": "index",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/valor-software/nativescript-plugins.git"
+    "url": "https://github.com/valor/nativescript-plugins.git"
   },
   "keywords": [
     "NativeScript",
@@ -23,13 +23,13 @@
   ],
   "author": {
     "name": "Eduardo Speroni",
-    "email": "eduardo.speroni@valor-software.com"
+    "email": "eduardo.speroni@valor.com"
   },
   "bugs": {
-    "url": "https://github.com/valor-software/nativescript-plugins/issues"
+    "url": "https://github.com/valor/nativescript-plugins/issues"
   },
   "license": "Apache-2.0",
-  "homepage": "https://github.com/valor-software/nativescript-plugins",
+  "homepage": "https://github.com/valor/nativescript-plugins",
   "readmeFilename": "README.md",
   "bootstrapper": "@nativescript/plugin-seed"
 }

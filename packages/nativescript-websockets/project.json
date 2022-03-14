@@ -20,6 +20,21 @@
             "output": "./platforms/"
           }
         ]
+      },
+      "dependsOn": [
+        {
+          "target": "build.native",
+          "projects": "self"
+        }
+      ]
+    },
+    "build.native": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": ["packages/nativescript-websockets/platforms/ios"],
+      "options": {
+        "commands": ["./build.sh"],
+        "parallel": false,
+        "cwd": "packages/nativescript-websockets/native-src/ios"
       }
     },
     "build.all": {
@@ -33,6 +48,10 @@
         {
           "target": "build.all",
           "projects": "dependencies"
+        },
+        {
+          "target": "build.native",
+          "projects": "self"
         },
         {
           "target": "build",

@@ -1,5 +1,5 @@
 {
-  "npmScope": "valor-software",
+  "npmScope": "valor",
   "affected": {
     "defaultBase": "master"
   },
@@ -21,7 +21,7 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "build.all", "lint", "test", "e2e"],
+        "cacheableOperations": ["build", "build.all", "build.native", "lint", "test", "e2e"],
         "runtimeCacheInputs": ["node -v"]
       }
     }
