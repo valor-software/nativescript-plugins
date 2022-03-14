@@ -3,7 +3,7 @@ const PackageSpecificAliasFieldPlugin = require('./package-alias-plugin');
 
 module.exports = (env) => {
   webpack.chainWebpack((config) => {
-    const browserFields = ['uuid', 'socketcluster-client'];
-    config.resolve.plugin('ngrx-browser-fields').use(PackageSpecificAliasFieldPlugin, ['browser', browserFields]);
+    const packages = ['uuid', 'socketcluster-client'];
+    config.resolve.plugin('PackageSpecificAliasFieldPlugin|ngrx-browser-fields').use(PackageSpecificAliasFieldPlugin, ['browser', packages]);
   });
 };
