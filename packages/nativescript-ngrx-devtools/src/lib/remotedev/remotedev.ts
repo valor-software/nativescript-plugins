@@ -1,18 +1,21 @@
 import type { ReduxDevtoolsExtensionConfig } from '@ngrx/store-devtools/src/extension';
 import { stringify } from 'jsan';
-import { EMPTY, from, Observable, of, Subject, throwError, timer } from 'rxjs';
-import { catchError, concatMap, first, map, mapTo, mergeAll, retryWhen, switchMap, takeUntil } from 'rxjs/operators';
-import type { SCChannel } from 'sc-channel';
+import { EMPTY, from, Observable, of, ReplaySubject, Subject, Subscriber, Subscription, throwError, timer } from 'rxjs';
+import { catchError, concatMap, first, map, mapTo, mergeAll, retryWhen, switchMap, tap } from 'rxjs/operators';
 import * as socketCluster from 'socketcluster-client';
 import { RemoteDevToolsProxyOptions } from './model';
 declare const __NS_DEV_HOST_IPS__: string[];
 
-// rxjs 7, making it easier to migrate when we ditch rxjs 6
-function firstValueFrom<T>(source: Observable<T>): Promise<T> {
-  return source.toPromise();
-}
-
 export type ChangeListener = (change: unknown) => void;
+
+type Message = {
+  type: string;
+  action: string;
+  payload: string;
+  instanceId: string;
+};
+
+type SocketMessage = Message & { id: string };
 
 export class RemoteDev {
   private listeners: { [key: string]: Array<ChangeListener> } = {};
@@ -28,50 +31,29 @@ export class RemoteDev {
   };
   private options!: Required<RemoteDevToolsProxyOptions>;
   private id!: string;
-  private socket: socketCluster.SCClientSocket | null = null;
-  private channel: SCChannel | null = null;
-  private connectionPromise: Promise<unknown> | null = null;
   private disposed = false;
-  private disposed$ = new Subject<void>();
+
+  destination: Subject<Message> | Subscriber<Message> = new ReplaySubject();
+  socketSubscription: Subscription | null = null;
 
   constructor(options: RemoteDevToolsProxyOptions = {}, private extensionConfig: ReduxDevtoolsExtensionConfig) {
     this.configure(options);
     this.id = extensionConfig.name || this.generateId();
   }
 
-  async dispose() {
+  dispose() {
     this.disposed = true;
-    this.disposed$.next();
-    this.disposed$.complete();
-    if (!this.socket) {
-      try {
-        await this.connectionPromise;
-      } catch (e) {
-        // ignore
-      }
+    this.socketSubscription?.unsubscribe();
+    console.log(this.socketSubscription?.closed);
+    if (this.destination instanceof ReplaySubject) {
+      this.destination.complete();
     }
-    if (this.channel) {
-      this.channel.unwatch();
-      this.channel.unsubscribe();
-      this.socket?.off(this.channel.name);
-    }
-    this.socket?.disconnect();
   }
 
-  public async connect() {
-    if (this.disposed) {
+  private ensureConnection() {
+    if (this.socketSubscription || this.disposed) {
       return;
     }
-    if (this.isSocketConnected()) {
-      return;
-    }
-    if (!this.isSocketConnecting()) {
-      this.connectionPromise = this._connect();
-    }
-    await this.connectionPromise;
-    this.connectionPromise = null;
-  }
-  private async _connect() {
     const createSocket = (hostname: string) => {
       return new Observable<socketCluster.SCClientSocket>((subscriber) => {
         const socket = socketCluster.create({
@@ -80,16 +62,21 @@ export class RemoteDev {
           secure: !!this.options.secure,
         });
         let completed = false;
-        socket.once('connect', () => {
+        const connectListener = () => {
           completed = true;
           subscriber.next(socket);
           subscriber.complete();
-        });
-        socket.once('error', (e) => {
+        };
+        const errorListener = (e: Error) => {
           subscriber.error(e);
-        });
+        };
+        socket.once('connect', connectListener);
+        socket.once('error', errorListener);
         return () => {
+          socket.off('connect', connectListener);
+          socket.off('error', errorListener);
           if (completed) {
+            // socket no longer under our control
             return;
           }
           socket.disconnect();
@@ -98,33 +85,98 @@ export class RemoteDev {
     };
 
     const hostnameArray = [this.options.hostname, ...this.options.defaultHosts];
-    try {
-      // TODO: maybe change this to a more elegant RxJS solution with ReplaySubject for actions so we can avoid this mess
-      const socket = await firstValueFrom(
-        from(hostnameArray).pipe(
-          // try a new connection every 200ms
-          concatMap((hostname, i) => (i == 0 ? of(hostname) : timer(200).pipe(mapTo(hostname)))),
-          map((host) => createSocket(host).pipe(catchError(() => EMPTY))),
-          mergeAll(),
-          first(),
-          retryWhen((errors) =>
-            errors.pipe(
-              switchMap((e) => {
-                if (this.options.autoReconnect) {
-                  return timer(1000);
+    this.socketSubscription = from(hostnameArray)
+      .pipe(
+        // try a new connection every 200ms
+        concatMap((hostname, i) => (i == 0 ? of(hostname) : timer(200).pipe(mapTo(hostname)))),
+        map((host) => createSocket(host).pipe(catchError(() => EMPTY))),
+        mergeAll(),
+        first(),
+        switchMap((socket) => {
+          return new Observable<socketCluster.SCClientSocket>((subscriber) => {
+            const disconnectHandler = () => {
+              // we don't stop here because when devtools reopen then we lose history
+              // this.propagateMessage({ type: 'STOP' });
+              subscriber.error();
+            };
+            socket.on('disconnect', disconnectHandler);
+            let channel: ReturnType<typeof socket.subscribe> | null = null;
+            let channelName: string | null;
+            let hasStarted = false;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const channelMessageHandler = (message: any) => {
+              this.propagateMessage(message);
+              if (message?.type === 'START' && !hasStarted) {
+                hasStarted = true;
+                subscriber.next(socket);
+              }
+            };
+            socket.emit('login', 'master', (error: Error, channelNameFromEmit: string) => {
+              channelName = channelNameFromEmit;
+              if (subscriber.closed) {
+                return;
+              }
+              if (error) {
+                subscriber.error(error);
+                console.error(error.message);
+                return;
+              }
+
+              channel = socket.subscribe(channelName);
+              channel.watch(channelMessageHandler);
+              socket.on(channelName, channelMessageHandler);
+              // send START/STOP
+              setTimeout(() => {
+                if (subscriber.closed || socket.state !== socket.OPEN || hasStarted) {
+                  return;
                 }
-                return throwError(() => e);
-              })
-            )
-          ),
-          takeUntil(this.disposed$)
+                // this is required because sometimes start is not sent (when devtools is open before the app)
+                // but when devtools opens after app start it sends it
+                channelMessageHandler({ type: 'START' });
+              }, 1000);
+            });
+            return () => {
+              channel?.unwatch(channelMessageHandler);
+              if (channelName) {
+                socket.off(channelName, channelMessageHandler);
+              }
+              socket.off('disconnect', disconnectHandler);
+              socket.disconnect();
+            };
+          });
+        }),
+        tap(
+          (socket) => {
+            const queue = this.destination instanceof ReplaySubject ? this.destination : null;
+            const subscriber = Subscriber.create((message?: Message) => {
+              if (!message) {
+                return;
+              }
+              const socketMessage: SocketMessage = { ...message, id: this.id };
+              // console.log('sending', socketMessage);
+              socket.emit(socket.id ? 'log' : 'log-noid', socketMessage);
+            });
+            this.destination = subscriber;
+            queue?.subscribe(subscriber.next.bind(subscriber));
+            queue?.complete();
+          },
+          () => {
+            this.destination = this.destination instanceof ReplaySubject ? this.destination : new ReplaySubject();
+          },
+          () => (this.destination = this.destination instanceof ReplaySubject ? this.destination : new ReplaySubject())
+        ),
+        retryWhen((errors) =>
+          errors.pipe(
+            switchMap((e) => {
+              if (this.options.autoReconnect) {
+                return timer(1000);
+              }
+              return throwError(() => e);
+            })
+          )
         )
-      );
-      this.socket = socket;
-      await this.watchSocket();
-    } finally {
-      this.connectionPromise = null;
-    }
+      )
+      .subscribe();
   }
 
   public subscribe(listener: ChangeListener) {
@@ -173,46 +225,22 @@ export class RemoteDev {
       ...options,
     };
   }
-
-  private isSocketConnected(): boolean {
-    return !!this.socket && this.socket.getState() !== this.socket.CLOSED;
-  }
-
-  private isSocketConnecting() {
-    return !!this.connectionPromise;
-  }
-
   private generateId() {
     return Math.random().toString(36).substr(2);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private async sendToSocket(action: any, state: any, type: any) {
-    try {
-      await this.connect();
-    } catch (e) {
-      // ignore, we failed to open the socket
-      return;
-    }
-
+  private sendToSocket(action: any, state: any, type: any) {
+    this.ensureConnection();
     setTimeout(() => {
-      if (!this.socket) {
-        return;
-      }
-      const message = {
+      const message: Message = {
         type: type || 'ACTION',
         action: type === 'ACTION' ? stringify(this.transformAction(action)) : action,
         payload: state ? stringify(state) : '',
-        id: this.socket.id,
         instanceId: this.id,
       };
-
-      if (!this.isSocketConnected()) {
-        return;
-      }
-
-      this.socket.emit(this.socket.id ? 'log' : 'log-noid', message);
-    }, 0);
+      this.destination.next(message);
+    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -234,54 +262,6 @@ export class RemoteDev {
     liftedAction.action.payload = liftedAction.action.payload || '';
 
     return liftedAction;
-  }
-
-  private watchSocket() {
-    if (this.channel || !this.socket) {
-      return;
-    }
-
-    return new Promise<void>((resolve, reject) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (this.channel || !this.socket) {
-        reject();
-        return;
-      }
-      this.socket.emit('login', 'master', (error: Error, channelName: string) => {
-        if (!this.socket) {
-          reject();
-          return;
-        }
-        if (error) {
-          reject(error);
-          console.error(error.message);
-          return;
-        }
-        let hasStarted = false;
-
-        this.channel = this.socket.subscribe(channelName);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const messageHandler = (message: any) => {
-          this.propagateMessage(message);
-          if (message?.type === 'START' && !hasStarted) {
-            hasStarted = true;
-            resolve();
-          }
-        };
-        this.channel.watch(messageHandler);
-        this.socket.on(channelName, messageHandler);
-        // send START/STOP
-        setTimeout(() => {
-          if (!this.isSocketConnected() || hasStarted) {
-            return;
-          }
-          // this is required because sometimes start is not sent (when devtools is open before the app)
-          // but when devtools opens after app start it sends it
-          messageHandler({ type: 'START' });
-        }, 1000);
-        // resolve();
-      });
-    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
