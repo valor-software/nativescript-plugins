@@ -64,7 +64,7 @@ export class NativeBridge extends NativeBridgeDefinition {
   client!: okhttp3.OkHttpClient;
   listener!: WebSocketListenerImpl;
   nativeWs!: okhttp3.WebSocket;
-  _connect(url: string, protocols: string[], headers: HeaderType): void {
+  connect(url: string, protocols: string[], headers: HeaderType): void {
     protocols = protocols || [];
     this.client = new okhttp3.OkHttpClient.Builder()
       .connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS)

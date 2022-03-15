@@ -9,7 +9,7 @@ export interface WebSocketPolyfill {
 
 export abstract class NativeBridgeDefinition {
   constructor(protected ws: WebSocketPolyfill) {}
-  abstract _connect(url: string, protocols: string | string[], headers: HeaderType): void;
+  abstract connect(url: string, protocols: string | string[], headers: HeaderType): void;
   abstract send(data: string | ArrayBuffer | ArrayBufferView | Blob): void;
   abstract closeWithCodeReason(statusCode: number, closeReason: string): void;
   abstract sendPing(): void;

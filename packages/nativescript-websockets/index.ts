@@ -110,7 +110,7 @@ class WebSocket extends Observable implements WebSocketPolyfill {
     //    Platform.OS !== 'ios' ? null : NativeWebSocketModule,
     //  );
     this._registerEvents();
-    this.nativeBridge._connect(url, protocols, { headers });
+    this.nativeBridge.connect(url, protocols, { headers });
     //  NativeWebSocketModule.connect(url, protocols, {headers}, this._socketId);
   }
 

@@ -41,7 +41,7 @@ export class NativeBridge extends NativeBridgeDefinition {
   // store the delegate so it isn't garbage collected
   // TODO: fix the iOS runtime so we don't need this
   delegate!: RCTSRWebSocketDelegateImpl;
-  _connect(url: string, protocols: string[], headers: HeaderType) {
+  connect(url: string, protocols: string[], headers: HeaderType) {
     const nativeUrl = NSURL.URLWithString(url);
     const request = NSMutableURLRequest.requestWithURL(nativeUrl);
     // NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
