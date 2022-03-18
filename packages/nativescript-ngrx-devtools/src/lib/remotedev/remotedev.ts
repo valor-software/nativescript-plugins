@@ -5,6 +5,7 @@ import { catchError, concatMap, first, map, mapTo, mergeAll, retryWhen, switchMa
 import * as socketCluster from 'socketcluster-client';
 import { RemoteDevToolsProxyOptions } from './model';
 declare const __NS_DEV_HOST_IPS__: string[];
+declare const __ANDROID__: boolean;
 
 export type ChangeListener = (change: unknown) => void;
 
@@ -17,6 +18,19 @@ type Message = {
 
 type SocketMessage = Message & { id: string };
 
+let _defaultIps: string[] | null = null;
+
+function getDefaultIps() {
+  if (!_defaultIps) {
+    const ipSet = new Set(typeof __NS_DEV_HOST_IPS__ !== 'undefined' ? __NS_DEV_HOST_IPS__ : []);
+    if (ipSet.size > 0 && typeof __ANDROID__ !== 'undefined' && __ANDROID__) {
+      ipSet.add('10.0.2.2');
+    }
+    _defaultIps = Array.from(ipSet);
+  }
+  return _defaultIps;
+}
+
 export class RemoteDev {
   private listeners: { [key: string]: Array<ChangeListener> } = {};
 
@@ -27,7 +41,7 @@ export class RemoteDev {
     autoReconnect: true,
     ackTimeout: 10000,
     connectTimeout: 10000,
-    defaultHosts: typeof __NS_DEV_HOST_IPS__ !== 'undefined' ? __NS_DEV_HOST_IPS__ : [],
+    defaultHosts: getDefaultIps(),
   };
   private options!: Required<RemoteDevToolsProxyOptions>;
   private id!: string;
@@ -84,7 +98,7 @@ export class RemoteDev {
       });
     };
 
-    const hostnameArray = [this.options.hostname, ...this.options.defaultHosts];
+    const hostnameArray = Array.from(new Set([this.options.hostname, ...this.options.defaultHosts]));
     this.socketSubscription = from(hostnameArray)
       .pipe(
         // try a new connection every 200ms
