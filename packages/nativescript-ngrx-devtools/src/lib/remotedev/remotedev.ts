@@ -112,6 +112,7 @@ export class RemoteDev {
               subscriber.error();
             };
             socket.on('disconnect', disconnectHandler);
+            socket.on('error', disconnectHandler);
             let channel: ReturnType<typeof socket.subscribe> | null = null;
             let channelName: string | null;
             let hasStarted = false;
@@ -153,6 +154,7 @@ export class RemoteDev {
                 socket.off(channelName, channelMessageHandler);
               }
               socket.off('disconnect', disconnectHandler);
+              socket.off('error', disconnectHandler);
               socket.disconnect();
             };
           });
@@ -164,7 +166,7 @@ export class RemoteDev {
               if (!message) {
                 return;
               }
-              const socketMessage: SocketMessage = { ...message, id: this.id };
+              const socketMessage: SocketMessage = { ...message, id: socket.id };
               // console.log('sending', socketMessage);
               socket.emit(socket.id ? 'log' : 'log-noid', socketMessage);
             });
