@@ -46,6 +46,7 @@ export class RemoteDev {
   private options!: Required<RemoteDevToolsProxyOptions>;
   private id!: string;
   private disposed = false;
+  private hostnames: string[] = [];
 
   destination: Subject<Message> | Subscriber<Message> = new ReplaySubject();
   socketSubscription: Subscription | null = null;
@@ -58,14 +59,13 @@ export class RemoteDev {
   dispose() {
     this.disposed = true;
     this.socketSubscription?.unsubscribe();
-    console.log(this.socketSubscription?.closed);
     if (this.destination instanceof ReplaySubject) {
       this.destination.complete();
     }
   }
 
   private ensureConnection() {
-    if (this.socketSubscription || this.disposed) {
+    if (this.socketSubscription || this.disposed || this.hostnames.length === 0) {
       return;
     }
     const createSocket = (hostname: string) => {
@@ -97,9 +97,7 @@ export class RemoteDev {
         };
       });
     };
-
-    const hostnameArray = Array.from(new Set([this.options.hostname, ...this.options.defaultHosts]));
-    this.socketSubscription = from(hostnameArray)
+    this.socketSubscription = from(this.hostnames)
       .pipe(
         // try a new connection every 200ms
         concatMap((hostname, i) => (i == 0 ? of(hostname) : timer(200).pipe(mapTo(hostname)))),
@@ -238,6 +236,7 @@ export class RemoteDev {
       ...this.defaultOptions,
       ...options,
     };
+    this.hostnames = Array.from(new Set([this.options.hostname, ...this.options.defaultHosts]));
   }
   private generateId() {
     return Math.random().toString(36).substr(2);
