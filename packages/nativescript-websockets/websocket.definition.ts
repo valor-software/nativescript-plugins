@@ -8,6 +8,7 @@ export interface WebSocketPolyfill {
 }
 
 export abstract class NativeBridgeDefinition {
+  public handleThreading = true;
   constructor(protected ws: WebSocketPolyfill) {}
   abstract connect(url: string, protocols: string | string[], headers: HeaderType): void;
   abstract send(data: string | ArrayBuffer | ArrayBufferView | Blob): void;

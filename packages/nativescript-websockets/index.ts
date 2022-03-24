@@ -48,6 +48,7 @@ class WebSocket extends Observable implements WebSocketPolyfill {
   static OPEN: number = OPEN;
   static CLOSING: number = CLOSING;
   static CLOSED: number = CLOSED;
+  static HANDLE_THREADING = true;
 
   CONNECTING: number = CONNECTING;
   OPEN: number = OPEN;
@@ -72,7 +73,7 @@ class WebSocket extends Observable implements WebSocketPolyfill {
   readyState: number = CONNECTING;
   url: string;
 
-  constructor(url: string, protocols?: string | Array<string>, options?: { headers: { origin?: string; [key: string]: unknown }; [key: string]: unknown }) {
+  constructor(url: string, protocols?: string | Array<string>, options?: { headers: { origin?: string; [key: string]: unknown }; nativescript: { handleThreading: boolean }; [key: string]: unknown }) {
     super();
     this.nativeBridge = new NativeBridge(this);
     this.url = url;
@@ -83,7 +84,8 @@ class WebSocket extends Observable implements WebSocketPolyfill {
       protocols = [];
     }
 
-    const { headers = {}, ...unrecognized } = options || ({} as { headers: { origin?: string; [key: string]: unknown }; [key: string]: unknown });
+    const { headers = {}, nativescript = { handleThreading: true }, ...unrecognized } = options || ({} as { headers: { origin?: string; [key: string]: unknown }; nativescript: { handleThreading: boolean }; [key: string]: unknown });
+    this.nativeBridge.handleThreading = nativescript?.handleThreading ?? WebSocket.HANDLE_THREADING;
     this._binaryType = 'arraybuffer';
 
     // Preserve deprecated backwards compatibility for the 'origin' option

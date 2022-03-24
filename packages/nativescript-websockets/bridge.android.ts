@@ -64,7 +64,11 @@ export class NativeBridge extends NativeBridgeDefinition {
   client!: okhttp3.OkHttpClient;
   listener!: WebSocketListenerImpl;
   nativeWs!: okhttp3.WebSocket;
+  startLooper?: android.os.Looper;
+  handler?: android.os.Handler;
   connect(url: string, protocols: string[], headers: HeaderType): void {
+    this.startLooper = android.os.Looper.myLooper();
+    this.handler = new android.os.Handler(this.startLooper);
     protocols = protocols || [];
     this.client = new okhttp3.OkHttpClient.Builder()
       .connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
@@ -116,6 +120,10 @@ export class NativeBridge extends NativeBridgeDefinition {
     this.ws._websocketClosed(code, reason, true);
   }
   public onMessage(ws: okhttp3.WebSocket, data: okio.ByteString | string): void {
+    if (!this.isCorrectThread()) {
+      this.scheduleToThread(() => this.onMessage(ws, data));
+      return;
+    }
     if (data instanceof okio.ByteString) {
       // const arrayBuffer = new ArrayBuffer(data.size());
       const bufferView = new Uint8Array(data.size());
@@ -129,6 +137,10 @@ export class NativeBridge extends NativeBridgeDefinition {
     this.ws._websocketMessage(data);
   }
   public onFailure(param0: okhttp3.WebSocket, param1: java.lang.Throwable, param2: okhttp3.Response): void {
+    if (!this.isCorrectThread()) {
+      this.scheduleToThread(() => this.onFailure(param0, param1, param2));
+      return;
+    }
     let message = param1.getLocalizedMessage();
     if (!message) {
       if (param1 instanceof java.io.EOFException) {
@@ -138,9 +150,28 @@ export class NativeBridge extends NativeBridgeDefinition {
     this.ws._websocketFailed(message);
   }
   public onOpen(param0: okhttp3.WebSocket, param1: okhttp3.Response): void {
+    if (!this.isCorrectThread()) {
+      this.scheduleToThread(() => this.onOpen(param0, param1));
+      return;
+    }
     this.ws._websocketOpen(param1.protocol().toString());
   }
   public onClosing(param0: okhttp3.WebSocket, param1: number, param2: string): void {
     //
+  }
+
+  private isCorrectThread() {
+    return !this.handleThreading || !this.startLooper || android.os.Looper.myLooper() === this.startLooper;
+  }
+  private scheduleToThread(action: () => void) {
+    if (this.handleThreading && this.handler) {
+      this.handler.post(
+        new java.lang.Runnable({
+          run: action,
+        })
+      );
+    } else {
+      action();
+    }
   }
 }
