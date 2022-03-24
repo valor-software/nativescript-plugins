@@ -1,5 +1,5 @@
 import type { ReduxDevtoolsExtensionConfig } from '@ngrx/store-devtools/src/extension';
-import { stringify } from 'jsan';
+import { stringify, Options as JsanOptions } from 'jsan';
 import { EMPTY, from, Observable, of, ReplaySubject, Subject, Subscriber, Subscription, throwError, timer } from 'rxjs';
 import { catchError, concatMap, first, map, mapTo, mergeAll, retryWhen, switchMap, tap } from 'rxjs/operators';
 import * as socketCluster from 'socketcluster-client';
@@ -9,12 +9,30 @@ declare const __ANDROID__: boolean;
 
 export type ChangeListener = (change: unknown) => void;
 
+function noop() {
+  // noop
+}
+
+type PartialMessage = {
+  partial: true;
+  action: unknown;
+  state: unknown;
+  type: unknown;
+};
+
 type Message = {
   type: string;
   action: string;
   payload: string;
   instanceId: string;
 };
+
+function isPartialMessage(message: Message | PartialMessage): message is PartialMessage {
+  if ((message as PartialMessage).partial) {
+    return true;
+  }
+  return false;
+}
 
 type SocketMessage = Message & { id: string };
 
@@ -42,26 +60,56 @@ export class RemoteDev {
     ackTimeout: 10000,
     connectTimeout: 10000,
     defaultHosts: getDefaultIps(),
+    messageCacheSize: Infinity,
+    delayMessageSerialization: false,
   };
   private options!: Required<RemoteDevToolsProxyOptions>;
   private id!: string;
   private disposed = false;
   private hostnames: string[] = [];
 
-  destination: Subject<Message> | Subscriber<Message> = new ReplaySubject();
+  destination!: Subject<Message | PartialMessage> | Subscriber<Message | PartialMessage>;
   socketSubscription: Subscription | null = null;
+  private stringifyOptions: {
+    replacer: Parameters<typeof stringify>[1];
+    options: Parameters<typeof stringify>[3];
+  };
 
   constructor(options: RemoteDevToolsProxyOptions = {}, private extensionConfig: ReduxDevtoolsExtensionConfig) {
     this.configure(options);
     this.id = extensionConfig.name || this.generateId();
+    this.ensureResetSubject();
+    let jsanOptions: JsanOptions | boolean | undefined;
+    let replacer = undefined;
+    if (extensionConfig.serialize === false) {
+      jsanOptions = false;
+    } else if (extensionConfig.serialize === true) {
+      jsanOptions = true;
+    } else if (extensionConfig.serialize) {
+      jsanOptions = extensionConfig.serialize.options;
+    }
+    if (extensionConfig.serialize && typeof extensionConfig.serialize === 'object') {
+      replacer = extensionConfig.serialize.replacer ?? undefined;
+    }
+    this.stringifyOptions = {
+      replacer,
+      options: jsanOptions,
+    };
   }
 
   dispose() {
     this.disposed = true;
     this.socketSubscription?.unsubscribe();
-    if (this.destination instanceof ReplaySubject) {
+    if (this.destination instanceof Subject) {
       this.destination.complete();
     }
+  }
+
+  private ensureResetSubject() {
+    if (this.destination instanceof Subject) {
+      return;
+    }
+    this.destination = this.options.messageCacheSize > 0 ? new ReplaySubject(this.options.messageCacheSize) : new Subject();
   }
 
   private ensureConnection() {
@@ -155,16 +203,20 @@ export class RemoteDev {
               }
               socket.off('disconnect', disconnectHandler);
               socket.off('error', disconnectHandler);
+              socket.on('error', noop); // keep this empty so that errors from closed sockets are completely ignored
               socket.disconnect();
             };
           });
         }),
         tap(
           (socket) => {
-            const queue = this.destination instanceof ReplaySubject ? this.destination : null;
-            const subscriber = Subscriber.create((message?: Message) => {
+            const queue = this.destination instanceof Subject ? this.destination : null;
+            const subscriber = Subscriber.create((message?: Message | PartialMessage) => {
               if (!message) {
                 return;
+              }
+              if (isPartialMessage(message)) {
+                message = this.transformPartialMessage(message);
               }
               const socketMessage: SocketMessage = { ...message, id: socket.id };
               // console.log('sending', socketMessage);
@@ -174,10 +226,8 @@ export class RemoteDev {
             queue?.subscribe(subscriber.next.bind(subscriber));
             queue?.complete();
           },
-          () => {
-            this.destination = this.destination instanceof ReplaySubject ? this.destination : new ReplaySubject();
-          },
-          () => (this.destination = this.destination instanceof ReplaySubject ? this.destination : new ReplaySubject())
+          () => this.ensureResetSubject(),
+          () => this.ensureResetSubject()
         ),
         retryWhen((errors) =>
           errors.pipe(
@@ -248,14 +298,27 @@ export class RemoteDev {
   private sendToSocket(action: any, state: any, type: any) {
     this.ensureConnection();
     setTimeout(() => {
-      const message: Message = {
-        type: type || 'ACTION',
-        action: type === 'ACTION' ? stringify(this.transformAction(action)) : action,
-        payload: state ? stringify(state) : '',
-        instanceId: this.id,
+      const message: PartialMessage = {
+        partial: true,
+        action,
+        state,
+        type,
       };
-      this.destination.next(message);
+      if (this.options.delayMessageSerialization) {
+        this.destination.next(message);
+      } else {
+        this.destination.next(this.transformPartialMessage(message));
+      }
     });
+  }
+  private transformPartialMessage(message: PartialMessage): Message {
+    const { action, state, type } = message;
+    return {
+      type: (type as string) || 'ACTION',
+      action: type === 'ACTION' ? stringify(this.transformAction(action), this.stringifyOptions.replacer, undefined, this.stringifyOptions.options) : (action as string),
+      payload: state ? stringify(state, this.stringifyOptions.replacer, undefined, this.stringifyOptions.options) : '',
+      instanceId: this.id,
+    };
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

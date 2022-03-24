@@ -6,4 +6,6 @@ export interface RemoteDevToolsProxyOptions {
   ackTimeout?: number;
   secure?: boolean;
   defaultHosts?: string[];
+  messageCacheSize?: number;
+  delayMessageSerialization?: boolean;
 }
