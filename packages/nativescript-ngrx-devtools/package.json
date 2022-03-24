@@ -1,6 +1,6 @@
 {
   "name": "@valor/nativescript-ngrx-devtools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "peerDependencies": {
     "@angular/common": "^13.2.0",
     "@angular/core": "^13.2.0",
