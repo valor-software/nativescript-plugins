@@ -1,6 +1,14 @@
 {
   "name": "@valor/nativescript-ngrx-devtools",
   "version": "1.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valor-software/nativescript-plugins.git"
+  },
+  "author": {
+    "name": "Eduardo Speroni",
+    "email": "eduardo.speroni@valor-software.com"
+  },
   "peerDependencies": {
     "@angular/common": "^13.2.0",
     "@angular/core": "^13.2.0",
@@ -10,5 +18,9 @@
     "jsan": "^3.1.14",
     "socketcluster-client": "^14.3.2",
     "tslib": "^2.3.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/valor-software/nativescript-plugins/issues"
+  },
+  "license": "MIT"
 }
