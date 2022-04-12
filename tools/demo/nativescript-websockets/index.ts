@@ -16,6 +16,16 @@ export class DemoSharedNativescriptWebsockets extends DemoSharedBase {
       const enc = new TextEncoder();
       ws.send(enc.encode('this is an arraybuffer'));
     };
+    ws.addEventListener('message', (ev) => {
+      console.log('Received from addEventListener', ev);
+    });
+    ws.addEventListener(
+      'message',
+      (ev) => {
+        console.log('Received from addEventListener with { once: true }', ev);
+      },
+      { once: true }
+    );
     ws.onmessage = (ev) => {
       console.log('MESSAGE RECEIVED!', ev.data);
       console.log(ev.data.constructor?.name, ev.data.getClass?.()?.getSimpleName(), typeof ev.data);

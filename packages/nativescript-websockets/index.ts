@@ -8,7 +8,6 @@
  * @flow
  */
 
-import { Observable } from '@nativescript/core';
 import { NativeBridge } from './bridge';
 import { WebSocketEvent } from './common';
 import { WebSocketPolyfill } from './websocket.definition';
@@ -24,17 +23,17 @@ const CLOSED = 3;
 
 const CLOSE_NORMAL = 1000;
 
-const WEBSOCKET_EVENTS = ['close', 'error', 'message', 'open'];
+// const WEBSOCKET_EVENTS = ['close', 'error', 'message', 'open'];
 
-type WebSocketEventDefinitions = {
-  websocketOpen: [{ id: number; protocol: string }];
-  websocketClosed: [{ id: number; code: number; reason: string }];
-  websocketMessage: [
-    { type: 'binary'; id: number; data: string } | { type: 'text'; id: number; data: string }
-    //  | {type: 'blob', id: number, data: BlobData},
-  ];
-  websocketFailed: [{ id: number; message: string }];
-};
+// type WebSocketEventDefinitions = {
+//   websocketOpen: [{ id: number; protocol: string }];
+//   websocketClosed: [{ id: number; code: number; reason: string }];
+//   websocketMessage: [
+//     { type: 'binary'; id: number; data: string } | { type: 'text'; id: number; data: string }
+//     //  | {type: 'blob', id: number, data: BlobData},
+//   ];
+//   websocketFailed: [{ id: number; message: string }];
+// };
 
 /**
  * Browser-compatible WebSockets implementation.
@@ -42,7 +41,7 @@ type WebSocketEventDefinitions = {
  * See https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
  * See https://github.com/websockets/ws
  */
-class WebSocket extends Observable implements WebSocketPolyfill {
+class WebSocket implements WebSocketPolyfill {
   private nativeBridge: NativeBridge;
   static CONNECTING: number = CONNECTING;
   static OPEN: number = OPEN;
@@ -73,8 +72,14 @@ class WebSocket extends Observable implements WebSocketPolyfill {
   readyState: number = CONNECTING;
   url: string;
 
+  private listeners: Record<string, Map<EventListenerOrEventListenerObject, boolean | AddEventListenerOptions> | undefined> = {
+    open: new Map(),
+    close: new Map(),
+    error: new Map(),
+    message: new Map(),
+  };
+
   constructor(url: string, protocols?: string | Array<string>, options?: { headers: { origin?: string; [key: string]: unknown }; nativescript: { handleThreading: boolean }; [key: string]: unknown }) {
-    super();
     this.nativeBridge = new NativeBridge(this);
     this.url = url;
     if (typeof protocols === 'string') {
@@ -114,6 +119,21 @@ class WebSocket extends Observable implements WebSocketPolyfill {
     this._registerEvents();
     this.nativeBridge.connect(url, protocols, { headers });
     //  NativeWebSocketModule.connect(url, protocols, {headers}, this._socketId);
+  }
+  addEventListener(type: string, callback: EventListenerOrEventListenerObject | null, options?: boolean | AddEventListenerOptions): void {
+    if (!callback) {
+      return;
+    }
+    this.listeners[type]?.set(callback, options ?? false);
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  removeEventListener(type: string, callback: EventListenerOrEventListenerObject | null, options?: boolean | EventListenerOptions): void {
+    if (!callback) {
+      return;
+    }
+    if (this.listeners[type]?.has(callback)) {
+      this.listeners[type]?.delete(callback);
+    }
   }
 
   get binaryType(): BinaryType {
@@ -200,6 +220,25 @@ class WebSocket extends Observable implements WebSocketPolyfill {
         this.onmessage?.(event);
         break;
     }
+    this.listeners[event.type]?.forEach((options, listener) => {
+      try {
+        if (typeof listener === 'function') {
+          listener(event as Event);
+        } else {
+          listener.handleEvent(event as Event);
+        }
+        if (typeof options !== 'boolean' && options.once) {
+          if (this.listeners[event.type]?.has(listener)) {
+            this.listeners[event.type]?.delete(listener);
+          }
+        }
+      } catch (e) {
+        // don't break events if listener throws
+        setTimeout(() => {
+          throw e;
+        });
+      }
+    });
   }
 
   _close(code?: number, reason?: string): void {
@@ -317,4 +356,4 @@ class WebSocket extends Observable implements WebSocketPolyfill {
   }
 }
 
-global.WebSocket = WebSocket as any;
+global.WebSocket = WebSocket as never;

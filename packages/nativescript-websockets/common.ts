@@ -1,6 +1,3 @@
-import { Observable } from '@nativescript/core';
-
-export class NativescriptWebsocketsCommon extends Observable {}
 export type CloseEvent =
   | {
       code: number;
