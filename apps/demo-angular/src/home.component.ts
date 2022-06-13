@@ -7,10 +7,13 @@ import { Component } from '@angular/core';
 export class HomeComponent {
   demos = [
     {
-      name: 'nativescript-websockets',
+      name: 'nativescript-barcodescanner',
     },
     {
       name: 'nativescript-ngrx-devtools',
+    },
+    {
+      name: 'nativescript-websockets',
     },
   ];
 }

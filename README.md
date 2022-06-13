@@ -5,6 +5,8 @@ npm run setup
 npm start
 ```
 
+- [@valor/nativescript-barcodescanner](packages/nativescript-barcodescanner/README.md)
+- [@valor/nativescript-ngrx-devtools](packages/nativescript-ngrx-devtools/README.md)
 - [@valor/nativescript-websockets](packages/nativescript-websockets/README.md)
 
 # How to use?
