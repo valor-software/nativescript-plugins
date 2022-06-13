@@ -36,6 +36,7 @@
     "@nativescript/plugin-tools": "3.0.0-alpha.6",
     "@nativescript/types": "^8.1.0",
     "@nativescript/webpack": "~5.0.0",
+    "@ngrx/effects": "^13.0.2",
     "@ngrx/store": "^13.0.2",
     "@ngrx/store-devtools": "^13.0.2",
     "@ngtools/webpack": "^13.0.0",
