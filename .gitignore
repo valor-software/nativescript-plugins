@@ -44,3 +44,5 @@ Thumbs.db
 packages/**/angular/dist
 packages/*/native-src/ios/build
 .angular
+
+/.env
