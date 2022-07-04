@@ -10,6 +10,12 @@
       "options": {
         "project": "packages/nativescript-ngrx-devtools/ng-package.json"
       },
+      "dependsOn": [
+        {
+          "target": "build.all",
+          "projects": "dependencies"
+        }
+      ],
       "configurations": {
         "production": {
           "tsConfig": "packages/nativescript-ngrx-devtools/tsconfig.lib.prod.json"

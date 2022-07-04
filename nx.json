@@ -23,7 +23,8 @@
       "options": {
         "cacheableOperations": ["build", "build.all", "build.native", "lint", "test", "e2e"],
         "runtimeCacheInputs": ["node -v"],
-        "accessToken": "M2YzM2ViYzctZWNiMC00Y2MyLWI3ZmYtMDMwZTAxZjUwZGUwfHJlYWQ="
+        "accessToken": "M2YzM2ViYzctZWNiMC00Y2MyLWI3ZmYtMDMwZTAxZjUwZGUwfHJlYWQ=",
+        "useDaemonProcess": false
       }
     }
   },
