@@ -75,6 +75,13 @@ module.exports = {
           description: '@valor/nativescript-ngrx-devtools: Build',
         },
       },
+      // @valor/nativescript-barcodescanner
+      'nativescript-barcodescanner': {
+        build: {
+          script: 'nx run nativescript-barcodescanner:build.all',
+          description: '@valor/nativescript-barcodescanner: Build',
+        },
+      },
       'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
@@ -92,6 +99,10 @@ module.exports = {
       'nativescript-ngrx-devtools': {
         script: 'nx run nativescript-ngrx-devtools:focus',
         description: 'Focus on @valor/nativescript-ngrx-devtools',
+      },
+      'nativescript-barcodescanner': {
+        script: 'nx run nativescript-barcodescanner:focus',
+        description: 'Focus on @valor/nativescript-barcodescanner',
       },
       reset: {
         script: 'nx g @nativescript/plugin-tools:focus-packages',
