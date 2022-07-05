@@ -1,0 +1,45 @@
+name: Lint and Build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  lint:
+    name: Lint affected projects
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - name: Setup global dependencies
+        run: npm i -g yarn
+      - name: Setup yarn cache
+        uses: c-hive/gha-yarn-cache@v2
+      - name: yarn install
+        run: yarn
+      - name: Lint affected
+        run: yarn nx affected:lint
+  build:
+    name: Build affected projects
+    needs: lint
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - name: Setup global dependencies
+        run: npm i -g yarn
+      - name: Setup yarn cache
+        uses: c-hive/gha-yarn-cache@v2
+      - name: yarn install
+        run: yarn
+      - name: Build.all affected
+        run: yarn nx affected --target=build.all
