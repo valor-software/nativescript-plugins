@@ -18,6 +18,11 @@
             "glob": "**/*",
             "input": "packages/nativescript-barcodescanner/platforms/",
             "output": "./platforms/"
+          },
+          {
+            "glob": "*.d.ts",
+            "input": "packages/nativescript-barcodescanner/types/",
+            "output": "./types/"
           }
         ],
         "dependsOn": [
