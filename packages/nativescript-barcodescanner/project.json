@@ -4,7 +4,7 @@
   "sourceRoot": "packages/nativescript-barcodescanner",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "outputPath": "dist/packages/nativescript-barcodescanner",
         "tsConfig": "packages/nativescript-barcodescanner/tsconfig.json",
@@ -52,11 +52,11 @@
     },
     "build.native": {
       "executor": "@nrwl/workspace:run-commands",
-      "outputs": ["packages/nativescript-websockets/platforms/ios"],
+      "outputs": ["packages/nativescript-barcodescanner/platforms/ios"],
       "options": {
         "commands": ["./build.sh"],
         "parallel": false,
-        "cwd": "packages/nativescript-websockets/native-src/ios"
+        "cwd": "packages/nativescript-barcodescanner/native-src/ios"
       }
     },
     "focus": {
