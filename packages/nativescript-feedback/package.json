@@ -1,13 +1,13 @@
 {
   "name": "@valor/nativescript-feedback",
-  "version": "1.0.0",
-  "description": "Add a plugin description",
+  "version": "2.0.1",
+  "description": "Non-blocking textual feedback for your NativeScript app. AKA superfancy Toasts!",
   "main": "index",
   "typings": "index.d.ts",
   "nativescript": {
     "platforms": {
-      "ios": "6.0.0",
-      "android": "6.0.0"
+      "ios": "8.0.0",
+      "android": "8.0.0"
     }
   },
   "repository": {
@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/valor-software/nativescript-plugins/issues"
   },
-  "license": "Apache-2.0",
+  "license": "MIT",
   "homepage": "https://github.com/valor-software/nativescript-plugins",
   "readmeFilename": "README.md",
   "bootstrapper": "@nativescript/plugin-seed"
