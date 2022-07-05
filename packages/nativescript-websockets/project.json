@@ -4,7 +4,7 @@
   "sourceRoot": "packages/nativescript-websockets",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "outputPath": "dist/packages/nativescript-websockets",
         "tsConfig": "packages/nativescript-websockets/tsconfig.json",
