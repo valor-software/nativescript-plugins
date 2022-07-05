@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           node-version: lts/*
@@ -21,7 +23,7 @@ jobs:
       - name: yarn install
         run: yarn
       - name: Lint affected
-        run: yarn nx affected:lint
+        run: yarn nx affected:lint --base origin/master
   build:
     name: Build affected projects
     needs: lint
@@ -30,6 +32,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           node-version: lts/*
@@ -40,4 +44,4 @@ jobs:
       - name: yarn install
         run: yarn
       - name: Build.all affected
-        run: yarn nx affected --target=build.all
+        run: yarn nx affected --target=build.all --base origin/master
