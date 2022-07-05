@@ -1,0 +1,12 @@
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    def supportVer = "27.0.1"
+    if (project.hasProperty("supportVersion")) {
+        supportVer = supportVersion
+    }
+    implementation "com.android.support:appcompat-v7:$supportVer"
+    implementation 'com.github.tapadoo:alerter:7.2.4'
+}
