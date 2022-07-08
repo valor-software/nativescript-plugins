@@ -4,6 +4,7 @@
     "demo": "apps/demo",
     "demo-angular": "apps/demo-angular",
     "nativescript-barcodescanner": "packages/nativescript-barcodescanner",
+    "nativescript-feedback": "packages/nativescript-feedback",
     "nativescript-ngrx-devtools": "packages/nativescript-ngrx-devtools",
     "nativescript-websockets": "packages/nativescript-websockets"
   }

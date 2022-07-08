@@ -1,0 +1,21 @@
+<ActionBar title="nativescript-feedback" class="action-bar"> </ActionBar>
+<ScrollView>
+  <StackLayout>
+    <Label text="NativeScript Feedback" class="message" textWrap="true"></Label>
+    <Image src="~/res/feedback4u.jpg"></Image>
+    <WrapLayout>
+      <Button text="Success, 2.5s" (tap)="demoShared.showSuccess()" class="button button-success"></Button>
+      <Button text="Success, black text" (tap)="demoShared.showSuccessAltColors()" class="button button-success-alt"></Button>
+      <Button text="Info, 2s" (tap)="demoShared.showInfo()" class="button button-info"></Button>
+      <Button text="Warning, 4s" (tap)="demoShared.showWarning()" class="button button-warning"></Button>
+      <Button text="Error, 1s" (tap)="demoShared.showError()" class="button button-error"></Button>
+      <Button text="Error, 5s, Bottom" (tap)="demoShared.showErrorBottom()" class="button button-error"></Button>
+      <Button text="No icon" (tap)="demoShared.showNoIcon()" class="button button-custom"></Button>
+      <Button text="Custom icon" (tap)="demoShared.showCustomIcon()" class="button button-custom-alt"></Button>
+      <Button text="Custom font" (tap)="demoShared.showCustomFont()" class="button button-font"></Button>
+      <Button text="Another custom font" (tap)="demoShared.showCustomFont2()" class="button button-font"></Button>
+      <Button text="Black icon" (tap)="demoShared.showBlackCustomIcon()" class="button button-custom-alt"></Button>
+      <Button text="Hide!" (tap)="demoShared.hide()" class="button button-hide"></Button>
+    </WrapLayout>
+  </StackLayout>
+</ScrollView>

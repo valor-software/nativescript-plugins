@@ -82,6 +82,13 @@ module.exports = {
           description: '@valor/nativescript-barcodescanner: Build',
         },
       },
+      // @valor/nativescript-feedback
+      'nativescript-feedback': {
+        build: {
+          script: 'nx run nativescript-feedback:build.all',
+          description: '@valor/nativescript-feedback: Build',
+        },
+      },
       'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
@@ -103,6 +110,10 @@ module.exports = {
       'nativescript-barcodescanner': {
         script: 'nx run nativescript-barcodescanner:focus',
         description: 'Focus on @valor/nativescript-barcodescanner',
+      },
+      'nativescript-feedback': {
+        script: 'nx run nativescript-feedback:focus',
+        description: 'Focus on @valor/nativescript-feedback',
       },
       reset: {
         script: 'nx g @nativescript/plugin-tools:focus-packages',

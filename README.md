@@ -1,17 +1,11 @@
-# @valor/\* plugins
-
-```
-npm run setup
-npm start
-```
-
 - [@valor/nativescript-barcodescanner](packages/nativescript-barcodescanner/README.md)
+- [@valor/nativescript-feedback](packages/nativescript-feedback/README.md)
 - [@valor/nativescript-ngrx-devtools](packages/nativescript-ngrx-devtools/README.md)
 - [@valor/nativescript-websockets](packages/nativescript-websockets/README.md)
 
 # How to use?
 
-This workspace manages the suite of plugins listed above. 
+This workspace manages the suite of plugins listed above.
 
 In general, when in doubt with what to do, just `npm start`.
 
@@ -47,7 +41,7 @@ npm start
 - Choose the focus commands for the package you wish to focus on and hit enter.
 - All the demo app's will be updated to isolate that 1 package and for supported IDE's (currently VS Code), the source code will also become isolated in the workspace.
 
-Note: *good to always clean the demo you plan to run after focusing. (You can clean any demo from `npm start` as well)*
+Note: _good to always clean the demo you plan to run after focusing. (You can clean any demo from `npm start` as well)_
 
 ## How to publish packages?
 

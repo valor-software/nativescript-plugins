@@ -1,0 +1,64 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/nativescript-feedback",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/packages/nativescript-feedback",
+        "tsConfig": "packages/nativescript-feedback/tsconfig.json",
+        "packageJson": "packages/nativescript-feedback/package.json",
+        "main": "packages/nativescript-feedback/index.d.ts",
+        "assets": [
+          "packages/nativescript-feedback/*.md",
+          "packages/nativescript-feedback/index.d.ts",
+          "LICENSE",
+          {
+            "glob": "**/*",
+            "input": "packages/nativescript-feedback/platforms/",
+            "output": "./platforms/"
+          }
+        ],
+        "dependsOn": [
+          {
+            "target": "build.all",
+            "projects": "dependencies"
+          }
+        ]
+      }
+    },
+    "build.all": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["node tools/scripts/build-finish.ts nativescript-feedback"],
+        "parallel": false
+      },
+      "outputs": ["dist/packages/nativescript-feedback"],
+      "dependsOn": [
+        {
+          "target": "build.all",
+          "projects": "dependencies"
+        },
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ]
+    },
+    "focus": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["nx g @nativescript/plugin-tools:focus-packages nativescript-feedback"],
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/nativescript-feedback/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

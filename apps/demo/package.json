@@ -6,7 +6,8 @@
   "dependencies": {
     "@nativescript/core": "file:../../node_modules/@nativescript/core",
     "@valor/nativescript-websockets": "file:../../packages/nativescript-websockets",
-    "@valor/nativescript-barcodescanner": "file:../../packages/nativescript-barcodescanner"
+    "@valor/nativescript-barcodescanner": "file:../../packages/nativescript-barcodescanner",
+    "@valor/nativescript-feedback": "file:../../packages/nativescript-feedback"
   },
   "devDependencies": {
     "@nativescript/android": "~8.2.0",

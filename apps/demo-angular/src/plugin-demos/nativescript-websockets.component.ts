@@ -1,6 +1,5 @@
 import { Component, NgZone } from '@angular/core';
 import { DemoSharedNativescriptWebsockets } from '@demo/shared';
-import {} from '@valor/nativescript-websockets';
 
 @Component({
   selector: 'demo-nativescript-websockets',

@@ -1,0 +1,35 @@
+{
+  "name": "@valor/nativescript-feedback",
+  "version": "2.0.1",
+  "description": "Non-blocking textual feedback for your NativeScript app. AKA superfancy Toasts!",
+  "main": "index",
+  "typings": "index.d.ts",
+  "nativescript": {
+    "platforms": {
+      "ios": "8.0.0",
+      "android": "8.0.0"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valor-software/nativescript-plugins.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "JavaScript",
+    "TypeScript",
+    "iOS",
+    "Android"
+  ],
+  "author": {
+    "name": "Eduardo Speroni",
+    "email": "eduardo.speroni@valor-software.com"
+  },
+  "bugs": {
+    "url": "https://github.com/valor-software/nativescript-plugins/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/valor-software/nativescript-plugins",
+  "readmeFilename": "README.md",
+  "bootstrapper": "@nativescript/plugin-seed"
+}

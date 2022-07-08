@@ -10,6 +10,9 @@ export class HomeComponent {
       name: 'nativescript-barcodescanner',
     },
     {
+      name: 'nativescript-feedback',
+    },
+    {
       name: 'nativescript-ngrx-devtools',
     },
     {

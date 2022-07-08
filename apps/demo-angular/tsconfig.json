@@ -6,7 +6,8 @@
       "@demo/shared": ["tools/demo/index.ts"],
       "@valor/nativescript-ngrx-devtools": ["packages/nativescript-ngrx-devtools/src/index.ts"],
       "@valor/nativescript-websockets": ["packages/nativescript-websockets/index.ts"],
-      "@valor/nativescript-barcodescanner": ["packages/nativescript-barcodescanner/index.d.ts"]
+      "@valor/nativescript-barcodescanner": ["packages/nativescript-barcodescanner"],
+      "@valor/nativescript-feedback": ["packages/nativescript-feedback"]
     }
   },
   "files": ["./references.d.ts", "./src/main.ts", "./src/polyfills.ts"],
