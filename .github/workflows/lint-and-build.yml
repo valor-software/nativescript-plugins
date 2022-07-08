@@ -1,7 +1,9 @@
-name: Lint and Build
+name: Lint and Build (PR)
 
 on:
   push:
+    branches: [ "master" ]
+  pull_request:
     branches: [ "master" ]
 
 jobs:
@@ -11,17 +13,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           node-version: lts/*
+      - uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'master'
       - name: Setup global dependencies
         run: npm i -g yarn
       - name: Setup yarn cache
         uses: c-hive/gha-yarn-cache@v2
       - name: yarn install
         run: yarn
-      - name: Lint
-        run: yarn nx run-many --target=lint --all
+      - name: Lint affected
+        run: yarn nx affected:lint
   build:
     name: Build affected projects
     needs: lint
@@ -30,9 +37,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           node-version: lts/*
+      - uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'master'
       - name: Setup global dependencies
         run: npm i -g yarn
       - name: Setup yarn cache
@@ -40,4 +52,4 @@ jobs:
       - name: yarn install
         run: yarn
       - name: Build.all affected
-        run: yarn nx run-many --target=build.all --all
+        run: yarn nx affected --target=build.all
