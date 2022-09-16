@@ -1,6 +1,12 @@
 import { HeaderType } from './common';
 import { NativeBridgeDefinition } from './websocket.definition';
 
+interface ExtendedArrayBuffer extends ArrayBuffer {
+  from?(nativeBuffer: java.nio.ByteBuffer): ArrayBuffer;
+}
+
+const fastConversionAvailable = !!(ArrayBuffer as unknown as ExtendedArrayBuffer).from;
+
 @NativeClass()
 class WebSocketListenerImpl extends okhttp3.WebSocketListener {
   private owner: WeakRef<NativeBridge>;
@@ -125,12 +131,18 @@ export class NativeBridge extends NativeBridgeDefinition {
       return;
     }
     if (data instanceof okio.ByteString) {
-      // const arrayBuffer = new ArrayBuffer(data.size());
-      const bufferView = new Uint8Array(data.size());
-      for (let i = 0; i < data.size(); i++) {
-        bufferView[i] = data.getByte(i);
+      let arrayBuffer: ArrayBuffer;
+      if (fastConversionAvailable) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        arrayBuffer = (ArrayBuffer as unknown as ExtendedArrayBuffer).from!(data.asByteBuffer());
+      } else {
+        const bufferView = new Uint8Array(data.size());
+        for (let i = 0; i < data.size(); i++) {
+          bufferView[i] = data.getByte(i);
+        }
+        arrayBuffer = bufferView.buffer;
       }
-      const arrayBuffer = bufferView.buffer;
+
       this.ws._websocketMessage(arrayBuffer);
       return;
     }
