@@ -45,3 +45,8 @@ packages/*/native-src/ios/build
 .angular
 
 /.env
+
+
+# Xcode uneeded files
+*.xcuserstate
+xcuserdata/
