@@ -1,6 +1,6 @@
 {
   "name": "@valor/nativescript-websockets",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "WebSockets polyfill for NativeScript",
   "main": "index",
   "typings": "index.d.ts",
