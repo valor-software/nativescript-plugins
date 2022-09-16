@@ -14,7 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		7NfsWIW7WH4qwjx4g5ETfUSaXqk=
+		kPZoPMZnF6cpPUTIa4ycobz/RdI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -29,6 +29,10 @@
 	<dict>
 		<key>Headers/NativeScriptWebSockets.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			rzYXY0XxGwUcTYwKoypY7gLDM4M=
+			</data>
 			<key>hash2</key>
 			<data>
 			uF4iYpvXiL2WlkBmgZBcswSbx/QBagILBb4gSqyoNP8=
@@ -36,6 +40,10 @@
 		</dict>
 		<key>Headers/RCTSRWebSocket.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			rApYbSK2yQkz6OYTkdFuqMuvrY4=
+			</data>
 			<key>hash2</key>
 			<data>
 			+nezkNQxT67J7cBvYVK7kma0F4HraFhPEDLBYtTCrO8=
@@ -43,6 +51,10 @@
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			0RZTVZF2Cs3l5bXTV8m42Jq6v10=
+			</data>
 			<key>hash2</key>
 			<data>
 			5mBi1ZfsLoEWajsURg4g2PsByD/djqA3+ytNPGlv7vk=
@@ -50,6 +62,10 @@
 		</dict>
 		<key>PrivateHeaders/RCTImplementations.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			8idHsgUf2vLHtd8wmGSF9ASee9E=
+			</data>
 			<key>hash2</key>
 			<data>
 			otJqywzyQIyeKVGEHs0lMUJp2lKVczdbuOi3rS6sT0w=

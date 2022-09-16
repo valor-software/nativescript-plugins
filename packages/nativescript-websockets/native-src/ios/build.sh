@@ -46,4 +46,5 @@ xcodebuild \
 
 
 mkdir -p $COPYPATH
+rm -rf $COPYPATH/$PACKAGENAME.xcframework 
 cp -R $OUTPUTPATH/$PACKAGENAME.xcframework $COPYPATH/
