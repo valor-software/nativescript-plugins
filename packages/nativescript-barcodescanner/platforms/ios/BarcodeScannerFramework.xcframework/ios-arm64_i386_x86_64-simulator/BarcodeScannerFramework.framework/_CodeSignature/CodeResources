@@ -34,7 +34,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		5vkv/321f580xLLgQBls4eIttpM=
+		j31t9DM8FduSXvQXdyroIDAbNTE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -45,6 +45,10 @@
 	<dict>
 		<key>Headers/BarcodeScannerFramework.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			39opdctdJ66yULCT4nIz+6PoR/o=
+			</data>
 			<key>hash2</key>
 			<data>
 			pSECB/XbTxpdeIMimJt8FkL8dPOof1tttfvQ3HUBJhQ=
@@ -52,6 +56,10 @@
 		</dict>
 		<key>Headers/QRCameraSwitchButton.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			0mr1FdMaNpSnIKM8Ec4jrBzWR4Y=
+			</data>
 			<key>hash2</key>
 			<data>
 			p+jx2O1XYIkLDzdqEchOgLXR+vAFpcMAetRvm1+ZVMo=
@@ -59,6 +67,10 @@
 		</dict>
 		<key>Headers/QRCodeReader.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			LDTahdPGo74JFyism9MSdiedr30=
+			</data>
 			<key>hash2</key>
 			<data>
 			MbEXVmXya5C6StZkcXaoZA014bRbILp8wyv1hjlcDck=
@@ -66,6 +78,10 @@
 		</dict>
 		<key>Headers/QRCodeReaderDelegate.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			FFwPBmS8ujG02c6PfPP+ZlhUyYI=
+			</data>
 			<key>hash2</key>
 			<data>
 			X8cnZ5Za44vs6K2DD2R+klXSe3YxsZ3Hu9ZDrnTNP7g=
@@ -73,6 +89,10 @@
 		</dict>
 		<key>Headers/QRCodeReaderView.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			wvVwtc7tda5Uvox7ABAB2VNLhls=
+			</data>
 			<key>hash2</key>
 			<data>
 			QvPKJGz0HUMdKJ/C4/4mltMEkDEJK6GogHzy/6I7/f0=
@@ -80,6 +100,10 @@
 		</dict>
 		<key>Headers/QRCodeReaderViewController.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			QrTk7t6/g8LJvnz3TSJHVy+bvHk=
+			</data>
 			<key>hash2</key>
 			<data>
 			VFVGaNCLvSA9nWuQ3XGlp6sal8WlKrSdjIrXSwr1n0I=
@@ -87,6 +111,10 @@
 		</dict>
 		<key>Headers/QRToggleTorchButton.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			e4wzMZ3V9oGELw6k1LEX2rFOrXg=
+			</data>
 			<key>hash2</key>
 			<data>
 			KUkHn7mowwkQL0V7gyUKKHLN8VTbb4QkfB5QIyUFK88=
@@ -94,6 +122,10 @@
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			FbeEYX+rJuU9ln+MtY+g4Ky3Gcw=
+			</data>
 			<key>hash2</key>
 			<data>
 			Sz/3Wy1BBymXakDXVqnRa6PoFflH2p9V8an5dA+HXes=
