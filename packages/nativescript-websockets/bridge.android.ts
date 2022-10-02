@@ -168,8 +168,8 @@ export class NativeBridge extends NativeBridgeDefinition {
     }
     this.ws._websocketOpen(param1.protocol().toString());
   }
-  public onClosing(param0: okhttp3.WebSocket, param1: number, param2: string): void {
-    //
+  public onClosing(websocket: okhttp3.WebSocket, code: number, reason: string): void {
+    websocket.close(code, reason);
   }
 
   private isCorrectThread() {
