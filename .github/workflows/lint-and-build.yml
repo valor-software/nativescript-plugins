@@ -22,13 +22,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: lts/*
+          cache: 'yarn'
       - uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: 'master'
       - name: Setup global dependencies
         run: npm i -g yarn
-      - name: Setup yarn cache
-        uses: c-hive/gha-yarn-cache@v2
       - name: yarn install
         run: yarn
       - name: Lint affected
@@ -46,13 +45,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: lts/*
+          cache: 'yarn'
       - uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: 'master'
       - name: Setup global dependencies
         run: npm i -g yarn
-      - name: Setup yarn cache
-        uses: c-hive/gha-yarn-cache@v2
       - name: yarn install
         run: yarn
       - name: Build.all affected
