@@ -1,6 +1,6 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "packages/nativescript-ngrx-devtools",
   "sourceRoot": "packages/nativescript-ngrx-devtools/src",
   "prefix": "valor",
   "targets": {
@@ -30,7 +30,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/nativescript-ngrx-devtools"],
       "options": {
-        "jestConfig": "packages/nativescript-ngrx-devtools/jest.config.js",
+        "jestConfig": "packages/nativescript-ngrx-devtools/jest.config.ts",
         "passWithNoTests": true
       }
     },
