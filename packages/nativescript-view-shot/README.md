@@ -184,4 +184,4 @@ Some views (like images) take a while to load. So you might need to add a delay 
 
 ## License
 
-Apache License Version 2.0
+MIT License
