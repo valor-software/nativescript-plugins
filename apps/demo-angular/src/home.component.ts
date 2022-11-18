@@ -16,6 +16,9 @@ export class HomeComponent {
       name: 'nativescript-ngrx-devtools',
     },
     {
+      name: 'nativescript-view-shot',
+    },
+    {
       name: 'nativescript-websockets',
     },
   ];

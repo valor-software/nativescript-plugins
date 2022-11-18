@@ -1,0 +1,26 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+  xmlns:viewShot="@valor/nativescript-view-shot" navigatingTo="navigatingTo" class="page">
+  <Page.actionBar>
+    <ActionBar title="nativescript-view-shot" icon="" class="action-bar">
+    </ActionBar>
+  </Page.actionBar>
+  <StackLayout class="p-20">
+    <ScrollView class="h-full">
+      <StackLayout>
+        <Button text="Render hidden view" tap="{{ render }}" class="btn btn-primary"/>
+        <Button text="Screen shot visible view" tap="{{ renderVisible }}" class="btn btn-primary"/>
+        <GridLayout id="visibleView">
+          <Label backgroundColor="LightGreen" text="View to screenshot" class="h1" textWrap="true"/>
+        </GridLayout>
+        <viewShot:LogicalViewContainer>
+        <!-- this view is completely detached! Handle measuring/layout yourself! -->
+          <GridLayout id="hostView">
+            <Label backgroundColor="LightBlue" text="Hello World" class="h1" textWrap="true"/>
+          </GridLayout>
+        </viewShot:LogicalViewContainer>
+        <Label text="result:"></Label>
+        <Image src="{{ imgSrc }}"></Image>
+      </StackLayout>
+    </ScrollView>
+  </StackLayout>
+</Page>
