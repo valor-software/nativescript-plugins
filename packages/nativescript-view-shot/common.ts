@@ -23,6 +23,7 @@ export class LogicalViewContainer extends LayoutBase {
   constructor() {
     super();
     this.nativeViewProtected = undefined;
+    this.visibility = 'collapsed';
   }
 
   // No native view for proxy container.
@@ -71,14 +72,4 @@ export interface DrawableViews {
   // a view container that will be inserted in the view tree to make it part of the view hierarchy
   // (enables CSS inheritance)
   logicalContainer?: View;
-}
-
-export function disposeDrawableView({ hiddenHost, logicalContainer }: DrawableViews) {
-  if (isAndroid) {
-    (hiddenHost.android.getParent() as android.view.ViewGroup).removeView(hiddenHost.android);
-  }
-  hiddenHost.parent?._removeView(hiddenHost);
-  logicalContainer?.parent?._removeView(logicalContainer);
-  hiddenHost.callUnloaded();
-  hiddenHost._tearDownUI(true);
 }
