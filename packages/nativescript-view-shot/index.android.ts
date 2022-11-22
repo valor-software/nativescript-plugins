@@ -24,6 +24,8 @@ class ContentViewDummy extends ContentView {
 export function renderToImageSource(hostView: View): ImageSource {
   const bitmap = android.graphics.Bitmap.createBitmap(hostView.android.getWidth(), hostView.android.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);
   const canvas = new android.graphics.Canvas(bitmap);
+  // ensure we start with a blank transparent canvas
+  canvas.drawARGB(0, 0, 0, 0);
   hostView.android.draw(canvas);
   return new ImageSource(bitmap);
 }
