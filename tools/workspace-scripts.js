@@ -89,6 +89,13 @@ module.exports = {
           description: '@valor/nativescript-feedback: Build',
         },
       },
+      // @valor/nativescript-in-app-review
+      'nativescript-in-app-review': {
+        build: {
+          script: 'nx run nativescript-in-app-review:build.all',
+          description: '@valor/nativescript-in-app-review: Build',
+        },
+      },
       'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
@@ -114,6 +121,10 @@ module.exports = {
       'nativescript-feedback': {
         script: 'nx run nativescript-feedback:focus',
         description: 'Focus on @valor/nativescript-feedback',
+      },
+      'nativescript-in-app-review': {
+        script: 'nx run nativescript-in-app-review:focus',
+        description: 'Focus on @valor/nativescript-in-app-review',
       },
       reset: {
         script: 'nx g @nativescript/plugin-tools:focus-packages',
