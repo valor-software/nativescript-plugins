@@ -26,10 +26,8 @@ jobs:
       - uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: 'master'
-      - name: Setup global dependencies
-        run: npm i -g yarn
       - name: yarn install
-        run: yarn
+        run: yarn --immutable
       - name: Lint affected
         run: yarn nx affected:lint
   build:
@@ -49,9 +47,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: 'master'
-      - name: Setup global dependencies
-        run: npm i -g yarn
       - name: yarn install
-        run: yarn
+        run: yarn --immutable
       - name: Build.all affected
         run: yarn nx affected --target=build.all
