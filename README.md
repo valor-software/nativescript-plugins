@@ -1,6 +1,7 @@
 - [@valor/nativescript-barcodescanner](packages/nativescript-barcodescanner/README.md)
 - [@valor/nativescript-feedback](packages/nativescript-feedback/README.md)
 - [@valor/nativescript-ngrx-devtools](packages/nativescript-ngrx-devtools/README.md)
+- [@valor/nativescript-view-shot](packages/nativescript-view-shot/README.md)
 - [@valor/nativescript-websockets](packages/nativescript-websockets/README.md)
 
 # How to use?

@@ -1,0 +1,28 @@
+<ActionBar title="nativescript-view-shot" class="action-bar"> </ActionBar>
+<StackLayout class="p-20">
+  <ScrollView class="h-full">
+    <StackLayout class="view-shot">
+      <GridLayout columns="auto,*">
+        <Label>Target width: </Label>
+        <TextField col="1" [(ngModel)]="targetWidth" keyboardType="number"></TextField>
+      </GridLayout>
+      <Button text="Render detached view" (tap)="renderTemplate(myTemplate, true)" class="btn btn-primary"></Button>
+      <Button text="Render detached in root (check css)" (tap)="renderTemplate(myTemplate, false)" class="btn btn-primary"></Button>
+      <Button text="Take screenshot of view" (tap)="screenshotView(myView)" class="btn btn-primary"></Button>
+      <!-- the view will be rendered in ViewHost for the purposes of CSS handling -->
+      <ng-container #viewHost></ng-container>
+      <GridLayout #myView>
+        <Label class="h1" backgroundColor="lightblue">Screenshot view</Label>
+      </GridLayout>
+      <Label *ngIf="loading">Loading image...</Label>
+      <Label>result:</Label>
+      <ng-template #myTemplate>
+        <GridLayout>
+          <Image [src]="webImage2"></Image>
+          <Label class="child-label h2">some text</Label>
+        </GridLayout>
+      </ng-template>
+      <Image [src]="imgSrc"></Image>
+    </StackLayout>
+  </ScrollView>
+</StackLayout>
