@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'nativescript-feedback', loadChildren: () => import('./plugin-demos/nativescript-feedback.module').then((m) => m.NativescriptFeedbackModule) },
   { path: 'nativescript-in-app-review', loadChildren: () => import('./plugin-demos/nativescript-in-app-review.module').then((m) => m.NativescriptInAppReviewModule) },
   { path: 'nativescript-ngrx-devtools', loadChildren: () => import('./plugin-demos/nativescript-ngrx-devtools.module').then((m) => m.NativeScriptNgRxDevtoolsDemoModule) },
+  { path: 'nativescript-view-shot', loadChildren: () => import('./plugin-demos/nativescript-view-shot.module').then((m) => m.NativescriptViewShotModule) },
   { path: 'nativescript-websockets', loadChildren: () => import('./plugin-demos/nativescript-websockets.module').then((m) => m.NativescriptWebsocketsModule) },
 ];
 

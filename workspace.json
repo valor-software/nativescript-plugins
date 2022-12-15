@@ -7,6 +7,7 @@
     "nativescript-feedback": "packages/nativescript-feedback",
     "nativescript-in-app-review": "packages/nativescript-in-app-review",
     "nativescript-ngrx-devtools": "packages/nativescript-ngrx-devtools",
+    "nativescript-view-shot": "packages/nativescript-view-shot",
     "nativescript-websockets": "packages/nativescript-websockets"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"

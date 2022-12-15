@@ -5,11 +5,11 @@
   <StackLayout class="p-20">
     <ScrollView class="h-full">
       <StackLayout>
-        <Button text="add a package first" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
-<Button text="nativescript-websockets" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
-<Button text="nativescript-barcodescanner" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
-<Button text="nativescript-feedback" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
-<Button text="nativescript-in-app-review" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
+        <Button text="nativescript-websockets" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
+        <Button text="nativescript-barcodescanner" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
+        <Button text="nativescript-feedback" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
+        <Button text="nativescript-view-shot" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
+        <Button text="nativescript-in-app-review" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
       </StackLayout>
     </ScrollView>
   </StackLayout>

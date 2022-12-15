@@ -25,6 +25,8 @@
       "@valor/nativescript-feedback": ["packages/nativescript-feedback/index.d.ts"],
       "@valor/nativescript-in-app-review": ["packages/nativescript-in-app-review/index.d.ts"],
       "@valor/nativescript-ngrx-devtools": ["packages/nativescript-ngrx-devtools/src/index.ts"],
+      "@valor/nativescript-view-shot": ["packages/nativescript-view-shot/index.d.ts"],
+      "@valor/nativescript-view-shot/angular": ["packages/nativescript-view-shot/angular/index.ts"],
       "@valor/nativescript-websockets": ["packages/nativescript-websockets/index.d.ts"]
     }
   },
