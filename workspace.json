@@ -5,6 +5,7 @@
     "demo-angular": "apps/demo-angular",
     "nativescript-barcodescanner": "packages/nativescript-barcodescanner",
     "nativescript-feedback": "packages/nativescript-feedback",
+    "nativescript-in-app-review": "packages/nativescript-in-app-review",
     "nativescript-ngrx-devtools": "packages/nativescript-ngrx-devtools",
     "nativescript-view-shot": "packages/nativescript-view-shot",
     "nativescript-websockets": "packages/nativescript-websockets"

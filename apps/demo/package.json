@@ -8,7 +8,8 @@
     "@valor/nativescript-websockets": "file:../../packages/nativescript-websockets",
     "@valor/nativescript-barcodescanner": "file:../../packages/nativescript-barcodescanner",
     "@valor/nativescript-feedback": "file:../../packages/nativescript-feedback",
-    "@valor/nativescript-view-shot": "file:../../packages/nativescript-view-shot"
+    "@valor/nativescript-view-shot": "file:../../packages/nativescript-view-shot",
+    "@valor/nativescript-in-app-review": "file:../../packages/nativescript-in-app-review"
   },
   "devDependencies": {
     "@nativescript/android": "~8.3.0",

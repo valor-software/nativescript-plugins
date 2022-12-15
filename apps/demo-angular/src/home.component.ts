@@ -13,6 +13,9 @@ export class HomeComponent {
       name: 'nativescript-feedback',
     },
     {
+      name: 'nativescript-in-app-review',
+    },
+    {
       name: 'nativescript-ngrx-devtools',
     },
     {

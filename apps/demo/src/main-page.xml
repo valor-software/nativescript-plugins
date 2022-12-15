@@ -9,6 +9,7 @@
         <Button text="nativescript-barcodescanner" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
         <Button text="nativescript-feedback" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
         <Button text="nativescript-view-shot" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
+        <Button text="nativescript-in-app-review" tap="{{ viewDemo }}" class="btn btn-primary view-demo"/>
       </StackLayout>
     </ScrollView>
   </StackLayout>
