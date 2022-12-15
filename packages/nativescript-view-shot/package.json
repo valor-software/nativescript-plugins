@@ -1,6 +1,6 @@
 {
   "name": "@valor/nativescript-view-shot",
-  "version": "1.0.0-rc.0",
+  "version": "1.0.0",
   "description": "Turn any NativeScript View into an image!",
   "main": "index",
   "typings": "index.d.ts",
