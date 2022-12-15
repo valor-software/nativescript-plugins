@@ -8,5 +8,7 @@ export class InAppReview extends InAppReviewCommon {
     } else {
       SKStoreReviewController.requestReviewInScene((Application.ios.window as UIWindow).windowScene);
     }
+
+    return Promise.resolve();
   }
 }
