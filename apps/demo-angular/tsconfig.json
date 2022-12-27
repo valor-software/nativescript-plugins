@@ -8,6 +8,7 @@
       "@valor/nativescript-websockets": ["packages/nativescript-websockets/index.ts"],
       "@valor/nativescript-barcodescanner": ["packages/nativescript-barcodescanner"],
       "@valor/nativescript-feedback": ["packages/nativescript-feedback"],
+      "@valor/nativescript-in-app-review": ["packages/nativescript-in-app-review"],
       "@valor/nativescript-view-shot": ["packages/nativescript-view-shot"],
       "@valor/nativescript-view-shot/angular": ["packages/nativescript-view-shot/angular"]
     }
