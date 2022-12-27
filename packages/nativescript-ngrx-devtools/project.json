@@ -1,4 +1,5 @@
 {
+  "name": "nativescript-ngrx-devtools",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "packages/nativescript-ngrx-devtools/src",
@@ -6,7 +7,7 @@
   "targets": {
     "build.all": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/packages/nativescript-ngrx-devtools"],
+      "outputs": ["{workspaceRoot}/dist/packages/nativescript-ngrx-devtools"],
       "options": {
         "project": "packages/nativescript-ngrx-devtools/ng-package.json"
       },
@@ -28,7 +29,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/nativescript-ngrx-devtools"],
+      "outputs": ["{workspaceRoot}/coverage/packages/nativescript-ngrx-devtools"],
       "options": {
         "jestConfig": "packages/nativescript-ngrx-devtools/jest.config.ts",
         "passWithNoTests": true
