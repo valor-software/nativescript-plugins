@@ -1,6 +1,6 @@
 import { Component, inject, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { DemoSharedNativescriptViewShot } from '@demo/shared';
-import { ImageSource, Screen, View } from '@nativescript/core';
+import { ImageSource, isIOS, Screen, View } from '@nativescript/core';
 import { renderToImageSource } from '@valor/nativescript-view-shot';
 import { ViewShotService } from '@valor/nativescript-view-shot/angular';
 
@@ -26,8 +26,9 @@ export class NativescriptViewShotComponent {
       width = Screen.mainScreen.widthDIPs;
     }
     this.loading = true;
+    const image = await this.webImage$;
     // reusing imageSource on iOS sometimes doesn't work, so we create a new one each time
-    this.webImage2 = new ImageSource((await this.webImage$).ios);
+    this.webImage2 = isIOS ? new ImageSource((await this.webImage$).ios) : image;
     this.loading = false;
     this.imgSrc = await this.viewShotService.captureInBackground(template, {
       logicalHost: attached ? this.vcRef : undefined,
