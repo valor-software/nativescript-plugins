@@ -16,6 +16,7 @@
         <Button text="Another custom font" tap="{{ showCustomFont2 }}" class="button button-font" />
         <Button text="Black icon" tap="{{ showBlackCustomIcon }}" class="button button-custom-alt" />
         <Button text="Hide!" tap="{{ hide }}" class="button button-hide" />
+        <Button text="Over dialog" tap="{{ showOverDialog }}" class="button button-custom" />
       </WrapLayout>
     </StackLayout>
   </ScrollView>
