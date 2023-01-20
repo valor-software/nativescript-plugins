@@ -1,6 +1,5 @@
 import { FeedbackCommon, FeedbackShowOptions, FeedbackHideOptions, FeedbackType, FeedbackPosition } from './common';
-import { Application, Color, Utils } from '@nativescript/core';
-import { View } from '@nativescript/core/ui/core/view/index.android';
+import { Application, Color, Utils, View } from '@nativescript/core';
 
 export { FeedbackType };
 export { FeedbackPosition };
@@ -11,7 +10,7 @@ export class Feedback extends FeedbackCommon {
   show(options: FeedbackShowOptions): Promise<void> {
     return new Promise<void>((resolve) => {
       this.lastAlert = null;
-      const activityOrDialog = options.android?.dialog ? (options.android.dialog as View)._dialogFragment?.getDialog() : Application.android.foregroundActivity;
+      const activityOrDialog = options.android?.dialog instanceof View ? (options.android.dialog as any)._dialogFragment?.getDialog() : Application.android.foregroundActivity;
       const alerter = com.tapadoo.alerter.Alerter.create(activityOrDialog)
         .setLayoutGravity(Feedback.getPosition(options.position))
         .setIconColorFilter(0)
