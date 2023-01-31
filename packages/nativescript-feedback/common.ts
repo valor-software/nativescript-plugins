@@ -1,4 +1,4 @@
-import { Color } from '@nativescript/core';
+import { Color, View } from '@nativescript/core';
 
 export enum FeedbackPosition {
   Top,
@@ -121,6 +121,11 @@ export interface FeedbackShowOptions {
      * Default true.
      */
     iconPulseEnabled?: boolean;
+
+    /***
+     * A view that will be shown modally
+     */
+    dialog?: View;
   };
 }
 

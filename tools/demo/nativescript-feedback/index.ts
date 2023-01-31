@@ -1,4 +1,4 @@
-import { Color, isIOS } from '@nativescript/core';
+import { alert, Button, Color, EventData, GridLayout, isIOS, Label } from '@nativescript/core';
 import { Feedback, FeedbackPosition, FeedbackType } from '@valor/nativescript-feedback';
 import { DemoSharedBase } from '../utils';
 
@@ -141,5 +141,48 @@ export class DemoSharedNativescriptFeedback extends DemoSharedBase {
 
   public hide(): void {
     this.feedback.hide();
+  }
+
+  public showOverDialog(args: EventData): void {
+    const page = (<Button>args.object).page;
+    const grid = new GridLayout();
+    (<any>grid).rows = '*';
+    (<any>grid).columns = '*';
+    grid.height = 280;
+    grid.width = 400;
+    grid.backgroundColor = '#5d0239';
+    const label = new Label();
+    label.horizontalAlignment = 'center';
+    label.verticalAlignment = 'middle';
+    label.text = 'This is a dialog';
+    label.fontSize = 18;
+    label.color = new Color('#FFFFFF');
+    grid.addChild(label);
+
+    const dialog = page.showModal(grid, {
+      context: null,
+      fullscreen: false,
+      animated: true,
+      stretched: false,
+      closeCallback: () => console.log('closed dialog'),
+    });
+
+    grid.on('tap', () => page.closeModal());
+
+    setTimeout(async () => {
+      await this.feedback.success({
+        title: 'Over dialog',
+        titleSize: 17,
+        messageSize: 14,
+        message: "I'm configured to show over a modal presentation.",
+        duration: 3000,
+        titleFont: isIOS ? 'SourceSansPro-Bold' : 'SourceSansPro-Bold.otf',
+        messageFont: isIOS ? 'Source Sans Pro' : 'SourceSansPro.otf',
+        onTap: () => console.log('over dialog tapped'),
+        android: { dialog },
+      });
+      console.log('closed toast');
+      setTimeout(() => dialog.closeModal(), 5000);
+    }, 1000);
   }
 }
