@@ -1,6 +1,6 @@
 {
   "name": "@valor/nativescript-feedback",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Non-blocking textual feedback for your NativeScript app. AKA superfancy Toasts!",
   "main": "index",
   "typings": "index.d.ts",
