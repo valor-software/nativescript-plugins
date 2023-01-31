@@ -9,7 +9,7 @@ export class InAppReview extends InAppReviewCommon {
 
     return new Promise<void>((resolve, reject) =>
       request.addOnCompleteListener(
-        new com.google.android.play.core.tasks.OnCompleteListener({
+        new com.google.android.gms.tasks.OnCompleteListener({
           onComplete: (task) => {
             if (!task.isSuccessful()) {
               reject(new Error(task.getException()?.getMessage()));
@@ -20,7 +20,7 @@ export class InAppReview extends InAppReviewCommon {
             const flow = manager.launchReviewFlow(Application.android.foregroundActivity, reviewInfo);
 
             flow.addOnCompleteListener(
-              new com.google.android.play.core.tasks.OnCompleteListener({
+              new com.google.android.gms.tasks.OnCompleteListener({
                 onComplete: (task) => {
                   // The flow has finished. The API does not indicate whether the
                   // user reviewed or not, or even whether the review dialog was
