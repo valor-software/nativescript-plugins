@@ -23,6 +23,8 @@ const CLOSED = 3;
 
 const CLOSE_NORMAL = 1000;
 
+const openWebsockets = new Set<WebSocketPolyfill>();
+
 // const WEBSOCKET_EVENTS = ['close', 'error', 'message', 'open'];
 
 // type WebSocketEventDefinitions = {
@@ -118,6 +120,7 @@ export class WebSocket implements WebSocketPolyfill {
     //  );
     this._registerEvents();
     this.nativeBridge.connect(url, protocols, { headers });
+    openWebsockets.add(this);
     //  NativeWebSocketModule.connect(url, protocols, {headers}, this._socketId);
   }
   addEventListener(type: string, callback: EventListenerOrEventListenerObject | null, options?: boolean | AddEventListenerOptions): void {
@@ -265,6 +268,7 @@ export class WebSocket implements WebSocketPolyfill {
   }
   _websocketClosed(code: number, reason: string, wasClean: boolean) {
     this.readyState = this.CLOSED;
+    openWebsockets.delete(this);
     this.dispatchEvent(
       new WebSocketEvent('close', {
         code: code,
@@ -279,6 +283,7 @@ export class WebSocket implements WebSocketPolyfill {
   // _websocketPong(pongPayload: NSData) {}
   _websocketFailed(error: string) {
     this.readyState = this.CLOSED;
+    openWebsockets.delete(this);
     this.dispatchEvent(
       new WebSocketEvent('error', {
         message: error,
