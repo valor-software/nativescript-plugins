@@ -1,6 +1,0 @@
-framework module NativeScriptWebSockets {
-  umbrella header "NativeScriptWebSockets.h"
-
-  export *
-  module * { export * }
-}
