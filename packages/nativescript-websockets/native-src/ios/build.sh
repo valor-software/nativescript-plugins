@@ -17,9 +17,11 @@ xcodebuild \
     -scheme $PACKAGENAME \
     -sdk iphonesimulator \
     -configuration Release \
+    -destination "generic/platform=iOS Simulator" \
     clean build \
     BUILD_DIR=$OUTPUTPATH \
     SKIP_INSTALL=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
     -quiet
 
 echo "Build for iphoneos"
@@ -28,26 +30,37 @@ xcodebuild \
     -scheme $PACKAGENAME \
     -sdk iphoneos \
     -configuration Release \
+    -destination "generic/platform=iOS" \
     clean build \
     BUILD_DIR=$OUTPUTPATH \
     CODE_SIGN_IDENTITY="" \
     CODE_SIGNING_REQUIRED=NO \
     SKIP_INSTALL=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
     -quiet
 
-echo "Build for visionos"
+echo "Build for visionos device"
 xcodebuild \
     -project $PACKAGENAME.xcodeproj \
     -scheme $PACKAGENAME \
-    -sdk xrsimulator \
     -configuration Release \
+    -destination "generic/platform=visionOS" \
     clean build \
     BUILD_DIR=$OUTPUTPATH \
-    -destination "generic/platform=xrsimulator" \
-    EXCLUDED_ARCHS="i386 x86_64" \
-    CODE_SIGN_IDENTITY="" \
-    CODE_SIGNING_REQUIRED=NO \
     SKIP_INSTALL=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    -quiet
+
+echo "Build for visionos simulator"
+xcodebuild \
+    -project $PACKAGENAME.xcodeproj \
+    -scheme $PACKAGENAME \
+    -configuration Release \
+    -destination "generic/platform=visionOS Simulator" \
+    clean build \
+    BUILD_DIR=$OUTPUTPATH \
+    SKIP_INSTALL=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
     -quiet
 
 echo "Creating XCFramework"
@@ -57,6 +70,8 @@ xcodebuild \
     -debug-symbols $OUTPUTPATH/Release-iphoneos/$PACKAGENAME.framework.dSYM \
     -framework $OUTPUTPATH/Release-iphonesimulator/$PACKAGENAME.framework \
     -debug-symbols $OUTPUTPATH/Release-iphonesimulator/$PACKAGENAME.framework.dSYM \
+    -framework $OUTPUTPATH/Release-xros/$PACKAGENAME.framework \
+    -debug-symbols $OUTPUTPATH/Release-xros/$PACKAGENAME.framework.dSYM \
     -framework $OUTPUTPATH/Release-xrsimulator/$PACKAGENAME.framework \
     -debug-symbols $OUTPUTPATH/Release-xrsimulator/$PACKAGENAME.framework.dSYM \
     -output $OUTPUTPATH/$PACKAGENAME.xcframework
