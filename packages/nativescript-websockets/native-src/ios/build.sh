@@ -39,6 +39,20 @@ xcodebuild \
     BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
     -quiet
 
+echo "Build for Mac Catalyst"
+xcodebuild \
+    -project $PACKAGENAME.xcodeproj \
+    -scheme $PACKAGENAME \
+    -configuration Release \
+    -destination "generic/platform=macOS,variant=Mac Catalyst" \
+    clean build \
+    BUILD_DIR=$OUTPUTPATH \
+    CODE_SIGN_IDENTITY="" \
+    CODE_SIGNING_REQUIRED=NO \
+    SKIP_INSTALL=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    -quiet
+
 echo "Build for visionos device"
 xcodebuild \
     -project $PACKAGENAME.xcodeproj \
@@ -68,6 +82,8 @@ xcodebuild \
     -create-xcframework \
     -framework $OUTPUTPATH/Release-iphoneos/$PACKAGENAME.framework \
     -debug-symbols $OUTPUTPATH/Release-iphoneos/$PACKAGENAME.framework.dSYM \
+    -framework $OUTPUTPATH/Release-maccatalyst/$PACKAGENAME.framework \
+    -debug-symbols $OUTPUTPATH/Release-maccatalyst/$PACKAGENAME.framework.dSYM \
     -framework $OUTPUTPATH/Release-iphonesimulator/$PACKAGENAME.framework \
     -debug-symbols $OUTPUTPATH/Release-iphonesimulator/$PACKAGENAME.framework.dSYM \
     -framework $OUTPUTPATH/Release-xros/$PACKAGENAME.framework \
