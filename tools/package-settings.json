@@ -12,5 +12,6 @@
     "url": "https://github.com/valor-software/nativescript-plugins/issues"
   },
   "license": "Apache-2.0",
-  "homepage": "https://github.com/valor-software/nativescript-plugins"
+  "homepage": "https://github.com/valor-software/nativescript-plugins",
+  "name": "@valor"
 }
