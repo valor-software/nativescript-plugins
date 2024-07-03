@@ -50,3 +50,6 @@ packages/*/native-src/ios/build
 # Xcode uneeded files
 *.xcuserstate
 xcuserdata/
+
+.nx/cache
+.nx/workspace-data

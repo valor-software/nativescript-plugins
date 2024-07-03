@@ -67,7 +67,7 @@ export class NativeBridge extends NativeBridgeDefinition {
     const webSocket = RCTSRWebSocket.alloc().initWithURLRequestProtocols(request, protocols);
     this.nativeSocket = webSocket;
     this.delegate = RCTSRWebSocketDelegateImpl.initWithOwner(this);
-    webSocket.setDelegateDispatchQueue(dispatch_get_current_queue());
+    webSocket.setDelegateDispatchQueue(dispatch_get_current_queue() as unknown as NSObject);
     webSocket.delegate = this.delegate;
     webSocket.open();
   }

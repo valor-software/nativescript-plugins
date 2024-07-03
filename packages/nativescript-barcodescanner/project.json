@@ -3,9 +3,10 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "packages/nativescript-barcodescanner",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/packages/nativescript-barcodescanner",
         "tsConfig": "packages/nativescript-barcodescanner/tsconfig.json",
@@ -44,15 +45,13 @@
       "dependsOn": [
         {
           "target": "build.all",
-          "projects": "dependencies"
+          "dependencies": true
         },
         {
-          "target": "build.native",
-          "projects": "self"
+          "target": "build.native"
         },
         {
-          "target": "build",
-          "projects": "self"
+          "target": "build"
         }
       ]
     },
@@ -72,6 +71,5 @@
         "parallel": false
       }
     }
-  },
-  "tags": []
+  }
 }
