@@ -127,7 +127,8 @@ export class BarcodeScanner {
     this._audioSession.setActiveError(true);
     this._currentVolume = this._audioSession.outputVolume;
     if (!this._observerActive) {
-      this._audioSession.addObserverForKeyPathOptionsContext(this._observer, 'outputVolume', 0, null);
+      // TODO: is this 0 as any needed? is it maybe ios types being wrong?
+      this._audioSession.addObserverForKeyPathOptionsContext(this._observer, 'outputVolume', 0 as any, null);
       this._observerActive = true;
     }
   }
