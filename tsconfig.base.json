@@ -21,6 +21,7 @@
     ],
     "paths": {
       "@demo/shared": ["tools/demo/index.ts"],
+      "@valor/*": ["packages/*"],
       "@valor/nativescript-barcodescanner": ["packages/nativescript-barcodescanner/index.d.ts"],
       "@valor/nativescript-feedback": ["packages/nativescript-feedback/index.d.ts"],
       "@valor/nativescript-in-app-review": ["packages/nativescript-in-app-review/index.d.ts"],

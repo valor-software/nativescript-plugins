@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "packages/nativescript-ngrx-devtools/src",
   "prefix": "valor",
+  "tags": [],
   "targets": {
     "build.all": {
       "executor": "@nrwl/angular:package",
@@ -14,7 +15,7 @@
       "dependsOn": [
         {
           "target": "build.all",
-          "projects": "dependencies"
+          "dependencies": true
         }
       ],
       "configurations": {
@@ -28,7 +29,7 @@
       "defaultConfiguration": "production"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/nativescript-ngrx-devtools"],
       "options": {
         "jestConfig": "packages/nativescript-ngrx-devtools/jest.config.ts",
@@ -36,11 +37,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["packages/nativescript-ngrx-devtools/src/**/*.ts", "packages/nativescript-ngrx-devtools/src/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

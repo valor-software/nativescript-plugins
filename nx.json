@@ -1,20 +1,12 @@
 {
-  "npmScope": "valor",
-  "affected": {
-    "defaultBase": "master"
-  },
   "workspaceLayout": {
     "appsDir": "apps",
     "libsDir": "packages"
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "build.all", "build.native", "lint", "test", "e2e"],
-        "runtimeCacheInputs": ["node -v"],
-        "accessToken": "M2YzM2ViYzctZWNiMC00Y2MyLWI3ZmYtMDMwZTAxZjUwZGUwfHJlYWQ=",
-        "useDaemonProcess": false
+        "runtimeCacheInputs": ["node -v"]
       }
     }
   },
@@ -22,17 +14,33 @@
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/workspace.json", "{workspaceRoot}/tsconfig.base.json", "{workspaceRoot}/tslint.json", "{workspaceRoot}/nx.json"],
-    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json", "!{projectRoot}/jest.config.[jt]s", "!{projectRoot}/.eslintrc.json"]
+    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json", "!{projectRoot}/jest.config.[jt]s", "!{projectRoot}/.eslintrc.json", "!{projectRoot}/src/test-setup.[jt]s"]
   },
   "targetDefaults": {
     "build": {
-      "inputs": ["production", "^production"]
+      "inputs": ["production", "^production"],
+      "cache": true
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "cache": true
     },
     "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
+      "cache": true
+    },
+    "build.all": {
+      "cache": true
+    },
+    "build.native": {
+      "cache": true
+    },
+    "e2e": {
+      "cache": true
     }
-  }
+  },
+  "useDaemonProcess": false,
+  "nxCloudAccessToken": "M2YzM2ViYzctZWNiMC00Y2MyLWI3ZmYtMDMwZTAxZjUwZGUwfHJlYWQ=",
+  "useInferencePlugins": false,
+  "defaultBase": "master"
 }

@@ -138,7 +138,7 @@ module.exports = {
         description: 'Focus on @valor/nativescript-in-app-review',
       },
       reset: {
-        script: 'nx g @nativescript/plugin-tools:focus-packages',
+        script: 'nx g @valor/plugin-tools:focus-packages',
         description: 'Reset Focus',
       },
     },
