@@ -40,7 +40,7 @@ xcodebuild \
     -project $PACKAGENAME.xcodeproj \
     -scheme $PACKAGENAME \
     -configuration Release \
-    -destination "generic/platform=macOS,variant=Mac Catalyst" \
+    -destination "platform=macOS,variant=Mac Catalyst" \
     clean build \
     BUILD_DIR=$OUTPUTPATH \
     CODE_SIGN_IDENTITY="" \
@@ -49,7 +49,19 @@ xcodebuild \
     BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
     -quiet
 
-echo "Build for visionos"
+echo "Build for visionos device"
+xcodebuild \
+    -project $PACKAGENAME.xcodeproj \
+    -scheme $PACKAGENAME \
+    -configuration Release \
+    -destination "generic/platform=visionOS" \
+    clean build \
+    BUILD_DIR=$OUTPUTPATH \
+    SKIP_INSTALL=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    -quiet
+
+echo "Build for visionos simulator"
 xcodebuild \
     -project $PACKAGENAME.xcodeproj \
     -scheme $PACKAGENAME \
@@ -73,6 +85,8 @@ xcodebuild \
     -debug-symbols $OUTPUTPATH/Release-iphonesimulator/$PACKAGENAME.framework.dSYM \
     -framework $OUTPUTPATH/Release-maccatalyst/$PACKAGENAME.framework \
     -debug-symbols $OUTPUTPATH/Release-maccatalyst/$PACKAGENAME.framework.dSYM \
+    -framework $OUTPUTPATH/Release-xros/$PACKAGENAME.framework \
+    -debug-symbols $OUTPUTPATH/Release-xros/$PACKAGENAME.framework.dSYM \
     -framework $OUTPUTPATH/Release-xrsimulator/$PACKAGENAME.framework \
     -debug-symbols $OUTPUTPATH/Release-xrsimulator/$PACKAGENAME.framework.dSYM \
     -output $OUTPUTPATH/$PACKAGENAME.xcframework
