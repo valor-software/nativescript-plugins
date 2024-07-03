@@ -6,9 +6,9 @@ env:
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
 
 jobs:
   lint:
@@ -47,6 +47,11 @@ jobs:
       - uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: 'master'
+      - name: Install visionOS platform
+        run: |
+          defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES
+          defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES
+          xcodebuild -downloadPlatform visionOS
       - name: yarn install
         run: yarn --immutable
       - name: Build.all affected

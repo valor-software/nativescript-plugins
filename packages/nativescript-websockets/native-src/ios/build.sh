@@ -35,6 +35,35 @@ xcodebuild \
     SKIP_INSTALL=NO \
     -quiet
 
+echo "Build for Mac Catalyst"
+xcodebuild \
+    -project $PACKAGENAME.xcodeproj \
+    -scheme $PACKAGENAME \
+    -configuration Release \
+    -destination "generic/platform=macOS,variant=Mac Catalyst" \
+    clean build \
+    BUILD_DIR=$OUTPUTPATH \
+    CODE_SIGN_IDENTITY="" \
+    CODE_SIGNING_REQUIRED=NO \
+    SKIP_INSTALL=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    -quiet
+
+echo "Build for visionos"
+xcodebuild \
+    -project $PACKAGENAME.xcodeproj \
+    -scheme $PACKAGENAME \
+    -sdk xrsimulator \
+    -configuration Release \
+    clean build \
+    BUILD_DIR=$OUTPUTPATH \
+    -destination "generic/platform=xrsimulator" \
+    EXCLUDED_ARCHS="i386 x86_64" \
+    CODE_SIGN_IDENTITY="" \
+    CODE_SIGNING_REQUIRED=NO \
+    SKIP_INSTALL=NO \
+    -quiet
+
 echo "Creating XCFramework"
 xcodebuild \
     -create-xcframework \
@@ -42,9 +71,12 @@ xcodebuild \
     -debug-symbols $OUTPUTPATH/Release-iphoneos/$PACKAGENAME.framework.dSYM \
     -framework $OUTPUTPATH/Release-iphonesimulator/$PACKAGENAME.framework \
     -debug-symbols $OUTPUTPATH/Release-iphonesimulator/$PACKAGENAME.framework.dSYM \
+    -framework $OUTPUTPATH/Release-maccatalyst/$PACKAGENAME.framework \
+    -debug-symbols $OUTPUTPATH/Release-maccatalyst/$PACKAGENAME.framework.dSYM \
+    -framework $OUTPUTPATH/Release-xrsimulator/$PACKAGENAME.framework \
+    -debug-symbols $OUTPUTPATH/Release-xrsimulator/$PACKAGENAME.framework.dSYM \
     -output $OUTPUTPATH/$PACKAGENAME.xcframework
 
-
 mkdir -p $COPYPATH
-rm -rf $COPYPATH/$PACKAGENAME.xcframework 
+rm -rf $COPYPATH/$PACKAGENAME.xcframework
 cp -R $OUTPUTPATH/$PACKAGENAME.xcframework $COPYPATH/
