@@ -11,10 +11,9 @@
         "outputPath": "dist/packages/nativescript-websockets",
         "tsConfig": "packages/nativescript-websockets/tsconfig.json",
         "packageJson": "packages/nativescript-websockets/package.json",
-        "main": "packages/nativescript-websockets/index.d.ts",
+        "main": "packages/nativescript-websockets/index.ts",
         "assets": [
           "packages/nativescript-websockets/*.md",
-          "packages/nativescript-websockets/index.d.ts",
           "LICENSE",
           {
             "glob": "**/*",
