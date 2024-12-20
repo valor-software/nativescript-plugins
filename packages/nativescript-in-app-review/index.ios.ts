@@ -5,7 +5,7 @@ let nscAppStore: NSCAppStore;
 
 export class InAppReview extends InAppReviewCommon {
   static requestReviewPopup() {
-    if (Utils.SDK_VERSION >= 17) {
+    if (Utils.SDK_VERSION >= 17 || __VISIONOS__) {
       if (!nscAppStore) {
         nscAppStore = NSCAppStore.new();
       }
