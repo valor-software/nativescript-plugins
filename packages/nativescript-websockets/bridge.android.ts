@@ -1,5 +1,5 @@
 import { HeaderType } from './common';
-import { NativeBridgeDefinition } from './websocket.definition';
+import { NativeBridgeDefinition, WebSocketBridgeConnectOptions } from './websocket.definition';
 
 interface ExtendedArrayBuffer extends ArrayBuffer {
   from?(nativeBuffer: java.nio.ByteBuffer): ArrayBuffer;
@@ -72,7 +72,7 @@ export class NativeBridge extends NativeBridgeDefinition {
   nativeWs!: okhttp3.WebSocket;
   startLooper?: android.os.Looper;
   handler?: android.os.Handler;
-  connect(url: string, protocols: string[], headers: HeaderType): void {
+  connect({ url, protocols, headers }: WebSocketBridgeConnectOptions): void {
     this.startLooper = android.os.Looper.myLooper();
     this.handler = new android.os.Handler(this.startLooper);
     protocols = protocols || [];

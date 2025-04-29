@@ -9,7 +9,7 @@
  */
 
 import { HeaderType } from './common';
-import { NativeBridgeDefinition } from './websocket.definition';
+import { NativeBridgeDefinition, WebSocketBridgeConnectOptions } from './websocket.definition';
 
 @NativeClass
 class RCTSRWebSocketDelegateImpl extends NSObject implements RCTSRWebSocketDelegate {
@@ -41,7 +41,7 @@ export class NativeBridge extends NativeBridgeDefinition {
   // store the delegate so it isn't garbage collected
   // TODO: fix the iOS runtime so we don't need this
   delegate!: RCTSRWebSocketDelegateImpl;
-  connect(url: string, protocols: string[], headers: HeaderType) {
+  connect({ url, protocols, headers, pinnedCertificates }: WebSocketBridgeConnectOptions): void {
     const nativeUrl = NSURL.URLWithString(url);
     const request = NSMutableURLRequest.requestWithURL(nativeUrl);
     // NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
@@ -62,6 +62,24 @@ export class NativeBridge extends NativeBridgeDefinition {
     // Load supplied headers
     for (const k of Object.keys(headers.headers)) {
       request.addValueForHTTPHeaderField(`${headers.headers[k]}`, k);
+    }
+    if (pinnedCertificates) {
+      const sslArray = NSMutableArray.new();
+
+      for (const c of pinnedCertificates) {
+        // convert from pem to der (base64)
+        const der = c
+          .replace(/-----BEGIN CERTIFICATE-----/g, '')
+          .replace(/-----END CERTIFICATE-----/g, '')
+          .replace(/\r?\n/g, '');
+        const cert = SecCertificateCreateWithData(null, NSData.alloc().initWithBase64EncodedStringOptions(der, NSDataBase64DecodingOptions.IgnoreUnknownCharacters));
+        if (cert) {
+          sslArray.addObject(cert);
+        } else {
+          console.warn('Unable to create certificate from pem');
+        }
+      }
+      request.RCTSR_SSLPinnedCertificates = sslArray;
     }
 
     const webSocket = RCTSRWebSocket.alloc().initWithURLRequestProtocols(request, protocols);
