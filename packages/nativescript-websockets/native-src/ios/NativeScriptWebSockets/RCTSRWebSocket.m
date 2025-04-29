@@ -23,6 +23,104 @@
 
 #import <CommonCrypto/CommonDigest.h>
 
+typedef NS_ENUM(NSInteger, RCTSRServerTrustState) {
+  RCTSRServerTrustStatePending = 0,
+  RCTSRServerTrustStateTrusted,
+  RCTSRServerTrustStateFailed,
+};
+
+// Reads the DER tag/length header at `offset`. Fails if the element doesn't fit in `length`.
+static BOOL RCTSRReadDERHeader(const uint8_t *bytes, size_t length, size_t offset, uint8_t *tag, size_t *headerLength, size_t *contentLength)
+{
+  if (offset >= length || length - offset < 2) {
+    return NO;
+  }
+  *tag = bytes[offset];
+  uint8_t first = bytes[offset + 1];
+  size_t header = 2;
+  size_t content = 0;
+  if (first < 0x80) {
+    content = first;
+  } else {
+    size_t lengthBytes = first & 0x7f;
+    if (lengthBytes == 0 || lengthBytes > 4 || length - offset - 2 < lengthBytes) {
+      return NO;
+    }
+    for (size_t i = 0; i < lengthBytes; i++) {
+      content = (content << 8) | bytes[offset + 2 + i];
+    }
+    header += lengthBytes;
+  }
+  if (content > length - offset - header) {
+    return NO;
+  }
+  *headerLength = header;
+  *contentLength = content;
+  return YES;
+}
+
+// Returns the DER-encoded SubjectPublicKeyInfo of an X.509 certificate.
+static NSData *RCTSRSubjectPublicKeyInfo(NSData *certificateData)
+{
+  const uint8_t *bytes = certificateData.bytes;
+  size_t length = certificateData.length;
+  uint8_t tag;
+  size_t header, content;
+
+  // Certificate ::= SEQUENCE { tbsCertificate, ... }
+  if (!RCTSRReadDERHeader(bytes, length, 0, &tag, &header, &content) || tag != 0x30) {
+    return nil;
+  }
+  size_t offset = header;
+  // TBSCertificate ::= SEQUENCE { [0] version OPTIONAL, serialNumber, signature, issuer, validity, subject, subjectPublicKeyInfo, ... }
+  if (!RCTSRReadDERHeader(bytes, length, offset, &tag, &header, &content) || tag != 0x30) {
+    return nil;
+  }
+  offset += header;
+  size_t end = offset + content;
+  if (!RCTSRReadDERHeader(bytes, end, offset, &tag, &header, &content)) {
+    return nil;
+  }
+  if (tag == 0xa0) {
+    offset += header + content;
+  }
+  for (int i = 0; i < 5; i++) {
+    if (!RCTSRReadDERHeader(bytes, end, offset, &tag, &header, &content)) {
+      return nil;
+    }
+    offset += header + content;
+  }
+  if (!RCTSRReadDERHeader(bytes, end, offset, &tag, &header, &content) || tag != 0x30) {
+    return nil;
+  }
+  return [certificateData subdataWithRange:NSMakeRange(offset, header + content)];
+}
+
+static NSData *RCTSRPublicKeySHA256(SecCertificateRef certificate)
+{
+  NSData *certificateData = CFBridgingRelease(SecCertificateCopyData(certificate));
+  NSData *spki = RCTSRSubjectPublicKeyInfo(certificateData);
+  if (!spki) {
+    return nil;
+  }
+  NSMutableData *hash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
+  CC_SHA256(spki.bytes, (CC_LONG)spki.length, hash.mutableBytes);
+  return hash;
+}
+
+static NSArray *RCTSRCertificateChain(SecTrustRef trust)
+{
+  if (@available(iOS 15.0, macCatalyst 15.0, *)) {
+    return CFBridgingRelease(SecTrustCopyCertificateChain(trust)) ?: @[];
+  }
+  NSMutableArray *chain = [NSMutableArray new];
+  CFIndex count = SecTrustGetCertificateCount(trust);
+  for (CFIndex i = 0; i < count; i++) {
+    [chain addObject:(__bridge id)SecTrustGetCertificateAtIndex(trust, i)];
+  }
+  return chain;
+}
+
 typedef NS_ENUM(NSInteger, RCTSROpCode)  {
   RCTSROpCodeTextFrame = 0x1,
   RCTSROpCodeBinaryFrame = 0x2,
@@ -202,7 +300,9 @@ typedef void (^data_callback)(RCTSRWebSocket *webSocket,  NSData *data);
 
   NSString *_secKey;
 
-  BOOL _pinnedCertFound;
+  // Only meaningful when _requiresServerTrustCheck is set; touched on _workQueue only.
+  RCTSRServerTrustState _serverTrustState;
+  BOOL _requiresServerTrustCheck;
 
   uint8_t _currentReadMaskKey[4];
   size_t _currentReadMaskOffset;
@@ -283,6 +383,12 @@ typedef void (^data_callback)(RCTSRWebSocket *webSocket,  NSData *data);
   return [self initWithURLRequest:request protocols:protocols];
 }
 
++ (NSData *)RCTSR_publicKeySHA256ForCertificateData:(NSData *)certificateData
+{
+  id certificate = CFBridgingRelease(SecCertificateCreateWithData(NULL, (__bridge CFDataRef)certificateData));
+  return certificate ? RCTSRPublicKeySHA256((__bridge SecCertificateRef)certificate) : nil;
+}
+
 - (void)_RCTSR_commonInit
 {
   NSString *scheme = _url.scheme.lowercaseString;
@@ -290,6 +396,9 @@ typedef void (^data_callback)(RCTSRWebSocket *webSocket,  NSData *data);
 
   if ([scheme isEqualToString:@"wss"] || [scheme isEqualToString:@"https"]) {
     _secure = YES;
+    RCTSRSSLValidationMode mode = _urlRequest.RCTSR_SSLValidationMode;
+    _requiresServerTrustCheck = mode == RCTSRSSLValidationModePinsOnly ||
+      (mode == RCTSRSSLValidationModeSystem && (_urlRequest.RCTSR_SSLPinnedPublicKeyHashes.count || _urlRequest.RCTSR_SSLTrustedRootCertificates.count));
   }
 
   _readyState = RCTSR_CONNECTING;
@@ -511,15 +620,10 @@ typedef void (^data_callback)(RCTSRWebSocket *webSocket,  NSData *data);
 
     [_outputStream setProperty:(__bridge id)kCFStreamSocketSecurityLevelNegotiatedSSL forKey:(__bridge id)kCFStreamPropertySocketSecurityLevel];
 
-    // If we're using pinned certs, don't validate the certificate chain
-    if (_urlRequest.RCTSR_SSLPinnedCertificates.count) {
+    // Custom trust is evaluated in -_ensureServerTrusted:, so the stream must not reject the chain first.
+    if (_requiresServerTrustCheck || _urlRequest.RCTSR_SSLValidationMode == RCTSRSSLValidationModeNone) {
       [SSLOptions setValue:@NO forKey:(__bridge id)kCFStreamSSLValidatesCertificateChain];
     }
-
-#if DEBUG
-    [SSLOptions setValue:@NO forKey:(__bridge id)kCFStreamSSLValidatesCertificateChain];
-    // RCTLogInfo(@"SocketRocket: In debug mode.  Allowing connection to any root cert");
-#endif
 
     [_outputStream setProperty:SSLOptions
                         forKey:(__bridge id)kCFStreamPropertySSLSettings];
@@ -1019,6 +1123,11 @@ static const uint8_t RCTSRPayloadLenMask   = 0x7F;
 {
   [self assertOnWorkQueue];
 
+  // Nothing (not even the upgrade request) may be written before the server is trusted.
+  if (![self _ensureServerTrusted:NO]) {
+    return;
+  }
+
   NSUInteger dataLength = _outputBuffer.length;
   if (dataLength - _outputBufferOffset > 0 && _outputStream.hasSpaceAvailable) {
     NSInteger bytesWritten = [_outputStream write:_outputBuffer.bytes + _outputBufferOffset maxLength:dataLength - _outputBufferOffset];
@@ -1305,37 +1414,6 @@ static const size_t RCTSRFrameHeaderOverhead = 32;
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
 {
-  if (_secure && !_pinnedCertFound && (eventCode == NSStreamEventHasBytesAvailable || eventCode == NSStreamEventHasSpaceAvailable)) {
-    NSArray *sslCerts = _urlRequest.RCTSR_SSLPinnedCertificates;
-    if (sslCerts) {
-      SecTrustRef secTrust = (__bridge SecTrustRef)[aStream propertyForKey:(__bridge id)kCFStreamPropertySSLPeerTrust];
-      if (secTrust) {
-        NSInteger numCerts = SecTrustGetCertificateCount(secTrust);
-        for (NSInteger i = 0; i < numCerts && !_pinnedCertFound; i++) {
-          SecCertificateRef cert = SecTrustGetCertificateAtIndex(secTrust, i);
-          NSData *certData = CFBridgingRelease(SecCertificateCopyData(cert));
-
-          for (id ref in sslCerts) {
-            SecCertificateRef trustedCert = (__bridge SecCertificateRef)ref;
-            NSData *trustedCertData = CFBridgingRelease(SecCertificateCopyData(trustedCert));
-
-            if ([trustedCertData isEqualToData:certData]) {
-              _pinnedCertFound = YES;
-              break;
-            }
-          }
-        }
-      }
-
-      if (!_pinnedCertFound) {
-        dispatch_async(_workQueue, ^{
-          [self _failWithError:[NSError errorWithDomain:RCTSRWebSocketErrorDomain code:23556 userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Invalid server cert"]}]];
-        });
-        return;
-      }
-    }
-  }
-  
   // _workQueue cannot be NULL
   if (!_workQueue) {
     return;
@@ -1350,8 +1428,103 @@ static const size_t RCTSRFrameHeaderOverhead = 32;
   });
 }
 
+- (NSString *)_serverTrustFailureReason:(SecTrustRef)trust
+{
+  NSArray<NSData *> *pins = _urlRequest.RCTSR_SSLPinnedPublicKeyHashes;
+
+  if (_urlRequest.RCTSR_SSLValidationMode == RCTSRSSLValidationModePinsOnly) {
+    // Only the leaf is bound to the handshake; any other certificate in the presented chain is attacker-controlled.
+    NSArray *chain = RCTSRCertificateChain(trust);
+    NSData *leafHash = chain.count ? RCTSRPublicKeySHA256((__bridge SecCertificateRef)chain.firstObject) : nil;
+    if (!leafHash || ![pins containsObject:leafHash]) {
+      return @"Server certificate does not match any pinned public key";
+    }
+    return nil;
+  }
+
+  SecPolicyRef policy = SecPolicyCreateSSL(true, (__bridge CFStringRef)_url.host);
+  SecTrustSetPolicies(trust, policy);
+  CFRelease(policy);
+
+  NSArray<NSData *> *roots = _urlRequest.RCTSR_SSLTrustedRootCertificates;
+  if (roots.count) {
+    NSMutableArray *anchors = [NSMutableArray arrayWithCapacity:roots.count];
+    for (NSData *root in roots) {
+      id certificate = CFBridgingRelease(SecCertificateCreateWithData(NULL, (__bridge CFDataRef)root));
+      if (!certificate) {
+        return @"Invalid trusted root certificate";
+      }
+      [anchors addObject:certificate];
+    }
+    SecTrustSetAnchorCertificates(trust, (__bridge CFArrayRef)anchors);
+    SecTrustSetAnchorCertificatesOnly(trust, true);
+  }
+
+  if (@available(iOS 12.0, macCatalyst 13.0, *)) {
+    CFErrorRef error = NULL;
+    if (!SecTrustEvaluateWithError(trust, &error)) {
+      NSString *reason = [(__bridge NSError *)error localizedDescription];
+      if (error) {
+        CFRelease(error);
+      }
+      return reason ?: @"Server certificate is not trusted";
+    }
+  } else {
+    SecTrustResultType result = kSecTrustResultInvalid;
+    if (SecTrustEvaluate(trust, &result) != errSecSuccess || (result != kSecTrustResultUnspecified && result != kSecTrustResultProceed)) {
+      return @"Server certificate is not trusted";
+    }
+  }
+
+  if (pins.count) {
+    // After a successful evaluation this is the chain the system built, not the one the server sent.
+    for (id certificate in RCTSRCertificateChain(trust)) {
+      NSData *hash = RCTSRPublicKeySHA256((__bridge SecCertificateRef)certificate);
+      if (hash && [pins containsObject:hash]) {
+        return nil;
+      }
+    }
+    return @"No certificate in the server's chain matches a pinned public key";
+  }
+  return nil;
+}
+
+// Returns YES once the server is trusted. With requireResult, a still-unavailable peer trust counts as a failure.
+- (BOOL)_ensureServerTrusted:(BOOL)requireResult
+{
+  [self assertOnWorkQueue];
+  if (!_requiresServerTrustCheck || _serverTrustState == RCTSRServerTrustStateTrusted) {
+    return YES;
+  }
+  if (_serverTrustState == RCTSRServerTrustStateFailed) {
+    return NO;
+  }
+
+  id trustObject = [_outputStream propertyForKey:(__bridge id)kCFStreamPropertySSLPeerTrust] ?: [_inputStream propertyForKey:(__bridge id)kCFStreamPropertySSLPeerTrust];
+  NSString *failure = nil;
+  if (trustObject) {
+    failure = [self _serverTrustFailureReason:(__bridge SecTrustRef)trustObject];
+  } else if (requireResult) {
+    failure = @"Server certificate is unavailable";
+  } else {
+    return NO;
+  }
+
+  if (failure) {
+    _serverTrustState = RCTSRServerTrustStateFailed;
+    [self _failWithError:[NSError errorWithDomain:RCTSRWebSocketErrorDomain code:23556 userInfo:@{NSLocalizedDescriptionKey: failure}]];
+    return NO;
+  }
+  _serverTrustState = RCTSRServerTrustStateTrusted;
+  return YES;
+}
+
 - (void)safeHandleEvent:(NSStreamEvent)eventCode stream:(NSStream *)aStream
 {
+  if ((eventCode == NSStreamEventHasBytesAvailable || eventCode == NSStreamEventHasSpaceAvailable) && ![self _ensureServerTrusted:YES]) {
+    return;
+  }
+
   switch (eventCode) {
     case NSStreamEventOpenCompleted: {
       RCTSRLog(@"NSStreamEventOpenCompleted %@", aStream);
@@ -1534,25 +1707,44 @@ static const size_t RCTSRFrameHeaderOverhead = 32;
 
 @end
 
-@implementation  NSURLRequest (CertificateAdditions)
+@implementation NSURLRequest (CertificateAdditions)
 
-- (NSArray *)RCTSR_SSLPinnedCertificates
+- (RCTSRSSLValidationMode)RCTSR_SSLValidationMode
 {
-  return [NSURLProtocol propertyForKey:@"RCTSR_SSLPinnedCertificates" inRequest:self];
+  return [[NSURLProtocol propertyForKey:@"RCTSR_SSLValidationMode" inRequest:self] integerValue];
+}
+
+- (NSArray<NSData *> *)RCTSR_SSLPinnedPublicKeyHashes
+{
+  return [NSURLProtocol propertyForKey:@"RCTSR_SSLPinnedPublicKeyHashes" inRequest:self];
+}
+
+- (NSArray<NSData *> *)RCTSR_SSLTrustedRootCertificates
+{
+  return [NSURLProtocol propertyForKey:@"RCTSR_SSLTrustedRootCertificates" inRequest:self];
 }
 
 @end
 
-@implementation  NSMutableURLRequest (CertificateAdditions)
+@implementation NSMutableURLRequest (CertificateAdditions)
 
-- (NSArray *)RCTSR_SSLPinnedCertificates
+@dynamic RCTSR_SSLValidationMode;
+@dynamic RCTSR_SSLPinnedPublicKeyHashes;
+@dynamic RCTSR_SSLTrustedRootCertificates;
+
+- (void)setRCTSR_SSLValidationMode:(RCTSRSSLValidationMode)mode
 {
-  return [NSURLProtocol propertyForKey:@"RCTSR_SSLPinnedCertificates" inRequest:self];
+  [NSURLProtocol setProperty:@(mode) forKey:@"RCTSR_SSLValidationMode" inRequest:self];
 }
 
-- (void)setRCTSR_SSLPinnedCertificates:(NSArray *)RCTSR_SSLPinnedCertificates
+- (void)setRCTSR_SSLPinnedPublicKeyHashes:(NSArray<NSData *> *)hashes
 {
-  [NSURLProtocol setProperty:RCTSR_SSLPinnedCertificates forKey:@"RCTSR_SSLPinnedCertificates" inRequest:self];
+  [NSURLProtocol setProperty:[hashes copy] forKey:@"RCTSR_SSLPinnedPublicKeyHashes" inRequest:self];
+}
+
+- (void)setRCTSR_SSLTrustedRootCertificates:(NSArray<NSData *> *)certificates
+{
+  [NSURLProtocol setProperty:[certificates copy] forKey:@"RCTSR_SSLTrustedRootCertificates" inRequest:self];
 }
 
 @end

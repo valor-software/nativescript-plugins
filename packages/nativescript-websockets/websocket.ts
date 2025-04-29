@@ -9,7 +9,7 @@
  */
 
 import { NativeBridge } from './bridge';
-import { WebSocketEvent } from './common';
+import { resolveSslOptions, WebSocketEvent, WebSocketSslOptions } from './common';
 import { WebSocketPolyfill } from './websocket.definition';
 
 type ArrayBufferView = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array | DataView;
@@ -36,6 +36,20 @@ const openWebsockets = new Set<WebSocketPolyfill>();
 //   ];
 //   websocketFailed: [{ id: number; message: string }];
 // };
+
+export type { CertificateValidation, PinnedPublicKey, WebSocketSslOptions } from './common';
+
+export interface WebSocketOptions {
+  headers?: { origin?: string; [key: string]: unknown };
+  nativescript?: { handleThreading?: boolean };
+  ssl?: WebSocketSslOptions;
+  [key: string]: unknown;
+}
+
+/** Sets `global.WebSocket` to this implementation, replacing any existing one. */
+export function installWebsocketPolyfill(): void {
+  global.WebSocket = WebSocket as never;
+}
 
 /**
  * Browser-compatible WebSockets implementation.
@@ -81,7 +95,7 @@ export class WebSocket implements WebSocketPolyfill {
     message: new Map(),
   };
 
-  constructor(url: string, protocols?: string | Array<string>, options?: { headers: { origin?: string; [key: string]: unknown }; nativescript: { handleThreading: boolean }; [key: string]: unknown }) {
+  constructor(url: string, protocols?: string | Array<string>, options?: WebSocketOptions) {
     this.nativeBridge = new NativeBridge(this);
     this.url = url;
     if (typeof protocols === 'string') {
@@ -91,7 +105,8 @@ export class WebSocket implements WebSocketPolyfill {
       protocols = [];
     }
 
-    const { headers = {}, nativescript = { handleThreading: true }, ...unrecognized } = options || ({} as { headers: { origin?: string; [key: string]: unknown }; nativescript: { handleThreading: boolean }; [key: string]: unknown });
+    const { headers = {}, nativescript = { handleThreading: true }, ssl: sslOptions, ...unrecognized } = options || ({} as WebSocketOptions);
+    const ssl = resolveSslOptions(url, sslOptions);
     this.nativeBridge.handleThreading = nativescript?.handleThreading ?? WebSocket.HANDLE_THREADING;
     this._binaryType = 'arraybuffer';
 
@@ -119,7 +134,7 @@ export class WebSocket implements WebSocketPolyfill {
     //    Platform.OS !== 'ios' ? null : NativeWebSocketModule,
     //  );
     this._registerEvents();
-    this.nativeBridge.connect(url, protocols, { headers });
+    this.nativeBridge.connect({ url, protocols, headers: { headers }, ssl });
     openWebsockets.add(this);
     //  NativeWebSocketModule.connect(url, protocols, {headers}, this._socketId);
   }
