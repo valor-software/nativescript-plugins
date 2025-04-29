@@ -4,6 +4,7 @@ import { DemoSharedNativescriptWebsockets } from '@demo/shared';
 @Component({
   selector: 'demo-nativescript-websockets',
   templateUrl: 'nativescript-websockets.component.html',
+  standalone: false,
 })
 export class NativescriptWebsocketsComponent {
   demoShared: DemoSharedNativescriptWebsockets;

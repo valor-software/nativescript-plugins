@@ -22,12 +22,7 @@
             "output": "./platforms/"
           }
         ],
-        "dependsOn": [
-          {
-            "target": "build.all",
-            "projects": "dependencies"
-          }
-        ]
+        "dependsOn": ["^build.all"]
       }
     },
     "build.all": {
@@ -37,15 +32,7 @@
         "parallel": false
       },
       "outputs": ["{workspaceRoot}/dist/packages/nativescript-in-app-review"],
-      "dependsOn": [
-        {
-          "target": "build.all",
-          "dependencies": true
-        },
-        {
-          "target": "build"
-        }
-      ]
+      "dependsOn": ["^build.all", "build"]
     },
     "focus": {
       "executor": "nx:run-commands",

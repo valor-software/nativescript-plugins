@@ -61,12 +61,12 @@ export class WebSocket implements WebSocketPolyfill {
   //    _subscriptions: Array<EventSubscription>;
   _binaryType: BinaryType;
 
-  /* eslint-disable @typescript-eslint/ban-types */
+  /* eslint-disable @typescript-eslint/no-unsafe-function-type */
   onclose?: Function;
   onerror?: Function;
   onmessage?: Function;
   onopen?: Function;
-  /* eslint-enable @typescript-eslint/ban-types */
+  /* eslint-enable @typescript-eslint/no-unsafe-function-type */
 
   bufferedAmount?: number;
   extension?: string;
@@ -274,7 +274,7 @@ export class WebSocket implements WebSocketPolyfill {
         code: code,
         reason: reason,
         wasClean,
-      })
+      }),
     );
   }
   _websocketMessage(message: string | ArrayBuffer | ArrayBufferView | Blob) {
@@ -287,12 +287,12 @@ export class WebSocket implements WebSocketPolyfill {
     this.dispatchEvent(
       new WebSocketEvent('error', {
         message: error,
-      })
+      }),
     );
     this.dispatchEvent(
       new WebSocketEvent('close', {
         message: error,
-      })
+      }),
     );
     this.close();
     //      this._unregisterEvents();

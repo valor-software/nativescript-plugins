@@ -20,6 +20,7 @@ import { decrement, increment, incrementWithDelay, RootState, selectCount, unser
       }
     `,
   ],
+  standalone: false,
 })
 export class NativeScriptNgRxDevtoolsComponent {
   count$ = this.store.select(selectCount);

@@ -27,12 +27,7 @@
             "output": "./types/"
           }
         ],
-        "dependsOn": [
-          {
-            "target": "build.native",
-            "projects": "self"
-          }
-        ]
+        "dependsOn": ["build.native"]
       }
     },
     "build.all": {
@@ -42,21 +37,11 @@
         "commands": ["node tools/scripts/build-finish.ts nativescript-barcodescanner"],
         "parallel": false
       },
-      "dependsOn": [
-        {
-          "target": "build.all",
-          "dependencies": true
-        },
-        {
-          "target": "build.native"
-        },
-        {
-          "target": "build"
-        }
-      ]
+      "dependsOn": ["^build.all", "build.native", "build"]
     },
     "build.native": {
       "executor": "nx:run-commands",
+      "inputs": ["{projectRoot}/native-src/ios"],
       "outputs": ["{projectRoot}/platforms/ios"],
       "options": {
         "commands": ["./build.sh"],

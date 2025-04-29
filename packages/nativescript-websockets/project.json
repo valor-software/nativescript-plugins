@@ -22,14 +22,11 @@
           }
         ]
       },
-      "dependsOn": [
-        {
-          "target": "build.native"
-        }
-      ]
+      "dependsOn": ["build.native"]
     },
     "build.native": {
       "executor": "nx:run-commands",
+      "inputs": ["{projectRoot}/native-src/ios"],
       "outputs": ["{projectRoot}/platforms/ios"],
       "options": {
         "commands": ["./build.sh"],
@@ -44,18 +41,7 @@
         "commands": ["node tools/scripts/build-finish.ts nativescript-websockets"],
         "parallel": false
       },
-      "dependsOn": [
-        {
-          "target": "build.all",
-          "dependencies": true
-        },
-        {
-          "target": "build.native"
-        },
-        {
-          "target": "build"
-        }
-      ]
+      "dependsOn": ["^build.all", "build.native", "build"]
     },
     "focus": {
       "executor": "nx:run-commands",

@@ -14,7 +14,7 @@
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/workspace.json", "{workspaceRoot}/tsconfig.base.json", "{workspaceRoot}/tslint.json", "{workspaceRoot}/nx.json"],
-    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json", "!{projectRoot}/jest.config.[jt]s", "!{projectRoot}/.eslintrc.json", "!{projectRoot}/src/test-setup.[jt]s"]
+    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json", "!{projectRoot}/jest.config.[jt]s", "!{projectRoot}/.eslintrc.json", "!{projectRoot}/src/test-setup.[jt]s", "!{projectRoot}/eslint.config.mjs"]
   },
   "targetDefaults": {
     "build": {
@@ -26,7 +26,7 @@
       "cache": true
     },
     "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/eslint.config.mjs"],
       "cache": true
     },
     "build.all": {
@@ -42,5 +42,21 @@
   "useDaemonProcess": false,
   "nxCloudAccessToken": "M2YzM2ViYzctZWNiMC00Y2MyLWI3ZmYtMDMwZTAxZjUwZGUwfHJlYWQ=",
   "useInferencePlugins": false,
-  "defaultBase": "master"
+  "defaultBase": "master",
+  "release": {
+    "releaseTagPattern": "{version}-{projectName}",
+    "projects": ["packages/*"],
+    "projectsRelationship": "independent",
+    "changelog": {
+      "workspaceChangelog": false,
+      "projectChangelogs": {
+        "renderOptions": {
+          "authors": true,
+          "commitReferences": true,
+          "versionTitleDate": true
+        }
+      }
+    }
+  },
+  "useLegacyCache": true
 }

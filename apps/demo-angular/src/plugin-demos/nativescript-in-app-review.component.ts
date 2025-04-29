@@ -5,6 +5,7 @@ import {} from '@valor/nativescript-in-app-review';
 @Component({
   selector: 'demo-nativescript-in-app-review',
   templateUrl: 'nativescript-in-app-review.component.html',
+  standalone: false,
 })
 export class NativescriptInAppReviewComponent {
   demoShared: DemoSharedNativescriptInAppReview;

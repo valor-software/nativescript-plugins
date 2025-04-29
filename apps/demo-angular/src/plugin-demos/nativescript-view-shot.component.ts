@@ -7,6 +7,7 @@ import { ViewShotService } from '@valor/nativescript-view-shot/angular';
 @Component({
   selector: 'demo-nativescript-view-shot',
   templateUrl: 'nativescript-view-shot.component.html',
+  standalone: false,
 })
 export class NativescriptViewShotComponent {
   demoShared: DemoSharedNativescriptViewShot;

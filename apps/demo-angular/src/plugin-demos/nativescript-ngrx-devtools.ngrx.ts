@@ -27,7 +27,7 @@ export const reducer = createReducer(
     count: 0,
   },
   on(increment, (state, action) => ({ ...state, count: state.count + action.amount })),
-  on(decrement, (state, action) => ({ ...state, count: state.count - action.amount }))
+  on(decrement, (state, action) => ({ ...state, count: state.count - action.amount })),
 );
 
 export const selectCounter = (state: RootState) => state.counter;
@@ -41,8 +41,8 @@ export class CounterEffects {
   increment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(incrementWithDelay),
-      mergeMap((action) => timer(action.delay).pipe(mapTo(increment(action.amount))))
-    )
+      mergeMap((action) => timer(action.delay).pipe(mapTo(increment(action.amount)))),
+    ),
   );
 }
 
@@ -59,7 +59,7 @@ export class CounterEffects {
         runtimeChecks: {
           strictActionImmutability: false, // prevent crash on unserializableAction
         },
-      }
+      },
     ),
     EffectsModule.forRoot([CounterEffects]),
     ...(__DEV__
@@ -72,6 +72,7 @@ export class CounterEffects {
               }
               return action;
             },
+            connectInZone: true,
           }),
           NativeScriptNgRxDevtoolsModule.forRoot(),
         ]
