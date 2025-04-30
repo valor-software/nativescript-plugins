@@ -17,7 +17,7 @@ export class InAppReview extends InAppReviewCommon {
             }
 
             const reviewInfo = task.getResult();
-            const flow = manager.launchReviewFlow(Application.android.foregroundActivity, reviewInfo);
+            const flow = manager.launchReviewFlow(Utils.android.getCurrentActivity(), reviewInfo);
 
             flow.addOnCompleteListener(
               new com.google.android.gms.tasks.OnCompleteListener({
