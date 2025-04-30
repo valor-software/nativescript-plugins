@@ -44,7 +44,7 @@
   "useInferencePlugins": false,
   "defaultBase": "master",
   "release": {
-    "releaseTagPattern": "{version}-{projectName}",
+    "releaseTagPattern": "release/{projectName}/{version}",
     "projects": ["packages/*"],
     "projectsRelationship": "independent",
     "changelog": {
