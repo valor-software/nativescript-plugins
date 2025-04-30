@@ -7,10 +7,17 @@ export interface WebSocketPolyfill {
   _websocketFailed(message: string): void;
 }
 
+export interface WebSocketBridgeConnectOptions {
+  url: string;
+  protocols: string[];
+  headers: HeaderType;
+  pinnedCertificates?: string[];
+}
+
 export abstract class NativeBridgeDefinition {
   public handleThreading = true;
   constructor(protected ws: WebSocketPolyfill) {}
-  abstract connect(url: string, protocols: string | string[], headers: HeaderType): void;
+  abstract connect(options: WebSocketBridgeConnectOptions): void;
   abstract send(data: string | ArrayBuffer | ArrayBufferView | Blob): void;
   abstract closeWithCodeReason(statusCode: number, closeReason: string): void;
   abstract sendPing(): void;

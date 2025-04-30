@@ -35,6 +35,10 @@ declare const enum RCTSRStatusCode {
 	CodeMessageTooBig = 1009
 }
 
+interface NSMutableURLRequest {
+	RCTSR_SSLPinnedCertificates: NSArray<any>;
+}
+
 declare class RCTSRWebSocket extends NSObject implements NSStreamDelegate {
 
 	static alloc(): RCTSRWebSocket; // inherited from NSObject
