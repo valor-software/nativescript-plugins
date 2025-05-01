@@ -1,4 +1,4 @@
-import { Application, Device, Utils } from '@nativescript/core';
+import { Application, Utils } from '@nativescript/core';
 import { InAppReviewCommon } from './common';
 
 let nscAppStore: NSCAppStore;

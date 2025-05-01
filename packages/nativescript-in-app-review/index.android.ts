@@ -1,4 +1,4 @@
-import { Application, Utils } from '@nativescript/core';
+import { Utils } from '@nativescript/core';
 import { InAppReviewCommon } from './common';
 
 export class InAppReview extends InAppReviewCommon {
@@ -31,11 +31,11 @@ export class InAppReview extends InAppReviewCommon {
                     resolve();
                   }
                 },
-              })
+              }),
             );
           },
-        })
-      )
+        }),
+      ),
     );
   }
 }
