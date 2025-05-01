@@ -5,6 +5,7 @@ import {} from '@valor/nativescript-barcodescanner';
 @Component({
   selector: 'demo-nativescript-barcodescanner',
   templateUrl: 'nativescript-barcodescanner.component.html',
+  standalone: false,
 })
 export class NativescriptBarcodescannerComponent {
   demoShared: DemoSharedNativescriptBarcodescanner;

@@ -5,6 +5,7 @@ import { DemoSharedNativescriptFeedback } from '@demo/shared';
   selector: 'demo-nativescript-feedback',
   styleUrls: ['./nativescript-feedback.component.css'],
   templateUrl: 'nativescript-feedback.component.html',
+  standalone: false,
 })
 export class NativescriptFeedbackComponent {
   demoShared: DemoSharedNativescriptFeedback;

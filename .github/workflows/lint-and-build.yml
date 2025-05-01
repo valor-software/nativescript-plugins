@@ -16,14 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: 'yarn'
-      - uses: nrwl/nx-set-shas@v2
+      - uses: nrwl/nx-set-shas@v4
         with:
           main-branch-name: 'master'
       - name: yarn install
@@ -37,14 +37,14 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: 'yarn'
-      - uses: nrwl/nx-set-shas@v2
+      - uses: nrwl/nx-set-shas@v4
         with:
           main-branch-name: 'master'
       - name: Xcode Select Version

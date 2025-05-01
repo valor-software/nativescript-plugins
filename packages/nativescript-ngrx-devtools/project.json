@@ -7,17 +7,12 @@
   "tags": [],
   "targets": {
     "build.all": {
-      "executor": "@nrwl/angular:package",
+      "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/packages/nativescript-ngrx-devtools"],
       "options": {
         "project": "packages/nativescript-ngrx-devtools/ng-package.json"
       },
-      "dependsOn": [
-        {
-          "target": "build.all",
-          "dependencies": true
-        }
-      ],
+      "dependsOn": ["^build.all"],
       "configurations": {
         "production": {
           "tsConfig": "packages/nativescript-ngrx-devtools/tsconfig.lib.prod.json"
