@@ -37,6 +37,13 @@ const openWebsockets = new Set<WebSocketPolyfill>();
 //   websocketFailed: [{ id: number; message: string }];
 // };
 
+interface ExtraWebsocketOptions {
+  headers: { origin?: string; [key: string]: unknown };
+  nativescript: { handleThreading: boolean };
+  pinnedCertificates?: string[];
+  [key: string]: unknown;
+}
+
 /**
  * Browser-compatible WebSockets implementation.
  *
@@ -81,7 +88,7 @@ export class WebSocket implements WebSocketPolyfill {
     message: new Map(),
   };
 
-  constructor(url: string, protocols?: string | Array<string>, options?: { headers: { origin?: string; [key: string]: unknown }; nativescript: { handleThreading: boolean }; [key: string]: unknown }) {
+  constructor(url: string, protocols?: string | Array<string>, options?: ExtraWebsocketOptions) {
     this.nativeBridge = new NativeBridge(this);
     this.url = url;
     if (typeof protocols === 'string') {
@@ -91,7 +98,7 @@ export class WebSocket implements WebSocketPolyfill {
       protocols = [];
     }
 
-    const { headers = {}, nativescript = { handleThreading: true }, ...unrecognized } = options || ({} as { headers: { origin?: string; [key: string]: unknown }; nativescript: { handleThreading: boolean }; [key: string]: unknown });
+    const { headers = {}, nativescript = { handleThreading: true }, pinnedCertificates, ...unrecognized } = options || ({} as ExtraWebsocketOptions);
     this.nativeBridge.handleThreading = nativescript?.handleThreading ?? WebSocket.HANDLE_THREADING;
     this._binaryType = 'arraybuffer';
 
@@ -119,7 +126,7 @@ export class WebSocket implements WebSocketPolyfill {
     //    Platform.OS !== 'ios' ? null : NativeWebSocketModule,
     //  );
     this._registerEvents();
-    this.nativeBridge.connect(url, protocols, { headers });
+    this.nativeBridge.connect({ url, protocols, headers: { headers }, pinnedCertificates });
     openWebsockets.add(this);
     //  NativeWebSocketModule.connect(url, protocols, {headers}, this._socketId);
   }
