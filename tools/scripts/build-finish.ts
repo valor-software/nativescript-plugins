@@ -50,9 +50,39 @@ function finishPreparation() {
     .catch((err) => console.error(err));
 }
 
+function removeTypeModule() {
+  const packageJsonPath = path.join('dist', 'packages', packageName, 'package.json');
+  if (!fs.existsSync(packageJsonPath)) {
+    console.warn(`Package JSON not found at ${packageJsonPath}. Skipping removal of "type": "module".`);
+    return;
+  }
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+  let changed = false;
+  if (packageJson.type === 'module') {
+    delete packageJson.type;
+    changed = true;
+  }
+  if (packageJson.types?.endsWith('.d.d.ts')) {
+    delete packageJson.types;
+    changed = true;
+  }
+  if (packageJson.module) {
+    delete packageJson.module;
+    changed = true;
+  }
+  if (changed) {
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2), 'utf8');
+    console.log(`Removed "type": "module" and related fields from ${packageJsonPath}.`);
+  } else {
+    console.log(`No changes needed in ${packageJsonPath}.`);
+  }
+}
+
 if (fs.existsSync(path.join(rootDir, 'packages', packageName, 'angular'))) {
   // package has angular specific src, build it first
   buildAngular();
 } else {
   finishPreparation();
 }
+
+removeTypeModule();
