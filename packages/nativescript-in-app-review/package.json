@@ -1,6 +1,6 @@
 {
   "name": "@valor/nativescript-in-app-review",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Native in-app review popups for NativeScript apps",
   "main": "index",
   "typings": "index.d.ts",
