@@ -11,7 +11,7 @@ export ZERO_AR_DATE=1
 
 rm -rf $OUTPUTPATH
 
-CUSTOM_OTHER_CFLAGS="-ffile-prefix-map=$(PWD)=."
+CUSTOM_OTHER_CFLAGS="\$(inherited) -ffile-prefix-map=$(PWD)=."
 
 echo "Build for iphonesimulator"
 xcodebuild \
