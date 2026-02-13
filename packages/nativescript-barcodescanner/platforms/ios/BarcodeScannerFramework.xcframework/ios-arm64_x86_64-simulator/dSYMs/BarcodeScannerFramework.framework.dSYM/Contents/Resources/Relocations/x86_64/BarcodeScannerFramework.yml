@@ -1,139 +1,139 @@
 ---
 triple:          'x86_64-apple-darwin'
-binary-path:     '/Users/eduardosperoni/projects/valor-nativescript-plugins/packages/nativescript-barcodescanner/native-src/ios/build/Release-iphonesimulator/BarcodeScannerFramework.framework/BarcodeScannerFramework'
+binary-path:     './build/Release-iphonesimulator/BarcodeScannerFramework.framework/BarcodeScannerFramework'
 relocations:
-  - { offsetInCU: 0x34, offset: 0x6ECBE, size: 0x8, addend: 0x0, symName: _BarcodeScannerFrameworkVersionString, symObjAddr: 0x0, symBinAddr: 0x6040, symSize: 0x0 }
-  - { offsetInCU: 0x69, offset: 0x6ECF3, size: 0x8, addend: 0x0, symName: _BarcodeScannerFrameworkVersionNumber, symObjAddr: 0x48, symBinAddr: 0x6088, symSize: 0x0 }
-  - { offsetInCU: 0x27, offset: 0x6ED30, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0x1150, symSize: 0x5D }
-  - { offsetInCU: 0x6C, offset: 0x6ED75, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0x1150, symSize: 0x5D }
-  - { offsetInCU: 0xC6, offset: 0x6EDCF, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView drawRect:]', symObjAddr: 0x5D, symBinAddr: 0x11AD, symSize: 0x13C }
-  - { offsetInCU: 0x209, offset: 0x6EF12, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView addOverlay]', symObjAddr: 0x199, symBinAddr: 0x12E9, symSize: 0x264 }
-  - { offsetInCU: 0x3B4, offset: 0x6F0BD, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView overlay]', symObjAddr: 0x3FD, symBinAddr: 0x154D, symSize: 0x11 }
-  - { offsetInCU: 0x3E9, offset: 0x6F0F2, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView setOverlay:]', symObjAddr: 0x40E, symBinAddr: 0x155E, symSize: 0x14 }
-  - { offsetInCU: 0x428, offset: 0x6F131, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView .cxx_destruct]', symObjAddr: 0x422, symBinAddr: 0x1572, symSize: 0x13 }
-  - { offsetInCU: 0x27, offset: 0x6F1D1, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController dealloc]', symObjAddr: 0x0, symBinAddr: 0x1590, symSize: 0x7F }
-  - { offsetInCU: 0x330, offset: 0x6F4DA, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController dealloc]', symObjAddr: 0x0, symBinAddr: 0x1590, symSize: 0x7F }
-  - { offsetInCU: 0x3AC, offset: 0x6F556, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController init]', symObjAddr: 0x7F, symBinAddr: 0x160F, symSize: 0x14 }
-  - { offsetInCU: 0x3FB, offset: 0x6F5A5, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:]', symObjAddr: 0x93, symBinAddr: 0x1623, symSize: 0xBD }
-  - { offsetInCU: 0x4A6, offset: 0x6F650, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithMetadataObjectTypes:]', symObjAddr: 0x150, symBinAddr: 0x16E0, symSize: 0x17 }
-  - { offsetInCU: 0x510, offset: 0x6F6BA, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:metadataObjectTypes:]', symObjAddr: 0x167, symBinAddr: 0x16F7, symSize: 0x84 }
-  - { offsetInCU: 0x5D7, offset: 0x6F781, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:codeReader:]', symObjAddr: 0x1EB, symBinAddr: 0x177B, symSize: 0x18 }
-  - { offsetInCU: 0x652, offset: 0x6F7FC, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:codeReader:startScanningAtLoad:]', symObjAddr: 0x203, symBinAddr: 0x1793, symSize: 0x28 }
-  - { offsetInCU: 0x6EC, offset: 0x6F896, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:codeReader:startScanningAtLoad:showSwitchCameraButton:showTorchButton:]', symObjAddr: 0x22B, symBinAddr: 0x17BB, symSize: 0x1E }
-  - { offsetInCU: 0x7A4, offset: 0x6F94E, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:codeReader:startScanningAtLoad:showSwitchCameraButton:showTorchButton:cancelButtonBackgroundColor:]', symObjAddr: 0x249, symBinAddr: 0x17D9, symSize: 0x302 }
-  - { offsetInCU: 0xA99, offset: 0x6FC43, size: 0x8, addend: 0x0, symName: '___154-[QRCodeReaderViewController initWithCancelButtonTitle:codeReader:startScanningAtLoad:showSwitchCameraButton:showTorchButton:cancelButtonBackgroundColor:]_block_invoke', symObjAddr: 0x54B, symBinAddr: 0x1ADB, symSize: 0x1D3 }
-  - { offsetInCU: 0xCAA, offset: 0x6FE54, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32w, symObjAddr: 0x71E, symBinAddr: 0x1CAE, symSize: 0x12 }
-  - { offsetInCU: 0xCD3, offset: 0x6FE7D, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32w, symObjAddr: 0x730, symBinAddr: 0x1CC0, symSize: 0xE }
-  - { offsetInCU: 0xCF2, offset: 0x6FE9C, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:]', symObjAddr: 0x73E, symBinAddr: 0x1CCE, symSize: 0x49 }
-  - { offsetInCU: 0xD76, offset: 0x6FF20, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithMetadataObjectTypes:]', symObjAddr: 0x787, symBinAddr: 0x1D17, symSize: 0x49 }
-  - { offsetInCU: 0xDFA, offset: 0x6FFA4, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:metadataObjectTypes:]', symObjAddr: 0x7D0, symBinAddr: 0x1D60, symSize: 0x6E }
-  - { offsetInCU: 0xEBD, offset: 0x70067, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:codeReader:]', symObjAddr: 0x83E, symBinAddr: 0x1DCE, symSize: 0x6E }
-  - { offsetInCU: 0xF80, offset: 0x7012A, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:codeReader:startScanningAtLoad:]', symObjAddr: 0x8AC, symBinAddr: 0x1E3C, symSize: 0x7D }
-  - { offsetInCU: 0x105A, offset: 0x70204, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:codeReader:startScanningAtLoad:showSwitchCameraButton:showTorchButton:]', symObjAddr: 0x929, symBinAddr: 0x1EB9, symSize: 0x93 }
-  - { offsetInCU: 0x115B, offset: 0x70305, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:codeReader:startScanningAtLoad:showSwitchCameraButton:showTorchButton:cancelButtonBackgroundColor:]', symObjAddr: 0x9BC, symBinAddr: 0x1F4C, symSize: 0xB0 }
-  - { offsetInCU: 0x128A, offset: 0x70434, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController viewWillAppear:]', symObjAddr: 0xA6C, symBinAddr: 0x1FFC, symSize: 0x4E }
-  - { offsetInCU: 0x12E1, offset: 0x7048B, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController viewWillDisappear:]', symObjAddr: 0xABA, symBinAddr: 0x204A, symSize: 0x46 }
-  - { offsetInCU: 0x1339, offset: 0x704E3, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController viewWillLayoutSubviews]', symObjAddr: 0xB00, symBinAddr: 0x2090, symSize: 0xD1 }
-  - { offsetInCU: 0x13B8, offset: 0x70562, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController shouldAutorotate]', symObjAddr: 0xBD1, symBinAddr: 0x2161, symSize: 0x8 }
-  - { offsetInCU: 0x13EB, offset: 0x70595, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController startScanning]', symObjAddr: 0xBD9, symBinAddr: 0x2169, symSize: 0x1D }
-  - { offsetInCU: 0x142A, offset: 0x705D4, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController stopScanning]', symObjAddr: 0xBF6, symBinAddr: 0x2186, symSize: 0x1D }
-  - { offsetInCU: 0x1469, offset: 0x70613, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController orientationChanged:]', symObjAddr: 0xC13, symBinAddr: 0x21A3, symSize: 0x14E }
-  - { offsetInCU: 0x15B3, offset: 0x7075D, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setCompletionWithBlock:]', symObjAddr: 0xD61, symBinAddr: 0x22F1, symSize: 0x12 }
-  - { offsetInCU: 0x160F, offset: 0x707B9, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController hex:]', symObjAddr: 0xD73, symBinAddr: 0x2303, symSize: 0x1C7 }
-  - { offsetInCU: 0x17C0, offset: 0x7096A, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setupUIComponentsWithCancelButtonTitle:cancelButtonBackgroundColor:]', symObjAddr: 0xF3A, symBinAddr: 0x24CA, symSize: 0x63E }
-  - { offsetInCU: 0x1D09, offset: 0x70EB3, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setupAutoLayoutConstraints]', symObjAddr: 0x1578, symBinAddr: 0x2B08, symSize: 0x87E }
-  - { offsetInCU: 0x23A8, offset: 0x71552, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController switchDeviceInput]', symObjAddr: 0x1DF6, symBinAddr: 0x3386, symSize: 0x1D }
-  - { offsetInCU: 0x23E8, offset: 0x71592, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController cancelAction:]', symObjAddr: 0x1E13, symBinAddr: 0x33A3, symSize: 0x8C }
-  - { offsetInCU: 0x247D, offset: 0x71627, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController switchCameraAction:]', symObjAddr: 0x1E9F, symBinAddr: 0x342F, symSize: 0x12 }
-  - { offsetInCU: 0x24D1, offset: 0x7167B, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController toggleTorchAction:]', symObjAddr: 0x1EB1, symBinAddr: 0x3441, symSize: 0x1D }
-  - { offsetInCU: 0x251E, offset: 0x716C8, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController delegate]', symObjAddr: 0x1ECE, symBinAddr: 0x345E, symSize: 0x11 }
-  - { offsetInCU: 0x2553, offset: 0x716FD, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setDelegate:]', symObjAddr: 0x1EDF, symBinAddr: 0x346F, symSize: 0x14 }
-  - { offsetInCU: 0x2592, offset: 0x7173C, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController codeReader]', symObjAddr: 0x1EF3, symBinAddr: 0x3483, symSize: 0x11 }
-  - { offsetInCU: 0x25C7, offset: 0x71771, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setCodeReader:]', symObjAddr: 0x1F04, symBinAddr: 0x3494, symSize: 0x14 }
-  - { offsetInCU: 0x2606, offset: 0x717B0, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController switchCameraButton]', symObjAddr: 0x1F18, symBinAddr: 0x34A8, symSize: 0x11 }
-  - { offsetInCU: 0x263B, offset: 0x717E5, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setSwitchCameraButton:]', symObjAddr: 0x1F29, symBinAddr: 0x34B9, symSize: 0x14 }
-  - { offsetInCU: 0x267A, offset: 0x71824, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController toggleTorchButton]', symObjAddr: 0x1F3D, symBinAddr: 0x34CD, symSize: 0x11 }
-  - { offsetInCU: 0x26AF, offset: 0x71859, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setToggleTorchButton:]', symObjAddr: 0x1F4E, symBinAddr: 0x34DE, symSize: 0x14 }
-  - { offsetInCU: 0x26EE, offset: 0x71898, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController cameraView]', symObjAddr: 0x1F62, symBinAddr: 0x34F2, symSize: 0x11 }
-  - { offsetInCU: 0x2723, offset: 0x718CD, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setCameraView:]', symObjAddr: 0x1F73, symBinAddr: 0x3503, symSize: 0x14 }
-  - { offsetInCU: 0x2762, offset: 0x7190C, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController cancelButton]', symObjAddr: 0x1F87, symBinAddr: 0x3517, symSize: 0x11 }
-  - { offsetInCU: 0x2797, offset: 0x71941, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setCancelButton:]', symObjAddr: 0x1F98, symBinAddr: 0x3528, symSize: 0x14 }
-  - { offsetInCU: 0x27D6, offset: 0x71980, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController startScanningAtLoad]', symObjAddr: 0x1FAC, symBinAddr: 0x353C, symSize: 0x10 }
-  - { offsetInCU: 0x280B, offset: 0x719B5, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setStartScanningAtLoad:]', symObjAddr: 0x1FBC, symBinAddr: 0x354C, symSize: 0x10 }
-  - { offsetInCU: 0x2848, offset: 0x719F2, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController showSwitchCameraButton]', symObjAddr: 0x1FCC, symBinAddr: 0x355C, symSize: 0x10 }
-  - { offsetInCU: 0x287D, offset: 0x71A27, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setShowSwitchCameraButton:]', symObjAddr: 0x1FDC, symBinAddr: 0x356C, symSize: 0x10 }
-  - { offsetInCU: 0x28BA, offset: 0x71A64, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController showTorchButton]', symObjAddr: 0x1FEC, symBinAddr: 0x357C, symSize: 0x10 }
-  - { offsetInCU: 0x28EF, offset: 0x71A99, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setShowTorchButton:]', symObjAddr: 0x1FFC, symBinAddr: 0x358C, symSize: 0x10 }
-  - { offsetInCU: 0x292C, offset: 0x71AD6, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController completionBlock]', symObjAddr: 0x200C, symBinAddr: 0x359C, symSize: 0x11 }
-  - { offsetInCU: 0x2961, offset: 0x71B0B, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setCompletionBlock:]', symObjAddr: 0x201D, symBinAddr: 0x35AD, symSize: 0x11 }
-  - { offsetInCU: 0x29A0, offset: 0x71B4A, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController .cxx_destruct]', symObjAddr: 0x202E, symBinAddr: 0x35BE, symSize: 0x92 }
-  - { offsetInCU: 0x27, offset: 0x71C9A, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0x3650, symSize: 0x116 }
-  - { offsetInCU: 0xBA, offset: 0x71D2D, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0x3650, symSize: 0x116 }
-  - { offsetInCU: 0x160, offset: 0x71DD3, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton drawRect:]', symObjAddr: 0x116, symBinAddr: 0x3766, symSize: 0x27E }
-  - { offsetInCU: 0x45A, offset: 0x720CD, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton linePathWithStartPoint:endPoint:thickness:]', symObjAddr: 0x394, symBinAddr: 0x39E4, symSize: 0xA9 }
-  - { offsetInCU: 0x551, offset: 0x721C4, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton touchesBegan:withEvent:]', symObjAddr: 0x43D, symBinAddr: 0x3A8D, symSize: 0x41 }
-  - { offsetInCU: 0x5B8, offset: 0x7222B, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton touchesMoved:withEvent:]', symObjAddr: 0x47E, symBinAddr: 0x3ACE, symSize: 0x41 }
-  - { offsetInCU: 0x61F, offset: 0x72292, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton touchesEnded:withEvent:]', symObjAddr: 0x4BF, symBinAddr: 0x3B0F, symSize: 0x41 }
-  - { offsetInCU: 0x686, offset: 0x722F9, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton touchesCancelled:withEvent:]', symObjAddr: 0x500, symBinAddr: 0x3B50, symSize: 0x41 }
-  - { offsetInCU: 0x6ED, offset: 0x72360, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton edgeColor]', symObjAddr: 0x541, symBinAddr: 0x3B91, symSize: 0x11 }
-  - { offsetInCU: 0x722, offset: 0x72395, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton setEdgeColor:]', symObjAddr: 0x552, symBinAddr: 0x3BA2, symSize: 0x14 }
-  - { offsetInCU: 0x761, offset: 0x723D4, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton fillColor]', symObjAddr: 0x566, symBinAddr: 0x3BB6, symSize: 0x11 }
-  - { offsetInCU: 0x796, offset: 0x72409, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton setFillColor:]', symObjAddr: 0x577, symBinAddr: 0x3BC7, symSize: 0x14 }
-  - { offsetInCU: 0x7D5, offset: 0x72448, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton edgeHighlightedColor]', symObjAddr: 0x58B, symBinAddr: 0x3BDB, symSize: 0x11 }
-  - { offsetInCU: 0x80A, offset: 0x7247D, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton setEdgeHighlightedColor:]', symObjAddr: 0x59C, symBinAddr: 0x3BEC, symSize: 0x14 }
-  - { offsetInCU: 0x849, offset: 0x724BC, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton fillHighlightedColor]', symObjAddr: 0x5B0, symBinAddr: 0x3C00, symSize: 0x11 }
-  - { offsetInCU: 0x87E, offset: 0x724F1, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton setFillHighlightedColor:]', symObjAddr: 0x5C1, symBinAddr: 0x3C11, symSize: 0x14 }
-  - { offsetInCU: 0x8BD, offset: 0x72530, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton .cxx_destruct]', symObjAddr: 0x5D5, symBinAddr: 0x3C25, symSize: 0x53 }
-  - { offsetInCU: 0x27, offset: 0x725ED, size: 0x8, addend: 0x0, symName: '-[QRCodeReader init]', symObjAddr: 0x0, symBinAddr: 0x3C78, symSize: 0xC1 }
-  - { offsetInCU: 0x1E3, offset: 0x727A9, size: 0x8, addend: 0x0, symName: '-[QRCodeReader init]', symObjAddr: 0x0, symBinAddr: 0x3C78, symSize: 0xC1 }
-  - { offsetInCU: 0x25A, offset: 0x72820, size: 0x8, addend: 0x0, symName: '-[QRCodeReader initWithMetadataObjectTypes:]', symObjAddr: 0xC1, symBinAddr: 0x3D39, symSize: 0x8C }
-  - { offsetInCU: 0x2F2, offset: 0x728B8, size: 0x8, addend: 0x0, symName: '+[QRCodeReader readerWithMetadataObjectTypes:]', symObjAddr: 0x14D, symBinAddr: 0x3DC5, symSize: 0x49 }
-  - { offsetInCU: 0x376, offset: 0x7293C, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setupAVComponents]', symObjAddr: 0x196, symBinAddr: 0x3E0E, symSize: 0x32A }
-  - { offsetInCU: 0x591, offset: 0x72B57, size: 0x8, addend: 0x0, symName: '-[QRCodeReader configureDefaultComponents]', symObjAddr: 0x4C0, symBinAddr: 0x4138, symSize: 0x148 }
-  - { offsetInCU: 0x6BC, offset: 0x72C82, size: 0x8, addend: 0x0, symName: '-[QRCodeReader switchDeviceInput]', symObjAddr: 0x608, symBinAddr: 0x4280, symSize: 0x112 }
-  - { offsetInCU: 0x7E6, offset: 0x72DAC, size: 0x8, addend: 0x0, symName: '-[QRCodeReader hasFrontDevice]', symObjAddr: 0x71A, symBinAddr: 0x4392, symSize: 0xE }
-  - { offsetInCU: 0x81B, offset: 0x72DE1, size: 0x8, addend: 0x0, symName: '-[QRCodeReader isTorchAvailable]', symObjAddr: 0x728, symBinAddr: 0x43A0, symSize: 0x16 }
-  - { offsetInCU: 0x85E, offset: 0x72E24, size: 0x8, addend: 0x0, symName: '-[QRCodeReader toggleTorch]', symObjAddr: 0x73E, symBinAddr: 0x43B6, symSize: 0x8E }
-  - { offsetInCU: 0x918, offset: 0x72EDE, size: 0x8, addend: 0x0, symName: '-[QRCodeReader startScanning]', symObjAddr: 0x7CC, symBinAddr: 0x4444, symSize: 0x95 }
-  - { offsetInCU: 0x9A3, offset: 0x72F69, size: 0x8, addend: 0x0, symName: '-[QRCodeReader stopScanning]', symObjAddr: 0x861, symBinAddr: 0x44D9, symSize: 0x95 }
-  - { offsetInCU: 0xA2E, offset: 0x72FF4, size: 0x8, addend: 0x0, symName: '-[QRCodeReader running]', symObjAddr: 0x8F6, symBinAddr: 0x456E, symSize: 0x44 }
-  - { offsetInCU: 0xA91, offset: 0x73057, size: 0x8, addend: 0x0, symName: '+[QRCodeReader videoOrientationFromInterfaceOrientation:]', symObjAddr: 0x93A, symBinAddr: 0x45B2, symSize: 0x17 }
-  - { offsetInCU: 0xAD2, offset: 0x73098, size: 0x8, addend: 0x0, symName: '+[QRCodeReader isAvailable]', symObjAddr: 0x951, symBinAddr: 0x45C9, symSize: 0xAB }
-  - { offsetInCU: 0xB74, offset: 0x7313A, size: 0x8, addend: 0x0, symName: '+[QRCodeReader supportsMetadataObjectTypes:]', symObjAddr: 0x9FC, symBinAddr: 0x4674, symSize: 0x33A }
-  - { offsetInCU: 0xDE6, offset: 0x733AC, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setCompletionWithBlock:]', symObjAddr: 0xD36, symBinAddr: 0x49AE, symSize: 0x12 }
-  - { offsetInCU: 0xE42, offset: 0x73408, size: 0x8, addend: 0x0, symName: '-[QRCodeReader captureOutput:didOutputMetadataObjects:fromConnection:]', symObjAddr: 0xD48, symBinAddr: 0x49C0, symSize: 0x267 }
-  - { offsetInCU: 0x1014, offset: 0x735DA, size: 0x8, addend: 0x0, symName: '-[QRCodeReader metadataObjectTypes]', symObjAddr: 0xFAF, symBinAddr: 0x4C27, symSize: 0xA }
-  - { offsetInCU: 0x1049, offset: 0x7360F, size: 0x8, addend: 0x0, symName: '-[QRCodeReader previewLayer]', symObjAddr: 0xFB9, symBinAddr: 0x4C31, symSize: 0xA }
-  - { offsetInCU: 0x107E, offset: 0x73644, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setPreviewLayer:]', symObjAddr: 0xFC3, symBinAddr: 0x4C3B, symSize: 0x11 }
-  - { offsetInCU: 0x10BD, offset: 0x73683, size: 0x8, addend: 0x0, symName: '-[QRCodeReader defaultDeviceInput]', symObjAddr: 0xFD4, symBinAddr: 0x4C4C, symSize: 0xA }
-  - { offsetInCU: 0x10F2, offset: 0x736B8, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setDefaultDeviceInput:]', symObjAddr: 0xFDE, symBinAddr: 0x4C56, symSize: 0x11 }
-  - { offsetInCU: 0x1131, offset: 0x736F7, size: 0x8, addend: 0x0, symName: '-[QRCodeReader frontDeviceInput]', symObjAddr: 0xFEF, symBinAddr: 0x4C67, symSize: 0xA }
-  - { offsetInCU: 0x1166, offset: 0x7372C, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setFrontDeviceInput:]', symObjAddr: 0xFF9, symBinAddr: 0x4C71, symSize: 0x11 }
-  - { offsetInCU: 0x11A5, offset: 0x7376B, size: 0x8, addend: 0x0, symName: '-[QRCodeReader metadataOutput]', symObjAddr: 0x100A, symBinAddr: 0x4C82, symSize: 0xA }
-  - { offsetInCU: 0x11DA, offset: 0x737A0, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setMetadataOutput:]', symObjAddr: 0x1014, symBinAddr: 0x4C8C, symSize: 0x11 }
-  - { offsetInCU: 0x1219, offset: 0x737DF, size: 0x8, addend: 0x0, symName: '-[QRCodeReader defaultDevice]', symObjAddr: 0x1025, symBinAddr: 0x4C9D, symSize: 0xA }
-  - { offsetInCU: 0x124E, offset: 0x73814, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setDefaultDevice:]', symObjAddr: 0x102F, symBinAddr: 0x4CA7, symSize: 0x11 }
-  - { offsetInCU: 0x128D, offset: 0x73853, size: 0x8, addend: 0x0, symName: '-[QRCodeReader frontDevice]', symObjAddr: 0x1040, symBinAddr: 0x4CB8, symSize: 0xA }
-  - { offsetInCU: 0x12C2, offset: 0x73888, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setFrontDevice:]', symObjAddr: 0x104A, symBinAddr: 0x4CC2, symSize: 0x11 }
-  - { offsetInCU: 0x1301, offset: 0x738C7, size: 0x8, addend: 0x0, symName: '-[QRCodeReader session]', symObjAddr: 0x105B, symBinAddr: 0x4CD3, symSize: 0xA }
-  - { offsetInCU: 0x1336, offset: 0x738FC, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setSession:]', symObjAddr: 0x1065, symBinAddr: 0x4CDD, symSize: 0x11 }
-  - { offsetInCU: 0x1375, offset: 0x7393B, size: 0x8, addend: 0x0, symName: '-[QRCodeReader completionBlock]', symObjAddr: 0x1076, symBinAddr: 0x4CEE, symSize: 0xA }
-  - { offsetInCU: 0x13AA, offset: 0x73970, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setCompletionBlock:]', symObjAddr: 0x1080, symBinAddr: 0x4CF8, symSize: 0xF }
-  - { offsetInCU: 0x13E9, offset: 0x739AF, size: 0x8, addend: 0x0, symName: '-[QRCodeReader .cxx_destruct]', symObjAddr: 0x108F, symBinAddr: 0x4D07, symSize: 0x75 }
-  - { offsetInCU: 0x27, offset: 0x73A9A, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0x4D7C, symSize: 0x116 }
-  - { offsetInCU: 0xBA, offset: 0x73B2D, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0x4D7C, symSize: 0x116 }
-  - { offsetInCU: 0x1B7, offset: 0x73C2A, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton drawRect:]', symObjAddr: 0x116, symBinAddr: 0x4E92, symSize: 0x85A }
-  - { offsetInCU: 0xB32, offset: 0x745A5, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton touchesBegan:withEvent:]', symObjAddr: 0x970, symBinAddr: 0x56EC, symSize: 0x41 }
-  - { offsetInCU: 0xB99, offset: 0x7460C, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton touchesMoved:withEvent:]', symObjAddr: 0x9B1, symBinAddr: 0x572D, symSize: 0x41 }
-  - { offsetInCU: 0xC00, offset: 0x74673, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton touchesEnded:withEvent:]', symObjAddr: 0x9F2, symBinAddr: 0x576E, symSize: 0x41 }
-  - { offsetInCU: 0xC67, offset: 0x746DA, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton touchesCancelled:withEvent:]', symObjAddr: 0xA33, symBinAddr: 0x57AF, symSize: 0x41 }
-  - { offsetInCU: 0xCCE, offset: 0x74741, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton edgeColor]', symObjAddr: 0xA74, symBinAddr: 0x57F0, symSize: 0x11 }
-  - { offsetInCU: 0xD03, offset: 0x74776, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton setEdgeColor:]', symObjAddr: 0xA85, symBinAddr: 0x5801, symSize: 0x14 }
-  - { offsetInCU: 0xD42, offset: 0x747B5, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton fillColor]', symObjAddr: 0xA99, symBinAddr: 0x5815, symSize: 0x11 }
-  - { offsetInCU: 0xD77, offset: 0x747EA, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton setFillColor:]', symObjAddr: 0xAAA, symBinAddr: 0x5826, symSize: 0x14 }
-  - { offsetInCU: 0xDB6, offset: 0x74829, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton edgeHighlightedColor]', symObjAddr: 0xABE, symBinAddr: 0x583A, symSize: 0x11 }
-  - { offsetInCU: 0xDEB, offset: 0x7485E, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton setEdgeHighlightedColor:]', symObjAddr: 0xACF, symBinAddr: 0x584B, symSize: 0x14 }
-  - { offsetInCU: 0xE2A, offset: 0x7489D, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton fillHighlightedColor]', symObjAddr: 0xAE3, symBinAddr: 0x585F, symSize: 0x11 }
-  - { offsetInCU: 0xE5F, offset: 0x748D2, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton setFillHighlightedColor:]', symObjAddr: 0xAF4, symBinAddr: 0x5870, symSize: 0x14 }
-  - { offsetInCU: 0xE9E, offset: 0x74911, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton .cxx_destruct]', symObjAddr: 0xB08, symBinAddr: 0x5884, symSize: 0x53 }
+  - { offset: 0x77187, size: 0x8, addend: 0x0, symName: _BarcodeScannerFrameworkVersionString, symObjAddr: 0x0, symBinAddr: 0x5C40, symSize: 0x0 }
+  - { offset: 0x771BC, size: 0x8, addend: 0x0, symName: _BarcodeScannerFrameworkVersionNumber, symObjAddr: 0x48, symBinAddr: 0x5C88, symSize: 0x0 }
+  - { offset: 0x771F9, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0xD40, symSize: 0x5D }
+  - { offset: 0x77237, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0xD40, symSize: 0x5D }
+  - { offset: 0x77291, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView drawRect:]', symObjAddr: 0x5D, symBinAddr: 0xD9D, symSize: 0x13C }
+  - { offset: 0x773D4, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView addOverlay]', symObjAddr: 0x199, symBinAddr: 0xED9, symSize: 0x267 }
+  - { offset: 0x77577, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView overlay]', symObjAddr: 0x400, symBinAddr: 0x1140, symSize: 0x11 }
+  - { offset: 0x775AC, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView setOverlay:]', symObjAddr: 0x411, symBinAddr: 0x1151, symSize: 0x14 }
+  - { offset: 0x775ED, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderView .cxx_destruct]', symObjAddr: 0x425, symBinAddr: 0x1165, symSize: 0x13 }
+  - { offset: 0x77694, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController dealloc]', symObjAddr: 0x0, symBinAddr: 0x1180, symSize: 0x7F }
+  - { offset: 0x77981, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController dealloc]', symObjAddr: 0x0, symBinAddr: 0x1180, symSize: 0x7F }
+  - { offset: 0x779FD, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController init]', symObjAddr: 0x7F, symBinAddr: 0x11FF, symSize: 0x14 }
+  - { offset: 0x77A4F, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:]', symObjAddr: 0x93, symBinAddr: 0x1213, symSize: 0xBD }
+  - { offset: 0x77AFA, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithMetadataObjectTypes:]', symObjAddr: 0x150, symBinAddr: 0x12D0, symSize: 0x17 }
+  - { offset: 0x77B64, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:metadataObjectTypes:]', symObjAddr: 0x167, symBinAddr: 0x12E7, symSize: 0x84 }
+  - { offset: 0x77C2F, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:codeReader:]', symObjAddr: 0x1EB, symBinAddr: 0x136B, symSize: 0x18 }
+  - { offset: 0x77CAD, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:codeReader:startScanningAtLoad:]', symObjAddr: 0x203, symBinAddr: 0x1383, symSize: 0x28 }
+  - { offset: 0x77D47, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:codeReader:startScanningAtLoad:showSwitchCameraButton:showTorchButton:]', symObjAddr: 0x22B, symBinAddr: 0x13AB, symSize: 0x1E }
+  - { offset: 0x77DFF, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController initWithCancelButtonTitle:codeReader:startScanningAtLoad:showSwitchCameraButton:showTorchButton:cancelButtonBackgroundColor:]', symObjAddr: 0x249, symBinAddr: 0x13C9, symSize: 0x302 }
+  - { offset: 0x780EC, size: 0x8, addend: 0x0, symName: '___154-[QRCodeReaderViewController initWithCancelButtonTitle:codeReader:startScanningAtLoad:showSwitchCameraButton:showTorchButton:cancelButtonBackgroundColor:]_block_invoke', symObjAddr: 0x54B, symBinAddr: 0x16CB, symSize: 0x1D3 }
+  - { offset: 0x782EB, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32w, symObjAddr: 0x71E, symBinAddr: 0x189E, symSize: 0x12 }
+  - { offset: 0x78314, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32w, symObjAddr: 0x730, symBinAddr: 0x18B0, symSize: 0xE }
+  - { offset: 0x78333, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:]', symObjAddr: 0x73E, symBinAddr: 0x18BE, symSize: 0x49 }
+  - { offset: 0x783B7, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithMetadataObjectTypes:]', symObjAddr: 0x787, symBinAddr: 0x1907, symSize: 0x49 }
+  - { offset: 0x7843B, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:metadataObjectTypes:]', symObjAddr: 0x7D0, symBinAddr: 0x1950, symSize: 0x6E }
+  - { offset: 0x784FE, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:codeReader:]', symObjAddr: 0x83E, symBinAddr: 0x19BE, symSize: 0x6E }
+  - { offset: 0x785C1, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:codeReader:startScanningAtLoad:]', symObjAddr: 0x8AC, symBinAddr: 0x1A2C, symSize: 0x7D }
+  - { offset: 0x7869B, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:codeReader:startScanningAtLoad:showSwitchCameraButton:showTorchButton:]', symObjAddr: 0x929, symBinAddr: 0x1AA9, symSize: 0x93 }
+  - { offset: 0x787A0, size: 0x8, addend: 0x0, symName: '+[QRCodeReaderViewController readerWithCancelButtonTitle:codeReader:startScanningAtLoad:showSwitchCameraButton:showTorchButton:cancelButtonBackgroundColor:]', symObjAddr: 0x9BC, symBinAddr: 0x1B3C, symSize: 0xB0 }
+  - { offset: 0x788D3, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController viewWillAppear:]', symObjAddr: 0xA6C, symBinAddr: 0x1BEC, symSize: 0x4E }
+  - { offset: 0x7892A, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController viewWillDisappear:]', symObjAddr: 0xABA, symBinAddr: 0x1C3A, symSize: 0x46 }
+  - { offset: 0x78982, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController viewWillLayoutSubviews]', symObjAddr: 0xB00, symBinAddr: 0x1C80, symSize: 0xD1 }
+  - { offset: 0x78A01, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController shouldAutorotate]', symObjAddr: 0xBD1, symBinAddr: 0x1D51, symSize: 0x8 }
+  - { offset: 0x78A34, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController startScanning]', symObjAddr: 0xBD9, symBinAddr: 0x1D59, symSize: 0x1D }
+  - { offset: 0x78A73, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController stopScanning]', symObjAddr: 0xBF6, symBinAddr: 0x1D76, symSize: 0x1D }
+  - { offset: 0x78AB2, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController orientationChanged:]', symObjAddr: 0xC13, symBinAddr: 0x1D93, symSize: 0x14E }
+  - { offset: 0x78BF4, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setCompletionWithBlock:]', symObjAddr: 0xD61, symBinAddr: 0x1EE1, symSize: 0x12 }
+  - { offset: 0x78C50, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController hex:]', symObjAddr: 0xD73, symBinAddr: 0x1EF3, symSize: 0x1C7 }
+  - { offset: 0x78E09, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setupUIComponentsWithCancelButtonTitle:cancelButtonBackgroundColor:]', symObjAddr: 0xF3A, symBinAddr: 0x20BA, symSize: 0x63A }
+  - { offset: 0x79351, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setupAutoLayoutConstraints]', symObjAddr: 0x1574, symBinAddr: 0x26F4, symSize: 0x87D }
+  - { offset: 0x799FF, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController switchDeviceInput]', symObjAddr: 0x1DF1, symBinAddr: 0x2F71, symSize: 0x1D }
+  - { offset: 0x79A3F, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController cancelAction:]', symObjAddr: 0x1E0E, symBinAddr: 0x2F8E, symSize: 0x8C }
+  - { offset: 0x79AC5, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController switchCameraAction:]', symObjAddr: 0x1E9A, symBinAddr: 0x301A, symSize: 0x12 }
+  - { offset: 0x79B19, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController toggleTorchAction:]', symObjAddr: 0x1EAC, symBinAddr: 0x302C, symSize: 0x1D }
+  - { offset: 0x79B66, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController delegate]', symObjAddr: 0x1EC9, symBinAddr: 0x3049, symSize: 0x11 }
+  - { offset: 0x79B9B, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setDelegate:]', symObjAddr: 0x1EDA, symBinAddr: 0x305A, symSize: 0x14 }
+  - { offset: 0x79BDC, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController codeReader]', symObjAddr: 0x1EEE, symBinAddr: 0x306E, symSize: 0x11 }
+  - { offset: 0x79C11, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setCodeReader:]', symObjAddr: 0x1EFF, symBinAddr: 0x307F, symSize: 0x14 }
+  - { offset: 0x79C52, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController switchCameraButton]', symObjAddr: 0x1F13, symBinAddr: 0x3093, symSize: 0x11 }
+  - { offset: 0x79C87, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setSwitchCameraButton:]', symObjAddr: 0x1F24, symBinAddr: 0x30A4, symSize: 0x14 }
+  - { offset: 0x79CC8, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController toggleTorchButton]', symObjAddr: 0x1F38, symBinAddr: 0x30B8, symSize: 0x11 }
+  - { offset: 0x79CFD, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setToggleTorchButton:]', symObjAddr: 0x1F49, symBinAddr: 0x30C9, symSize: 0x14 }
+  - { offset: 0x79D3E, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController cameraView]', symObjAddr: 0x1F5D, symBinAddr: 0x30DD, symSize: 0x11 }
+  - { offset: 0x79D73, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setCameraView:]', symObjAddr: 0x1F6E, symBinAddr: 0x30EE, symSize: 0x14 }
+  - { offset: 0x79DB4, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController cancelButton]', symObjAddr: 0x1F82, symBinAddr: 0x3102, symSize: 0x11 }
+  - { offset: 0x79DE9, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setCancelButton:]', symObjAddr: 0x1F93, symBinAddr: 0x3113, symSize: 0x14 }
+  - { offset: 0x79E2A, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController startScanningAtLoad]', symObjAddr: 0x1FA7, symBinAddr: 0x3127, symSize: 0x10 }
+  - { offset: 0x79E5F, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setStartScanningAtLoad:]', symObjAddr: 0x1FB7, symBinAddr: 0x3137, symSize: 0x10 }
+  - { offset: 0x79E9C, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController showSwitchCameraButton]', symObjAddr: 0x1FC7, symBinAddr: 0x3147, symSize: 0x10 }
+  - { offset: 0x79ED1, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setShowSwitchCameraButton:]', symObjAddr: 0x1FD7, symBinAddr: 0x3157, symSize: 0x10 }
+  - { offset: 0x79F0E, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController showTorchButton]', symObjAddr: 0x1FE7, symBinAddr: 0x3167, symSize: 0x10 }
+  - { offset: 0x79F43, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setShowTorchButton:]', symObjAddr: 0x1FF7, symBinAddr: 0x3177, symSize: 0x10 }
+  - { offset: 0x79F80, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController completionBlock]', symObjAddr: 0x2007, symBinAddr: 0x3187, symSize: 0x11 }
+  - { offset: 0x79FB5, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController setCompletionBlock:]', symObjAddr: 0x2018, symBinAddr: 0x3198, symSize: 0x11 }
+  - { offset: 0x79FF4, size: 0x8, addend: 0x0, symName: '-[QRCodeReaderViewController .cxx_destruct]', symObjAddr: 0x2029, symBinAddr: 0x31A9, symSize: 0x87 }
+  - { offset: 0x7A154, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0x3230, symSize: 0x116 }
+  - { offset: 0x7A1E0, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0x3230, symSize: 0x116 }
+  - { offset: 0x7A286, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton drawRect:]', symObjAddr: 0x116, symBinAddr: 0x3346, symSize: 0x27E }
+  - { offset: 0x7A581, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton linePathWithStartPoint:endPoint:thickness:]', symObjAddr: 0x394, symBinAddr: 0x35C4, symSize: 0xA9 }
+  - { offset: 0x7A67C, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton touchesBegan:withEvent:]', symObjAddr: 0x43D, symBinAddr: 0x366D, symSize: 0x41 }
+  - { offset: 0x7A6E3, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton touchesMoved:withEvent:]', symObjAddr: 0x47E, symBinAddr: 0x36AE, symSize: 0x41 }
+  - { offset: 0x7A74A, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton touchesEnded:withEvent:]', symObjAddr: 0x4BF, symBinAddr: 0x36EF, symSize: 0x41 }
+  - { offset: 0x7A7B1, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton touchesCancelled:withEvent:]', symObjAddr: 0x500, symBinAddr: 0x3730, symSize: 0x41 }
+  - { offset: 0x7A818, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton edgeColor]', symObjAddr: 0x541, symBinAddr: 0x3771, symSize: 0x11 }
+  - { offset: 0x7A84D, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton setEdgeColor:]', symObjAddr: 0x552, symBinAddr: 0x3782, symSize: 0x14 }
+  - { offset: 0x7A88E, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton fillColor]', symObjAddr: 0x566, symBinAddr: 0x3796, symSize: 0x11 }
+  - { offset: 0x7A8C3, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton setFillColor:]', symObjAddr: 0x577, symBinAddr: 0x37A7, symSize: 0x14 }
+  - { offset: 0x7A904, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton edgeHighlightedColor]', symObjAddr: 0x58B, symBinAddr: 0x37BB, symSize: 0x11 }
+  - { offset: 0x7A939, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton setEdgeHighlightedColor:]', symObjAddr: 0x59C, symBinAddr: 0x37CC, symSize: 0x14 }
+  - { offset: 0x7A97A, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton fillHighlightedColor]', symObjAddr: 0x5B0, symBinAddr: 0x37E0, symSize: 0x11 }
+  - { offset: 0x7A9AF, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton setFillHighlightedColor:]', symObjAddr: 0x5C1, symBinAddr: 0x37F1, symSize: 0x14 }
+  - { offset: 0x7A9F0, size: 0x8, addend: 0x0, symName: '-[QRToggleTorchButton .cxx_destruct]', symObjAddr: 0x5D5, symBinAddr: 0x3805, symSize: 0x53 }
+  - { offset: 0x7AAB4, size: 0x8, addend: 0x0, symName: '-[QRCodeReader init]', symObjAddr: 0x0, symBinAddr: 0x3858, symSize: 0xC1 }
+  - { offset: 0x7AC5A, size: 0x8, addend: 0x0, symName: '-[QRCodeReader init]', symObjAddr: 0x0, symBinAddr: 0x3858, symSize: 0xC1 }
+  - { offset: 0x7ACD1, size: 0x8, addend: 0x0, symName: '-[QRCodeReader initWithMetadataObjectTypes:]', symObjAddr: 0xC1, symBinAddr: 0x3919, symSize: 0x8C }
+  - { offset: 0x7AD69, size: 0x8, addend: 0x0, symName: '+[QRCodeReader readerWithMetadataObjectTypes:]', symObjAddr: 0x14D, symBinAddr: 0x39A5, symSize: 0x49 }
+  - { offset: 0x7ADED, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setupAVComponents]', symObjAddr: 0x196, symBinAddr: 0x39EE, symSize: 0x316 }
+  - { offset: 0x7B008, size: 0x8, addend: 0x0, symName: '-[QRCodeReader configureDefaultComponents]', symObjAddr: 0x4AC, symBinAddr: 0x3D04, symSize: 0x148 }
+  - { offset: 0x7B133, size: 0x8, addend: 0x0, symName: '-[QRCodeReader switchDeviceInput]', symObjAddr: 0x5F4, symBinAddr: 0x3E4C, symSize: 0x104 }
+  - { offset: 0x7B259, size: 0x8, addend: 0x0, symName: '-[QRCodeReader hasFrontDevice]', symObjAddr: 0x6F8, symBinAddr: 0x3F50, symSize: 0xE }
+  - { offset: 0x7B28E, size: 0x8, addend: 0x0, symName: '-[QRCodeReader isTorchAvailable]', symObjAddr: 0x706, symBinAddr: 0x3F5E, symSize: 0x16 }
+  - { offset: 0x7B2D1, size: 0x8, addend: 0x0, symName: '-[QRCodeReader toggleTorch]', symObjAddr: 0x71C, symBinAddr: 0x3F74, symSize: 0x8E }
+  - { offset: 0x7B38B, size: 0x8, addend: 0x0, symName: '-[QRCodeReader startScanning]', symObjAddr: 0x7AA, symBinAddr: 0x4002, symSize: 0x95 }
+  - { offset: 0x7B40E, size: 0x8, addend: 0x0, symName: '-[QRCodeReader stopScanning]', symObjAddr: 0x83F, symBinAddr: 0x4097, symSize: 0x95 }
+  - { offset: 0x7B491, size: 0x8, addend: 0x0, symName: '-[QRCodeReader running]', symObjAddr: 0x8D4, symBinAddr: 0x412C, symSize: 0x44 }
+  - { offset: 0x7B4F4, size: 0x8, addend: 0x0, symName: '+[QRCodeReader videoOrientationFromInterfaceOrientation:]', symObjAddr: 0x918, symBinAddr: 0x4170, symSize: 0x17 }
+  - { offset: 0x7B535, size: 0x8, addend: 0x0, symName: '+[QRCodeReader isAvailable]', symObjAddr: 0x92F, symBinAddr: 0x4187, symSize: 0xAB }
+  - { offset: 0x7B5DF, size: 0x8, addend: 0x0, symName: '+[QRCodeReader supportsMetadataObjectTypes:]', symObjAddr: 0x9DA, symBinAddr: 0x4232, symSize: 0x33A }
+  - { offset: 0x7B849, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setCompletionWithBlock:]', symObjAddr: 0xD14, symBinAddr: 0x456C, symSize: 0x12 }
+  - { offset: 0x7B8A5, size: 0x8, addend: 0x0, symName: '-[QRCodeReader captureOutput:didOutputMetadataObjects:fromConnection:]', symObjAddr: 0xD26, symBinAddr: 0x457E, symSize: 0x267 }
+  - { offset: 0x7BA7B, size: 0x8, addend: 0x0, symName: '-[QRCodeReader metadataObjectTypes]', symObjAddr: 0xF8D, symBinAddr: 0x47E5, symSize: 0xA }
+  - { offset: 0x7BAB0, size: 0x8, addend: 0x0, symName: '-[QRCodeReader previewLayer]', symObjAddr: 0xF97, symBinAddr: 0x47EF, symSize: 0xA }
+  - { offset: 0x7BAE5, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setPreviewLayer:]', symObjAddr: 0xFA1, symBinAddr: 0x47F9, symSize: 0x11 }
+  - { offset: 0x7BB26, size: 0x8, addend: 0x0, symName: '-[QRCodeReader defaultDeviceInput]', symObjAddr: 0xFB2, symBinAddr: 0x480A, symSize: 0xA }
+  - { offset: 0x7BB5B, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setDefaultDeviceInput:]', symObjAddr: 0xFBC, symBinAddr: 0x4814, symSize: 0x11 }
+  - { offset: 0x7BB9C, size: 0x8, addend: 0x0, symName: '-[QRCodeReader frontDeviceInput]', symObjAddr: 0xFCD, symBinAddr: 0x4825, symSize: 0xA }
+  - { offset: 0x7BBD1, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setFrontDeviceInput:]', symObjAddr: 0xFD7, symBinAddr: 0x482F, symSize: 0x11 }
+  - { offset: 0x7BC12, size: 0x8, addend: 0x0, symName: '-[QRCodeReader metadataOutput]', symObjAddr: 0xFE8, symBinAddr: 0x4840, symSize: 0xA }
+  - { offset: 0x7BC47, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setMetadataOutput:]', symObjAddr: 0xFF2, symBinAddr: 0x484A, symSize: 0x11 }
+  - { offset: 0x7BC88, size: 0x8, addend: 0x0, symName: '-[QRCodeReader defaultDevice]', symObjAddr: 0x1003, symBinAddr: 0x485B, symSize: 0xA }
+  - { offset: 0x7BCBD, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setDefaultDevice:]', symObjAddr: 0x100D, symBinAddr: 0x4865, symSize: 0x11 }
+  - { offset: 0x7BCFE, size: 0x8, addend: 0x0, symName: '-[QRCodeReader frontDevice]', symObjAddr: 0x101E, symBinAddr: 0x4876, symSize: 0xA }
+  - { offset: 0x7BD33, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setFrontDevice:]', symObjAddr: 0x1028, symBinAddr: 0x4880, symSize: 0x11 }
+  - { offset: 0x7BD74, size: 0x8, addend: 0x0, symName: '-[QRCodeReader session]', symObjAddr: 0x1039, symBinAddr: 0x4891, symSize: 0xA }
+  - { offset: 0x7BDA9, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setSession:]', symObjAddr: 0x1043, symBinAddr: 0x489B, symSize: 0x11 }
+  - { offset: 0x7BDEA, size: 0x8, addend: 0x0, symName: '-[QRCodeReader completionBlock]', symObjAddr: 0x1054, symBinAddr: 0x48AC, symSize: 0xA }
+  - { offset: 0x7BE1F, size: 0x8, addend: 0x0, symName: '-[QRCodeReader setCompletionBlock:]', symObjAddr: 0x105E, symBinAddr: 0x48B6, symSize: 0xF }
+  - { offset: 0x7BE5E, size: 0x8, addend: 0x0, symName: '-[QRCodeReader .cxx_destruct]', symObjAddr: 0x106D, symBinAddr: 0x48C5, symSize: 0x75 }
+  - { offset: 0x7BF5E, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0x493A, symSize: 0x116 }
+  - { offset: 0x7BFEA, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton initWithFrame:]', symObjAddr: 0x0, symBinAddr: 0x493A, symSize: 0x116 }
+  - { offset: 0x7C0E7, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton drawRect:]', symObjAddr: 0x116, symBinAddr: 0x4A50, symSize: 0x85A }
+  - { offset: 0x7CAA1, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton touchesBegan:withEvent:]', symObjAddr: 0x970, symBinAddr: 0x52AA, symSize: 0x41 }
+  - { offset: 0x7CB08, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton touchesMoved:withEvent:]', symObjAddr: 0x9B1, symBinAddr: 0x52EB, symSize: 0x41 }
+  - { offset: 0x7CB6F, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton touchesEnded:withEvent:]', symObjAddr: 0x9F2, symBinAddr: 0x532C, symSize: 0x41 }
+  - { offset: 0x7CBD6, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton touchesCancelled:withEvent:]', symObjAddr: 0xA33, symBinAddr: 0x536D, symSize: 0x41 }
+  - { offset: 0x7CC3D, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton edgeColor]', symObjAddr: 0xA74, symBinAddr: 0x53AE, symSize: 0x11 }
+  - { offset: 0x7CC72, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton setEdgeColor:]', symObjAddr: 0xA85, symBinAddr: 0x53BF, symSize: 0x14 }
+  - { offset: 0x7CCB3, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton fillColor]', symObjAddr: 0xA99, symBinAddr: 0x53D3, symSize: 0x11 }
+  - { offset: 0x7CCE8, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton setFillColor:]', symObjAddr: 0xAAA, symBinAddr: 0x53E4, symSize: 0x14 }
+  - { offset: 0x7CD29, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton edgeHighlightedColor]', symObjAddr: 0xABE, symBinAddr: 0x53F8, symSize: 0x11 }
+  - { offset: 0x7CD5E, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton setEdgeHighlightedColor:]', symObjAddr: 0xACF, symBinAddr: 0x5409, symSize: 0x14 }
+  - { offset: 0x7CD9F, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton fillHighlightedColor]', symObjAddr: 0xAE3, symBinAddr: 0x541D, symSize: 0x11 }
+  - { offset: 0x7CDD4, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton setFillHighlightedColor:]', symObjAddr: 0xAF4, symBinAddr: 0x542E, symSize: 0x14 }
+  - { offset: 0x7CE15, size: 0x8, addend: 0x0, symName: '-[QRCameraSwitchButton .cxx_destruct]', symObjAddr: 0xB08, symBinAddr: 0x5442, symSize: 0x53 }
 ...
