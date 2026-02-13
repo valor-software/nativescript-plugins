@@ -41,7 +41,7 @@
     },
     "build.native": {
       "executor": "nx:run-commands",
-      "inputs": ["{projectRoot}/native-src/ios"],
+      "inputs": ["{projectRoot}/native-src/ios/**/*"],
       "outputs": ["{projectRoot}/platforms/ios"],
       "options": {
         "commands": ["./build.sh"],
