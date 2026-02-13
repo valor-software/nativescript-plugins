@@ -1445,10 +1445,38 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@csstools/color-helpers@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@csstools/color-helpers/-/color-helpers-5.1.0.tgz#106c54c808cabfd1ab4c602d8505ee584c2996ef"
+  integrity sha512-S11EXWJyy0Mz5SYvRmY8nJYTFFd1LCNV+7cXyAgQtOOuzb4EsgfqDufL+9esx72/eLhsRdGZwaldu/h+E4t4BA==
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
+
+"@csstools/css-calc@^2.1.4", "@csstools/css-calc@~2.1.2":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@csstools/css-calc/-/css-calc-2.1.4.tgz#8473f63e2fcd6e459838dd412401d5948f224c65"
+  integrity sha512-3N8oaj+0juUw/1H3YwmDDJXCgTB1gKU6Hc/bB502u9zR0q2vd786XJH9QfrKIEgFlZmhZiq6epXl4rHqhzsIgQ==
+
+"@csstools/css-color-parser@^3.0.8":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@csstools/css-color-parser/-/css-color-parser-3.1.0.tgz#4e386af3a99dd36c46fef013cfe4c1c341eed6f0"
+  integrity sha512-nbtKwh3a6xNVIp/VRuXV64yTKnb1IjTAEEh3irzS+HkKjAOYLTGNb9pmVNntZ8iVBHcWDA2Dof0QtPgFI1BaTA==
+  dependencies:
+    "@csstools/color-helpers" "^5.1.0"
+    "@csstools/css-calc" "^2.1.4"
+
+"@csstools/css-parser-algorithms@^3.0.4":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@csstools/css-parser-algorithms/-/css-parser-algorithms-3.0.5.tgz#5755370a9a29abaec5515b43c8b3f2cf9c2e3076"
+  integrity sha512-DaDeUkXZKjdGhgYaHNJTV9pV7Y9B3b644jCLs9Upc3VeNGg6LWARAT6O+Q+/COo+2gg/bM5rhpMAtf70WqfBdQ==
+
+"@csstools/css-tokenizer@^3.0.3":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@csstools/css-tokenizer/-/css-tokenizer-3.0.4.tgz#333fedabc3fd1a8e5d0100013731cf19e6a8c5d3"
+  integrity sha512-Vd/9EVDiu6PPJt9yAh6roZP6El1xHrdvIVGjyBsHR0RYwNHgL7FJPyIIW4fANJNG6FtyZfvlRPpFI4ZM/lubvw==
 
 "@discoveryjs/json-ext@0.5.7", "@discoveryjs/json-ext@^0.5.0":
   version "0.5.7"
@@ -3162,17 +3190,21 @@
     "@nativescript/zone-js" "^3.0.4"
     tslib "^2.3.0"
 
-"@nativescript/core@~8.8.0":
-  version "8.8.6"
-  resolved "https://registry.yarnpkg.com/@nativescript/core/-/core-8.8.6.tgz#6e6feaed9f9199c8e6473d50526d88fba0673e7c"
-  integrity sha512-pbYDkwit2qLYRAn4bUcXQY0Wq73LVnbmtKiRXIgZDGo86cjxtsPjQmvVpqluBf3GMNFm9U1+h5VfxwwQw1vGdg==
+"@nativescript/core@~8.9.0":
+  version "8.9.9"
+  resolved "https://registry.yarnpkg.com/@nativescript/core/-/core-8.9.9.tgz#02d46da5f5ecece527849e0b41ac7768a8f02e5b"
+  integrity sha512-xkwxkEuqQA9ajX3ThkimZ/sVl95gaB51f8cu/jUrEDVEy2vY5+J7EGXfpN2pl+jK2XQ9hB0/TmMTkY0ewxgODw==
   dependencies:
+    "@csstools/css-calc" "~2.1.2"
+    "@csstools/css-color-parser" "^3.0.8"
+    "@csstools/css-parser-algorithms" "^3.0.4"
+    "@csstools/css-tokenizer" "^3.0.3"
     "@nativescript/hook" "~2.0.0"
     acorn "^8.7.0"
     css-tree "^1.1.2"
     css-what "^6.1.0"
     emoji-regex "^10.2.1"
-    reduce-css-calc "^2.1.7"
+    source-map "0.6.1"
     tslib "^2.0.0"
 
 "@nativescript/hook@~2.0.0":
@@ -3193,10 +3225,10 @@
     fs-extra "^11.2.0"
     plist "^3.1.0"
 
-"@nativescript/plugin-tools@5.5.1":
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/@nativescript/plugin-tools/-/plugin-tools-5.5.1.tgz#73433e351524d0422ba04503465d8444becfe71f"
-  integrity sha512-vnISTCNCh5z+9uGYEQUkhVGJ5SBP/Vm0GYivlcAFusvD/9bQVWLNJDQcZRn5E/AJo6kbl+IUfb4KiP+2TPwuZA==
+"@nativescript/plugin-tools@5.5.3":
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/@nativescript/plugin-tools/-/plugin-tools-5.5.3.tgz#fe45e943954001ba072ca9e8002e43d8c97572bd"
+  integrity sha512-FCfFBM4l5WDckwfEqFUKJv/XsbF/OasPfSBwJsJeTwxteyyLLSa/D8m/nrgbyhQxfNWp8AVokyf4AitUIi8Ppg==
   dependencies:
     "@nativescript/nx" "^20.0.0"
     "@nstudio/focus" "^20.0.0"
@@ -3229,23 +3261,23 @@
     ts-patch "^3.0.0"
     xml2js "~0.6.0"
 
-"@nativescript/types-android@8.8.0":
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/@nativescript/types-android/-/types-android-8.8.0.tgz#405e89748b1a95ce379cd487da3f0ff79d0db09f"
-  integrity sha512-U8ZOT+dtfYbfMj2OY1l6h9RQB+0weBQu6sG/2hKYyqmFnyT69XLmWbjE26LkqCceAukVk2Vg15bpk6haZVLI/Q==
+"@nativescript/types-android@~8.9.0":
+  version "8.9.0"
+  resolved "https://registry.yarnpkg.com/@nativescript/types-android/-/types-android-8.9.0.tgz#201585b9586c7fc86af0dfa687250b5da7dffe26"
+  integrity sha512-tNfCpfbSu/YMFjEbKk89Kw5VCRn8Y7Kyg4x7YRR5q3urrvhaUD6hBzoLWprrOfHwmoQXVU/eEMleKcrk0/liiw==
 
-"@nativescript/types-ios@8.8.0":
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/@nativescript/types-ios/-/types-ios-8.8.0.tgz#2f2e1571b65d86e6934ba15b67b526b1310c7881"
-  integrity sha512-kifctOi4OR/7zLV/G5DxrK2Ws45lbsZROje+fGn7osnMXYs641zsrBIgm2OQuADcuMvNTk9ynHxI76NtPLPLYA==
+"@nativescript/types-ios@~8.9.0":
+  version "8.9.1"
+  resolved "https://registry.yarnpkg.com/@nativescript/types-ios/-/types-ios-8.9.1.tgz#970d4563181321f89f2601a777ca94e5ceeec72b"
+  integrity sha512-OsQiVg+r8oWfqsbH5Lcs1ItODipc4bxIFcaXFkcYZTvlbCKG72IZ+HNdd88oKlh4z8HaqdDRJT5zXQWQ1GZ+YQ==
 
-"@nativescript/types@~8.8.0":
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/@nativescript/types/-/types-8.8.0.tgz#8a53ab2b3d27b5d47c33590acced482365c69e8d"
-  integrity sha512-cXzKaHdS9HXPga7G+jCMjhDgvZGGEYUJ4Uq+DpevPMz8aRVL1s4UPe7q75xi2DsgRSQzb6UM8FZNbpFsrtiPLg==
+"@nativescript/types@~8.9.0":
+  version "8.9.1"
+  resolved "https://registry.yarnpkg.com/@nativescript/types/-/types-8.9.1.tgz#7166775e2d2350de205537dff44e9b76c9d88123"
+  integrity sha512-mMgnpDQVDDARx+WyoNP2jZD4UcwZEmPuieFgipfA0LkwGaB0mcVKAXPruW0qxAkuXtgS0qY+qgpON06nDfJmMQ==
   dependencies:
-    "@nativescript/types-android" "8.8.0"
-    "@nativescript/types-ios" "8.8.0"
+    "@nativescript/types-android" "~8.9.0"
+    "@nativescript/types-ios" "~8.9.0"
 
 "@nativescript/webpack@~5.0.24":
   version "5.0.24"
@@ -6441,11 +6473,6 @@ css-tree@~2.2.0:
   dependencies:
     mdn-data "2.0.28"
     source-map-js "^1.0.1"
-
-css-unit-converter@^1.1.1:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/css-unit-converter/-/css-unit-converter-1.1.2.tgz#4c77f5a1954e6dbff60695ecb214e3270436ab21"
-  integrity sha512-IiJwMC8rdZE0+xiEZHeru6YoONC4rfPMqGm2W85jMIbkFvv5nFTwJVFHam2eFrN6txmoUYFAFXiv8ICVeTO0MA==
 
 css-what@^6.1.0:
   version "6.1.0"
@@ -12156,11 +12183,6 @@ postcss-url@^10.1.1:
     minimatch "~3.0.4"
     xxhashjs "~0.2.2"
 
-postcss-value-parser@^3.3.0:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.1.tgz#9ff822547e2893213cf1c30efa51ac5fd1ba8281"
-  integrity sha512-pISE66AbVkp4fDQ7VHBwRNXzAAKJjw4Vw7nWI/+Q3vuly7SNfgYXvm6i5IgFylHGK5sP/xHAbB7N49OS4gWNyQ==
-
 postcss-value-parser@^4.0.0, postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
@@ -12466,14 +12488,6 @@ rechoir@^0.7.0:
   integrity sha512-/njmZ8s1wVeR6pjTZ+0nCnv8SpZNRMT2D1RLOJQESlYFDBvwpTA4KWJpZ+sBJ4+vhjILRcK7JIFdGCdxEAAitg==
   dependencies:
     resolve "^1.9.0"
-
-reduce-css-calc@^2.1.7:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/reduce-css-calc/-/reduce-css-calc-2.1.8.tgz#7ef8761a28d614980dc0c982f772c93f7a99de03"
-  integrity sha512-8liAVezDmUcH+tdzoEGrhfbGcP7nOV4NkGE3a74+qqvE7nt9i4sKLGBuZNOnpI4WiGksiNPklZxva80061QiPg==
-  dependencies:
-    css-unit-converter "^1.1.1"
-    postcss-value-parser "^3.3.0"
 
 reflect-metadata@^0.2.0:
   version "0.2.2"
@@ -13478,16 +13492,7 @@ string-length@^4.0.1:
     char-regex "^1.0.2"
     strip-ansi "^6.0.0"
 
-"string-width-cjs@npm:string-width@^4.2.0":
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
-  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.1"
-
-string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -13528,14 +13533,7 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
-  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
-  dependencies:
-    ansi-regex "^5.0.1"
-
-strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -14702,7 +14700,7 @@ word-wrap@^1.2.5:
   resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.5.tgz#d2c45c6dd4fbce621a66f136cbe328afd0410b34"
   integrity sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -14715,15 +14713,6 @@ wrap-ansi@^6.0.1, wrap-ansi@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
   integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
-  dependencies:
-    ansi-styles "^4.0.0"
-    string-width "^4.1.0"
-    strip-ansi "^6.0.0"
-
-wrap-ansi@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
-  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"
