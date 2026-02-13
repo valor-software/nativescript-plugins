@@ -11,6 +11,8 @@ export ZERO_AR_DATE=1
 
 rm -rf $OUTPUTPATH
 
+CUSTOM_OTHER_CFLAGS="-ffile-prefix-map=$(PWD)=."
+
 echo "Build for iphonesimulator"
 xcodebuild \
     -project $PACKAGENAME.xcodeproj \
@@ -20,6 +22,7 @@ xcodebuild \
     clean build \
     BUILD_DIR=$OUTPUTPATH \
     SKIP_INSTALL=NO \
+    OTHER_CFLAGS="$CUSTOM_OTHER_CFLAGS" \
     -quiet
 
 echo "Build for iphoneos"
@@ -33,6 +36,7 @@ xcodebuild \
     CODE_SIGN_IDENTITY="" \
     CODE_SIGNING_REQUIRED=NO \
     SKIP_INSTALL=NO \
+    OTHER_CFLAGS="$CUSTOM_OTHER_CFLAGS" \
     -quiet
 
 echo "Build for Mac Catalyst"
@@ -47,6 +51,7 @@ xcodebuild \
     CODE_SIGNING_REQUIRED=NO \
     SKIP_INSTALL=NO \
     BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    OTHER_CFLAGS="$CUSTOM_OTHER_CFLAGS" \
     -quiet
 
 echo "Build for visionos device"
@@ -59,6 +64,7 @@ xcodebuild \
     BUILD_DIR=$OUTPUTPATH \
     SKIP_INSTALL=NO \
     BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    OTHER_CFLAGS="$CUSTOM_OTHER_CFLAGS" \
     -quiet
 
 echo "Build for visionos simulator"
@@ -74,6 +80,7 @@ xcodebuild \
     CODE_SIGN_IDENTITY="" \
     CODE_SIGNING_REQUIRED=NO \
     SKIP_INSTALL=NO \
+    OTHER_CFLAGS="$CUSTOM_OTHER_CFLAGS" \
     -quiet
 
 echo "Creating XCFramework"
@@ -90,6 +97,17 @@ xcodebuild \
     -framework $OUTPUTPATH/Release-xrsimulator/$PACKAGENAME.framework \
     -debug-symbols $OUTPUTPATH/Release-xrsimulator/$PACKAGENAME.framework.dSYM \
     -output $OUTPUTPATH/$PACKAGENAME.xcframework
+
+echo "Remapping paths in Relocations files"
+for dsym_dir in $OUTPUTPATH/$PACKAGENAME.xcframework/*/dSYMs/$PACKAGENAME.framework.dSYM/Contents/Resources/Relocations/*/; do
+    if [ -d "$dsym_dir" ]; then
+        for yml_file in "$dsym_dir"*.yml; do
+            if [ -f "$yml_file" ]; then
+                sed -i '' "s|$(PWD)|.|g" "$yml_file"
+            fi
+        done
+    fi
+done
 
 mkdir -p $COPYPATH
 rm -rf $COPYPATH/$PACKAGENAME.xcframework
