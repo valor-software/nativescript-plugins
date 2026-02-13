@@ -51,7 +51,7 @@ jobs:
         # see available xcode versions in https://github.com/actions/runner-images/blob/main/images/macos/macos-14-arm64-Readme.md#xcode
         uses: mobiledevops/xcode-select-version-action@v1
         with:
-          xcode-select-version: 15.4
+          xcode-select-version: 16.4
       - name: Install visionOS platform
         run: |
           defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES
