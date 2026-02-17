@@ -72,6 +72,7 @@ export class NativeBridge extends NativeBridgeDefinition {
   nativeWs!: okhttp3.WebSocket;
   startLooper?: android.os.Looper;
   handler?: android.os.Handler;
+  private _restrictedCodes = new Set([1004, 1005, 1006, 1015]);
   connect(url: string, protocols: string[], headers: HeaderType): void {
     this.startLooper = android.os.Looper.myLooper();
     this.handler = new android.os.Handler(this.startLooper);
@@ -169,6 +170,11 @@ export class NativeBridge extends NativeBridgeDefinition {
     this.ws._websocketOpen(param1.protocol().toString());
   }
   public onClosing(websocket: okhttp3.WebSocket, code: number, reason: string): void {
+    // prevent invalid codes
+    if (this._restrictedCodes.has(code)) {
+      websocket.close(1000, reason);
+      return;
+    }
     websocket.close(code, reason);
   }
 
@@ -180,7 +186,7 @@ export class NativeBridge extends NativeBridgeDefinition {
       this.handler.post(
         new java.lang.Runnable({
           run: action,
-        })
+        }),
       );
     } else {
       action();
