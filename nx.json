@@ -37,6 +37,12 @@
     },
     "e2e": {
       "cache": true
+    },
+    "nx-release-publish": {
+      "dependsOn": ["build.all", "build"],
+      "options": {
+        "packageRoot": "dist/packages/{projectName}"
+      }
     }
   },
   "useDaemonProcess": false,
@@ -63,5 +69,6 @@
       }
     }
   },
-  "useLegacyCache": true
+  "useLegacyCache": true,
+  "analytics": false
 }
