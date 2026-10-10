@@ -54,7 +54,7 @@ export function loadViewInBackground(view: View, host?: View): BackgroundViews {
   if (!activity) {
     throw new Error('loadViewInBackground requires a running activity');
   }
-  const logicalContainer = host ? new LogicalViewContainer() : null;
+  let logicalContainer: LogicalViewContainer | undefined;
   const hiddenHost = new ContentViewDummy();
   const hostView = new GridLayout(); // use a host view to ensure margins are respected
   hiddenHost.content = hostView;
@@ -62,6 +62,7 @@ export function loadViewInBackground(view: View, host?: View): BackgroundViews {
   hostView.addChild(view);
 
   if (host) {
+    logicalContainer = new LogicalViewContainer();
     logicalContainer.addChild(hiddenHost);
     host._addView(logicalContainer);
   } else {

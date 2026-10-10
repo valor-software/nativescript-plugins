@@ -1,4 +1,4 @@
-import { isAndroid, LayoutBase, Utils, View } from '@nativescript/core';
+import { LayoutBase, Utils, View } from '@nativescript/core';
 
 export interface BackgroundViews {
   // parent of the view that will be rendered to ensure margins are respected
@@ -84,7 +84,8 @@ export class LogicalViewContainer extends LayoutBase {
     return false;
   }
 
-  public createNativeView() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public createNativeView(): any {
     return undefined;
   }
 

@@ -7,7 +7,8 @@
       "@valor/nativescript-view-shot": ["../../../dist/packages/nativescript-view-shot"]
     },
     "outDir": "../../../dist/out-tsc",
-    "declarationDir": "../../../dist/out-tsc"
+    "declarationDir": "../../../dist/out-tsc",
+    "strict": true
   },
   "files": ["index.ts"]
 }

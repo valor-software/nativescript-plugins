@@ -29,7 +29,7 @@ export function renderToImageSource(hostView: View, options: RenderOptions = {})
 }
 
 export function loadViewInBackground(view: View, host?: View): BackgroundViews {
-  const logicalContainer = host ? new LogicalViewContainer() : null;
+  let logicalContainer: LogicalViewContainer | undefined;
   const hiddenHost = new ContentView();
   const hostView = new GridLayout(); // use a host view to ensure margins are respected
   hiddenHost.content = hostView;
@@ -37,6 +37,7 @@ export function loadViewInBackground(view: View, host?: View): BackgroundViews {
   hostView.addChild(view);
 
   if (host) {
+    logicalContainer = new LogicalViewContainer();
     logicalContainer.addChild(hiddenHost);
     host._addView(logicalContainer);
   } else {

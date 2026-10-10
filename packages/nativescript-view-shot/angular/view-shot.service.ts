@@ -1,7 +1,7 @@
 import { ComponentRef, inject, Injectable, Injector, TemplateRef, Type, ViewContainerRef } from '@angular/core';
 
 import { generateNativeScriptView, isDetachedElement, isInvisibleNode, NgView, NgViewRef } from '@nativescript/angular';
-import { ContentView, ImageSource, LayoutBase, ProxyViewContainer, View, ViewBase } from '@nativescript/core';
+import { ContentView, ImageSource, View, ViewBase } from '@nativescript/core';
 import { disposeBackgroundView, loadViewInBackground, measureAndLayout, RenderOptions, renderToImageSource } from '@valor/nativescript-view-shot';
 
 export interface DrawableOptions<T = unknown> extends RenderOptions {
@@ -56,7 +56,7 @@ export class ViewShotService {
       }
       if (ngView.view.parent) {
         if (ngView.view.parent instanceof ContentView) {
-          ngView.view.parent.content = null;
+          ngView.view.parent.content = null as unknown as View;
         } else {
           ngView.view.parent._removeView(ngView.view);
         }
