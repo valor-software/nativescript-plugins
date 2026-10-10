@@ -1,11 +1,10 @@
-import { ImageSource, View } from '@nativescript/core';
+import { ImageSource, Utils, View } from '@nativescript/core';
 import { BackgroundViews, measureAndLayout, RenderOptions, RenderViewOptions } from './common';
 
 export interface PlatformRenderer {
   renderToImageSource(hostView: View, options?: RenderOptions): ImageSource | null;
   loadViewInBackground(view: View, host?: View): BackgroundViews;
   disposeBackgroundView(backgroundViews: BackgroundViews): void;
-  disposeImage(image: ImageSource | null | undefined): void;
 }
 
 export function renderViewToImageWith(platform: PlatformRenderer, view: View, { width, height, host, ...renderOptions }: RenderViewOptions = {}): ImageSource | null {
@@ -25,12 +24,19 @@ export function withRenderedImageWith<T>(platform: PlatformRenderer, view: View,
     const result = callback(image);
     if (result instanceof Promise) {
       disposeLater = true;
-      return result.finally(() => platform.disposeImage(image)) as T;
+      return result.finally(() => releaseImage(image)) as T;
     }
     return result;
   } finally {
     if (!disposeLater) {
-      platform.disposeImage(image);
+      releaseImage(image);
     }
+  }
+}
+
+function releaseImage(image: ImageSource | null) {
+  const nativeImage = image?.ios ?? image?.android;
+  if (nativeImage) {
+    Utils.releaseNativeObject(nativeImage);
   }
 }

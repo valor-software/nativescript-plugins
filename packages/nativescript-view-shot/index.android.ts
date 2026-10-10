@@ -87,15 +87,7 @@ export function disposeBackgroundView({ hiddenHost, logicalContainer }: Backgrou
   hiddenHost._tearDownUI(true);
 }
 
-export function disposeImage(image: ImageSource | null | undefined) {
-  if (!image?.android) {
-    return;
-  }
-  Utils.releaseNativeObject(image.android);
-  image.android = null;
-}
-
-const platform: PlatformRenderer = { renderToImageSource, loadViewInBackground, disposeBackgroundView, disposeImage };
+const platform: PlatformRenderer = { renderToImageSource, loadViewInBackground, disposeBackgroundView };
 
 export function renderViewToImage(view: View, options?: RenderViewOptions): ImageSource | null {
   return renderViewToImageWith(platform, view, options);

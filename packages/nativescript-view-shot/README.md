@@ -84,10 +84,10 @@ Render functions return `null` when the view has no native view or has a zero wi
 The pixel memory of a rendered image lives in native memory that the JS garbage collector doesn't account for, so discarded images can pile up until an unrelated GC runs. When rendering often, release images as soon as you are done with them:
 
 ```ts
-// release explicitly
+// release explicitly with core's Utils.releaseNativeObject
 const image = renderViewToImage(view, { width: 100, height: 100 });
 sendToDevice(image);
-disposeImage(image); // image must not be used afterwards
+Utils.releaseNativeObject(image.ios ?? image.android); // image must not be used afterwards
 
 // or scope the image to a callback; it's released when the callback returns or its promise settles
 withRenderedImage(view, (image) => sendToDevice(image));
@@ -150,8 +150,6 @@ export function loadViewInBackground(view: View, host?: View): BackgroundViews;
 export function disposeBackgroundView(backgroundViews: BackgroundViews): void;
 
 export function renderViewToImage(view: View, options?: RenderViewOptions): ImageSource | null;
-
-export function disposeImage(image: ImageSource | null | undefined): void;
 
 export function withRenderedImage<T>(view: View, callback: (image: ImageSource | null) => T, options?: RenderOptions): T;
 

@@ -1,4 +1,4 @@
-import { ContentView, GridLayout, ImageSource, Screen, Utils, View } from '@nativescript/core';
+import { ContentView, GridLayout, ImageSource, Screen, View } from '@nativescript/core';
 import { BackgroundViews, LogicalViewContainer, RenderOptions, RenderViewOptions } from './common';
 import { PlatformRenderer, renderViewToImageWith, withRenderedImageWith } from './render-helpers';
 export * from './common';
@@ -57,15 +57,7 @@ export function disposeBackgroundView({ hiddenHost, logicalContainer }: Backgrou
   hiddenHost._tearDownUI(true);
 }
 
-export function disposeImage(image: ImageSource | null | undefined) {
-  if (!image?.ios) {
-    return;
-  }
-  Utils.releaseNativeObject(image.ios);
-  image.ios = null;
-}
-
-const platform: PlatformRenderer = { renderToImageSource, loadViewInBackground, disposeBackgroundView, disposeImage };
+const platform: PlatformRenderer = { renderToImageSource, loadViewInBackground, disposeBackgroundView };
 
 export function renderViewToImage(view: View, options?: RenderViewOptions): ImageSource | null {
   return renderViewToImageWith(platform, view, options);
