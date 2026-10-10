@@ -10,6 +10,42 @@ export interface BackgroundViews {
   logicalContainer?: View;
 }
 
+export interface RenderOptions {
+  /**
+   * Pixels per DIP/point in the resulting image. Defaults to the main screen scale.
+   * For a pixel-exact image, size the view in DIPs equal to the target pixels and pass `scale: 1`.
+   */
+  scale?: number;
+  /**
+   * The view paints every pixel, so the image can skip its alpha channel.
+   */
+  opaque?: boolean;
+  /**
+   * iOS only. Color range of the backing buffer. `'automatic'` picks an extended-range
+   * (64 bpp) buffer on wide-color screens, doubling memory. Defaults to `'standard'`.
+   */
+  range?: 'standard' | 'extended' | 'automatic';
+  /**
+   * Android only. `'RGB_565'` halves memory but drops alpha and reduces color depth. Defaults to `'ARGB_8888'`.
+   */
+  bitmapConfig?: 'ARGB_8888' | 'RGB_565';
+}
+
+export interface RenderViewOptions extends RenderOptions {
+  /**
+   * target width of the view and image, in dip. If not specified, the measured width of the view will be used.
+   */
+  width?: number;
+  /**
+   * target height of the view and image, in dip. If not specified, the measured height of the view will be used.
+   */
+  height?: number;
+  /**
+   * logical parent of the view, used for CSS inheritance. See `loadViewInBackground`.
+   */
+  host?: View;
+}
+
 export function measureAndLayout(hostView: View, width?: number, height?: number) {
   const dpWidth = width ? Utils.layout.toDevicePixels(width) : 0;
   const dpHeight = height ? Utils.layout.toDevicePixels(height) : 0;

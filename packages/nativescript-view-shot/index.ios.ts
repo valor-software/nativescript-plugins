@@ -1,12 +1,30 @@
-import { Application, ContentView, GridLayout, ImageSource, isAndroid, Screen, Utils, View } from '@nativescript/core';
-import { BackgroundViews, LogicalViewContainer } from './common';
+import { ContentView, GridLayout, ImageSource, Screen, Utils, View } from '@nativescript/core';
+import { BackgroundViews, LogicalViewContainer, RenderOptions, RenderViewOptions } from './common';
+import { PlatformRenderer, renderViewToImageWith, withRenderedImageWith } from './render-helpers';
 export * from './common';
 
-export function renderToImageSource(hostView: View): ImageSource {
-  UIGraphicsBeginImageContextWithOptions(CGSizeMake(hostView.ios.frame.size.width, hostView.ios.frame.size.height), false, Screen.mainScreen.scale);
-  (hostView.ios as UIView).layer.renderInContext(UIGraphicsGetCurrentContext());
-  const image = UIGraphicsGetImageFromCurrentImageContext();
-  UIGraphicsEndImageContext();
+const imageRanges: Record<NonNullable<RenderOptions['range']>, UIGraphicsImageRendererFormatRange> = {
+  standard: UIGraphicsImageRendererFormatRange.Standard,
+  extended: UIGraphicsImageRendererFormatRange.Extended,
+  automatic: UIGraphicsImageRendererFormatRange.Automatic,
+};
+
+export function renderToImageSource(hostView: View, options: RenderOptions = {}): ImageSource | null {
+  const nativeView: UIView = hostView.ios;
+  if (!nativeView) {
+    return null;
+  }
+  const { width, height } = nativeView.frame.size;
+  // UIKit asserts on empty bitmap contexts
+  if (!(width > 0 && height > 0)) {
+    return null;
+  }
+  const format = UIGraphicsImageRendererFormat.preferredFormat();
+  format.scale = options.scale ?? Screen.mainScreen.scale;
+  format.opaque = !!options.opaque;
+  format.preferredRange = imageRanges[options.range ?? 'standard'];
+  const renderer = UIGraphicsImageRenderer.alloc().initWithSizeFormat(CGSizeMake(width, height), format);
+  const image = renderer.imageWithActions((context) => nativeView.layer.renderInContext(context.CGContext));
   return new ImageSource(image);
 }
 
@@ -21,14 +39,10 @@ export function loadViewInBackground(view: View, host?: View): BackgroundViews {
   if (host) {
     logicalContainer.addChild(hiddenHost);
     host._addView(logicalContainer);
-    hiddenHost.callLoaded();
   } else {
-    hiddenHost._setupAsRootView(isAndroid ? Utils.android.getApplicationContext() : {});
-    hiddenHost.callLoaded();
+    hiddenHost._setupAsRootView({});
   }
-  if (isAndroid) {
-    Application.android.startActivity.addContentView(hiddenHost.android, new android.view.ViewGroup.LayoutParams(0, 0));
-  }
+  hiddenHost.callLoaded();
   return {
     hiddenHost,
     hostView,
@@ -41,4 +55,22 @@ export function disposeBackgroundView({ hiddenHost, logicalContainer }: Backgrou
   logicalContainer?.parent?._removeView(logicalContainer);
   hiddenHost.callUnloaded();
   hiddenHost._tearDownUI(true);
+}
+
+export function disposeImage(image: ImageSource | null | undefined) {
+  if (!image?.ios) {
+    return;
+  }
+  Utils.releaseNativeObject(image.ios);
+  image.ios = null;
+}
+
+const platform: PlatformRenderer = { renderToImageSource, loadViewInBackground, disposeBackgroundView, disposeImage };
+
+export function renderViewToImage(view: View, options?: RenderViewOptions): ImageSource | null {
+  return renderViewToImageWith(platform, view, options);
+}
+
+export function withRenderedImage<T>(view: View, callback: (image: ImageSource | null) => T, options?: RenderOptions): T {
+  return withRenderedImageWith(platform, view, callback, options);
 }

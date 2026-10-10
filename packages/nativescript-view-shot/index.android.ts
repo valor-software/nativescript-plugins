@@ -1,5 +1,6 @@
-import { Application, ContentView, GridLayout, ImageSource, Utils, View } from '@nativescript/core';
-import { BackgroundViews, LogicalViewContainer } from './common';
+import { Application, ContentView, GridLayout, ImageSource, Screen, Utils, View } from '@nativescript/core';
+import { BackgroundViews, LogicalViewContainer, RenderOptions, RenderViewOptions } from './common';
+import { PlatformRenderer, renderViewToImageWith, withRenderedImageWith } from './render-helpers';
 export * from './common';
 
 @NativeClass
@@ -21,16 +22,38 @@ class ContentViewDummy extends ContentView {
   }
 }
 
-export function renderToImageSource(hostView: View): ImageSource {
-  const bitmap = android.graphics.Bitmap.createBitmap(hostView.android.getWidth(), hostView.android.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);
+export function renderToImageSource(hostView: View, options: RenderOptions = {}): ImageSource | null {
+  const nativeView: android.view.View = hostView.android;
+  if (!nativeView) {
+    return null;
+  }
+  // native view size is in device pixels, i.e. already at `density` scale
+  const ratio = (options.scale ?? Screen.mainScreen.scale) / Screen.mainScreen.scale;
+  const width = Math.round(nativeView.getWidth() * ratio);
+  const height = Math.round(nativeView.getHeight() * ratio);
+  if (width <= 0 || height <= 0) {
+    return null;
+  }
+  const config = options.bitmapConfig === 'RGB_565' ? android.graphics.Bitmap.Config.RGB_565 : android.graphics.Bitmap.Config.ARGB_8888;
+  const bitmap = android.graphics.Bitmap.createBitmap(width, height, config);
+  if (options.opaque) {
+    bitmap.setHasAlpha(false);
+  }
   const canvas = new android.graphics.Canvas(bitmap);
   // ensure we start with a blank transparent canvas
   canvas.drawARGB(0, 0, 0, 0);
-  hostView.android.draw(canvas);
+  if (ratio !== 1) {
+    canvas.scale(ratio, ratio);
+  }
+  nativeView.draw(canvas);
   return new ImageSource(bitmap);
 }
 
 export function loadViewInBackground(view: View, host?: View): BackgroundViews {
+  const activity = Application.android.foregroundActivity ?? Application.android.startActivity;
+  if (!activity) {
+    throw new Error('loadViewInBackground requires a running activity');
+  }
   const logicalContainer = host ? new LogicalViewContainer() : null;
   const hiddenHost = new ContentViewDummy();
   const hostView = new GridLayout(); // use a host view to ensure margins are respected
@@ -41,13 +64,12 @@ export function loadViewInBackground(view: View, host?: View): BackgroundViews {
   if (host) {
     logicalContainer.addChild(hiddenHost);
     host._addView(logicalContainer);
-    hiddenHost.callLoaded();
   } else {
     hiddenHost._setupAsRootView(Utils.android.getApplicationContext());
-    hiddenHost.callLoaded();
   }
+  hiddenHost.callLoaded();
 
-  Application.android.startActivity.addContentView(hiddenHost.android, new android.view.ViewGroup.LayoutParams(0, 0));
+  activity.addContentView(hiddenHost.android, new android.view.ViewGroup.LayoutParams(0, 0));
 
   return {
     hiddenHost,
@@ -57,9 +79,28 @@ export function loadViewInBackground(view: View, host?: View): BackgroundViews {
 }
 
 export function disposeBackgroundView({ hiddenHost, logicalContainer }: BackgroundViews) {
-  (hiddenHost.android.getParent() as android.view.ViewGroup).removeView(hiddenHost.android);
+  const parent = hiddenHost.android?.getParent() as android.view.ViewGroup | null;
+  parent?.removeView(hiddenHost.android);
   hiddenHost.parent?._removeView(hiddenHost);
   logicalContainer?.parent?._removeView(logicalContainer);
   hiddenHost.callUnloaded();
   hiddenHost._tearDownUI(true);
+}
+
+export function disposeImage(image: ImageSource | null | undefined) {
+  if (!image?.android) {
+    return;
+  }
+  Utils.releaseNativeObject(image.android);
+  image.android = null;
+}
+
+const platform: PlatformRenderer = { renderToImageSource, loadViewInBackground, disposeBackgroundView, disposeImage };
+
+export function renderViewToImage(view: View, options?: RenderViewOptions): ImageSource | null {
+  return renderViewToImageWith(platform, view, options);
+}
+
+export function withRenderedImage<T>(view: View, callback: (image: ImageSource | null) => T, options?: RenderOptions): T {
+  return withRenderedImageWith(platform, view, callback, options);
 }
