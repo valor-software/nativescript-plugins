@@ -52,11 +52,6 @@ jobs:
         uses: mobiledevops/xcode-select-version-action@v1
         with:
           xcode-select-version: 26.6
-      - name: Install visionOS platform
-        run: |
-          defaults write com.apple.dt.Xcode AllowUnsupportedVisionOSHost -bool YES
-          defaults write com.apple.CoreSimulator AllowUnsupportedVisionOSHost -bool YES
-          xcodebuild -downloadPlatform visionOS
       - name: yarn install
         run: yarn --immutable
       - name: Build.all affected
