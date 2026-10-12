@@ -1,10 +1,10 @@
 import { ComponentRef, inject, Injectable, Injector, TemplateRef, Type, ViewContainerRef } from '@angular/core';
 
 import { generateNativeScriptView, isDetachedElement, isInvisibleNode, NgView, NgViewRef } from '@nativescript/angular';
-import { ContentView, ImageSource, LayoutBase, ProxyViewContainer, View, ViewBase } from '@nativescript/core';
-import { disposeBackgroundView, loadViewInBackground, measureAndLayout, renderToImageSource } from '@valor/nativescript-view-shot';
+import { ContentView, ImageSource, View, ViewBase } from '@nativescript/core';
+import { disposeBackgroundView, loadViewInBackground, measureAndLayout, RenderOptions, renderToImageSource } from '@valor/nativescript-view-shot';
 
-export interface DrawableOptions<T = unknown> {
+export interface DrawableOptions<T = unknown> extends RenderOptions {
   /**
    * target width of the view and image, in dip. If not specified, the measured width of the view will be used.
    */
@@ -41,55 +41,60 @@ export interface DrawableOptions<T = unknown> {
 })
 export class ViewShotService {
   private myInjector = inject(Injector);
-  async captureInBackground<T>(type: Type<T> | TemplateRef<T>, { width, height, injector, delay, logicalHost }: DrawableOptions<T> = {}): Promise<ImageSource> {
+  async captureInBackground<T>(type: Type<T> | TemplateRef<T>, { width, height, injector, delay, logicalHost, ...renderOptions }: DrawableOptions<T> = {}): Promise<ImageSource | null> {
     let host: NgView = logicalHost instanceof ViewContainerRef ? logicalHost.element.nativeElement : logicalHost;
     while ((isInvisibleNode(host) || isDetachedElement(host)) && (host = host.parentNode)); // iterate over parent nodes until we find a visible one
     const ngView = generateNativeScriptView(type, {
       injector: injector || (logicalHost instanceof ViewContainerRef ? logicalHost.injector : this.myInjector),
       keepNativeViewAttached: true,
     });
-    if (ngView.ref instanceof ComponentRef) {
-      ngView.ref.changeDetectorRef.detectChanges();
-    } else {
-      ngView.ref.detectChanges();
-    }
-    if (ngView.view.parent) {
-      if (ngView.view.parent instanceof ContentView) {
-        ngView.view.parent.content = null;
+    try {
+      if (ngView.ref instanceof ComponentRef) {
+        ngView.ref.changeDetectorRef.detectChanges();
       } else {
-        ngView.view.parent._removeView(ngView.view);
+        ngView.ref.detectChanges();
       }
-    }
-    const drawableViews = loadViewInBackground(ngView.view, host);
-    const { hostView } = drawableViews;
-
-    measureAndLayout(hostView, width, height);
-
-    if (typeof delay === 'function' || (typeof delay === 'number' && delay >= 0)) {
-      if (typeof delay === 'number') {
-        await new Promise<void>((resolve) =>
-          setTimeout(() => {
-            resolve();
-          }, delay)
-        );
-      } else {
-        await delay(ngView);
-        if (ngView.ref instanceof ComponentRef) {
-          ngView.ref.changeDetectorRef.detectChanges();
+      if (ngView.view.parent) {
+        if (ngView.view.parent instanceof ContentView) {
+          ngView.view.parent.content = null as unknown as View;
         } else {
-          ngView.ref.detectChanges();
+          ngView.view.parent._removeView(ngView.view);
         }
       }
-      measureAndLayout(hostView, width, height);
-    }
+      const drawableViews = loadViewInBackground(ngView.view, host);
+      try {
+        const { hostView } = drawableViews;
 
-    const result = renderToImageSource(hostView);
-    disposeBackgroundView(drawableViews);
-    ngView.ref.destroy();
-    return result;
+        measureAndLayout(hostView, width, height);
+
+        if (typeof delay === 'function' || (typeof delay === 'number' && delay >= 0)) {
+          if (typeof delay === 'number') {
+            await new Promise<void>((resolve) =>
+              setTimeout(() => {
+                resolve();
+              }, delay),
+            );
+          } else {
+            await delay(ngView);
+            if (ngView.ref instanceof ComponentRef) {
+              ngView.ref.changeDetectorRef.detectChanges();
+            } else {
+              ngView.ref.detectChanges();
+            }
+          }
+          measureAndLayout(hostView, width, height);
+        }
+
+        return renderToImageSource(hostView, renderOptions);
+      } finally {
+        disposeBackgroundView(drawableViews);
+      }
+    } finally {
+      ngView.ref.destroy();
+    }
   }
 
-  captureRenderedView(view: View) {
-    return renderToImageSource(view);
+  captureRenderedView(view: View, options?: RenderOptions) {
+    return renderToImageSource(view, options);
   }
 }

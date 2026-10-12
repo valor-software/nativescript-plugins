@@ -48,13 +48,70 @@ Create and render a view completely detached:
 ```ts
   renderDetached() {
     const myView = new GridLayout();
-    const renderedViewData = loadViewInBackground(myView);
-    // measure and layout the detached view with the desired width/height
-    measureAndLayout(renderedViewData.hostView, Screen.mainScreen.widthDIPs);
-    const result = renderToImageSource(renderedViewData.hostView);
-    disposeBackgroundView(renderedViewData);
+    // loads the view in the background, measures, lays out, renders and disposes it
+    const result = renderViewToImage(myView, { width: Screen.mainScreen.widthDIPs });
     // work with result
   }
+```
+
+`renderViewToImage` is shorthand for:
+```ts
+const renderedViewData = loadViewInBackground(myView);
+measureAndLayout(renderedViewData.hostView, Screen.mainScreen.widthDIPs);
+const result = renderToImageSource(renderedViewData.hostView);
+disposeBackgroundView(renderedViewData);
+```
+
+#### Render options
+
+Every render function accepts `RenderOptions`:
+
+```ts
+renderToImageSource(view, {
+  scale: 1, // pixels per DIP/point, defaults to the screen scale
+  opaque: true, // the view paints every pixel, skip the alpha channel
+  range: 'standard', // iOS only: 'standard' (default) | 'extended' | 'automatic'
+  bitmapConfig: 'ARGB_8888', // Android only: 'ARGB_8888' (default) | 'RGB_565'
+});
+```
+
+To get an image of an exact pixel size (thumbnails, uploads, external displays), size the view in DIPs equal to the target pixels and pass `scale: 1`. The default scale renders `screenScale²` times as many pixels.
+
+Render functions return `null` when the view has no native view or has a zero width or height (usually a missing `measureAndLayout` call).
+
+#### Releasing images
+
+The pixel memory of a rendered image lives in native memory that the JS garbage collector doesn't account for, so discarded images can pile up until an unrelated GC runs. When rendering often, release images as soon as you are done with them:
+
+```ts
+// release explicitly with core's Utils.releaseNativeObject
+const image = renderViewToImage(view, { width: 100, height: 100 });
+sendToDevice(image);
+Utils.releaseNativeObject(image.ios ?? image.android); // image must not be used afterwards
+
+// or scope the image to a callback; it's released when the callback returns or its promise settles
+withRenderedImage(view, (image) => sendToDevice(image));
+```
+
+Don't dispose an image that is still in use from JS, such as one bound to an `Image` view.
+
+#### Repeated renders
+
+For views rendered many times (live previews, external displays), load the view once and mutate it between renders instead of rebuilding it every time:
+
+```ts
+const myView = buildView();
+const renderedViewData = loadViewInBackground(myView);
+
+function renderFrame(text: string) {
+  myLabel.text = text;
+  // background views are not attached to a window, so layout must be run manually after every change
+  measureAndLayout(renderedViewData.hostView, 1200, 100);
+  withRenderedImage(renderedViewData.hostView, (image) => sendToDevice(image), { scale: 1 });
+}
+
+// when done
+disposeBackgroundView(renderedViewData);
 ```
 
 #### API
@@ -71,15 +128,30 @@ export interface BackgroundViews {
   // (enables CSS inheritance)
   logicalContainer?: View;
 }
+export interface RenderOptions {
+  scale?: number;
+  opaque?: boolean;
+  range?: 'standard' | 'extended' | 'automatic'; // iOS only
+  bitmapConfig?: 'ARGB_8888' | 'RGB_565'; // Android only
+}
+export interface RenderViewOptions extends RenderOptions {
+  width?: number;
+  height?: number;
+  host?: View;
+}
 export function measureAndLayout(hostView: View, width?: number, height?: number): void;
 
 export class LogicalViewContainer extends LayoutBase {}
 
-export function renderToImageSource(hostView: View): ImageSource;
+export function renderToImageSource(hostView: View, options?: RenderOptions): ImageSource | null;
 
 export function loadViewInBackground(view: View, host?: View): BackgroundViews;
 
 export function disposeBackgroundView(backgroundViews: BackgroundViews): void;
+
+export function renderViewToImage(view: View, options?: RenderViewOptions): ImageSource | null;
+
+export function withRenderedImage<T>(view: View, callback: (image: ImageSource | null) => T, options?: RenderOptions): T;
 
 ```
 
@@ -140,7 +212,8 @@ export class NativescriptViewShotComponent {
 import { Injector, TemplateRef, Type, ViewContainerRef } from '@angular/core';
 import { NgViewRef } from '@nativescript/angular';
 import { ImageSource, View, ViewBase } from '@nativescript/core';
-export interface DrawableOptions<T = unknown> {
+import { RenderOptions } from '@valor/nativescript-view-shot';
+export interface DrawableOptions<T = unknown> extends RenderOptions {
     /**
      * target width of the view and image, in dip. If not specified, the measured width of the view will be used.
      */
@@ -172,8 +245,8 @@ export interface DrawableOptions<T = unknown> {
     logicalHost?: ViewBase | ViewContainerRef;
 }
 export declare class ViewShotService {
-    captureInBackground<T>(type: Type<T> | TemplateRef<T>, options?: DrawableOptions<T>): Promise<ImageSource>;
-    captureRenderedView(view: View): ImageSource;
+    captureInBackground<T>(type: Type<T> | TemplateRef<T>, options?: DrawableOptions<T>): Promise<ImageSource | null>;
+    captureRenderedView(view: View, options?: RenderOptions): ImageSource | null;
 }
 
 ```
