@@ -90,6 +90,10 @@ static inline int32_t validate_dispatch_data_partial_string(NSData *data)
 // So instead, just map ws -> http and wss -> https.
 @property (nonatomic, readonly, copy) NSString *RCTSR_origin;
 
+// NSURL.host drops the brackets of IPv6 literals, which the Host and Origin
+// headers require (RFC 3986 section 3.2.2). Use the raw host for socket and TLS names.
+@property (nonatomic, readonly, copy) NSString *RCTSR_hostForHeader;
+
 @end
 
 
@@ -449,7 +453,7 @@ typedef void (^data_callback)(RCTSRWebSocket *webSocket,  NSData *data);
   CFHTTPMessageRef request = CFHTTPMessageCreateRequest(NULL, CFSTR("GET"), (__bridge CFURLRef)_url, kCFHTTPVersion1_1);
 
   // Set host first so it defaults
-  CFHTTPMessageSetHeaderFieldValue(request, CFSTR("Host"), (__bridge CFStringRef)(_url.port ? [NSString stringWithFormat:@"%@:%@", _url.host, _url.port] : _url.host));
+  CFHTTPMessageSetHeaderFieldValue(request, CFSTR("Host"), (__bridge CFStringRef)(_url.port ? [NSString stringWithFormat:@"%@:%@", _url.RCTSR_hostForHeader, _url.port] : _url.RCTSR_hostForHeader));
 
   NSMutableData *keyBytes = [[NSMutableData alloc] initWithLength:16];
   int result __unused = SecRandomCopyBytes(kSecRandomDefault, keyBytes.length, keyBytes.mutableBytes);
@@ -1570,10 +1574,19 @@ static const size_t RCTSRFrameHeaderOverhead = 32;
                      -1);
   int port = self.port.intValue;
   if (port > 0 && port != defaultPort) {
-    return [NSString stringWithFormat:@"%@://%@:%d", scheme, self.host, port];
+    return [NSString stringWithFormat:@"%@://%@:%d", scheme, self.RCTSR_hostForHeader, port];
   } else {
-    return [NSString stringWithFormat:@"%@://%@", scheme, self.host];
+    return [NSString stringWithFormat:@"%@://%@", scheme, self.RCTSR_hostForHeader];
   }
+}
+
+- (NSString *)RCTSR_hostForHeader
+{
+  NSString *host = self.host;
+  if ([host containsString:@":"] && ![host hasPrefix:@"["]) {
+    return [NSString stringWithFormat:@"[%@]", host];
+  }
+  return host;
 }
 
 @end
