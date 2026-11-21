@@ -1,3 +1,5 @@
-import { WebSocket } from './websocket';
+import { installWebsocketPolyfill } from './websocket';
 
-global.WebSocket = WebSocket as never;
+if (typeof global.WebSocket === 'undefined') {
+  installWebsocketPolyfill();
+}

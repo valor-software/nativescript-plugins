@@ -37,6 +37,16 @@ typedef NS_ENUM(NSInteger, RCTSRStatusCode) {
     RCTSRStatusCodeMessageTooBig = 1009,
 };
 
+typedef NS_ENUM(NSInteger, RCTSRSSLValidationMode) {
+    // Standard chain, hostname and expiry validation (against RCTSR_SSLTrustedRootCertificates when set).
+    // When pins are set, at least one certificate of the validated chain must match.
+    RCTSRSSLValidationModeSystem = 0,
+    // No chain/hostname/expiry validation; the leaf's public key must match a pin.
+    RCTSRSSLValidationModePinsOnly = 1,
+    // No validation at all.
+    RCTSRSSLValidationModeNone = 2,
+};
+
 @class RCTSRWebSocket;
 
 extern NSString *const RCTSRWebSocketErrorDomain;
@@ -88,6 +98,9 @@ extern NSString *const RCTSRHTTPResponseErrorKey;
 // Send Data (can be nil) in a ping message.
 - (void)sendPing:(NSData *)data;
 
+// SHA-256 of the certificate's DER-encoded SubjectPublicKeyInfo, or nil if the data isn't a valid certificate.
++ (NSData *)RCTSR_publicKeySHA256ForCertificateData:(NSData *)certificateData;
+
 @end
 
 #pragma mark - RCTSRWebSocketDelegate
@@ -111,7 +124,11 @@ extern NSString *const RCTSRHTTPResponseErrorKey;
 
 @interface NSURLRequest (CertificateAdditions)
 
-@property (nonatomic, readonly, copy) NSArray *RCTSR_SSLPinnedCertificates;
+@property (nonatomic, readonly) RCTSRSSLValidationMode RCTSR_SSLValidationMode;
+// SHA-256 hashes of DER-encoded SubjectPublicKeyInfo.
+@property (nonatomic, readonly, copy) NSArray<NSData *> *RCTSR_SSLPinnedPublicKeyHashes;
+// DER-encoded certificates that replace the system trust store.
+@property (nonatomic, readonly, copy) NSArray<NSData *> *RCTSR_SSLTrustedRootCertificates;
 
 @end
 
@@ -119,7 +136,9 @@ extern NSString *const RCTSRHTTPResponseErrorKey;
 
 @interface NSMutableURLRequest (CertificateAdditions)
 
-@property (nonatomic, copy) NSArray *RCTSR_SSLPinnedCertificates;
+@property (nonatomic) RCTSRSSLValidationMode RCTSR_SSLValidationMode;
+@property (nonatomic, copy) NSArray<NSData *> *RCTSR_SSLPinnedPublicKeyHashes;
+@property (nonatomic, copy) NSArray<NSData *> *RCTSR_SSLTrustedRootCertificates;
 
 @end
 
