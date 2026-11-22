@@ -1,0 +1,6 @@
+{
+  "project": "native-src/ios/NativeScriptWebSockets.xcodeproj",
+  "scheme": "NativeScriptWebSockets",
+  "platforms": ["ios", "ios-sim", "catalyst", "xros", "xros-sim"],
+  "output": "platforms/ios"
+}

@@ -1,189 +1,189 @@
 ---
 triple:          'arm64-apple-darwin'
-binary-path:     './build/Release-iphonesimulator/NativeScriptWebSockets.framework/NativeScriptWebSockets'
+binary-path:     'ios-arm64_x86_64-simulator/NativeScriptWebSockets.framework/NativeScriptWebSockets'
 relocations:
-  - { offset: 0x5818C, size: 0x8, addend: 0x0, symName: _NativeScriptWebSocketsVersionString, symObjAddr: 0x0, symBinAddr: 0x88E8, symSize: 0x0 }
-  - { offset: 0x581C1, size: 0x8, addend: 0x0, symName: _NativeScriptWebSocketsVersionNumber, symObjAddr: 0x48, symBinAddr: 0x8930, symSize: 0x0 }
-  - { offset: 0x58250, size: 0x8, addend: 0x0, symName: _RCTSRWebSocketErrorDomain, symObjAddr: 0x9190, symBinAddr: 0xC088, symSize: 0x0 }
-  - { offset: 0x58266, size: 0x8, addend: 0x0, symName: _RCTSRHTTPResponseErrorKey, symObjAddr: 0x9198, symBinAddr: 0xC090, symSize: 0x0 }
-  - { offset: 0x582FD, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket safeHandleEvent:stream:]', symObjAddr: 0x3F0C, symBinAddr: 0x4D1C, symSize: 0x25C }
-  - { offset: 0x583DB, size: 0x8, addend: 0x0, symName: _networkThread, symObjAddr: 0x22A58, symBinAddr: 0x11930, symSize: 0x0 }
-  - { offset: 0x58438, size: 0x8, addend: 0x0, symName: _networkRunLoop, symObjAddr: 0x22A60, symBinAddr: 0x11938, symSize: 0x0 }
-  - { offset: 0x58442, size: 0x8, addend: 0x0, symName: '+[NSRunLoop(RCTSRWebSocket) RCTSR_networkRunLoop]', symObjAddr: 0x4C70, symBinAddr: 0x5A80, symSize: 0x30 }
-  - { offset: 0x5846E, size: 0x8, addend: 0x0, symName: _RCTSR_networkRunLoop.onceToken, symObjAddr: 0x22A68, symBinAddr: 0x11940, symSize: 0x0 }
-  - { offset: 0x584B6, size: 0x8, addend: 0x0, symName: _CRLFCRLFBytes, symObjAddr: 0x95E0, symBinAddr: 0x8950, symSize: 0x0 }
-  - { offset: 0x584CC, size: 0x8, addend: 0x0, symName: _validate_dispatch_data_partial_string, symObjAddr: 0x3470, symBinAddr: 0x4280, symSize: 0xB0 }
-  - { offset: 0x58AE4, size: 0x8, addend: 0x0, symName: '-[NSData(RCTSRWebSocket) stringBySHA1ThenBase64Encoding]', symObjAddr: 0x0, symBinAddr: 0xE10, symSize: 0x38 }
-  - { offset: 0x58B29, size: 0x8, addend: 0x0, symName: _newSHA1String, symObjAddr: 0x38, symBinAddr: 0xE48, symSize: 0xA0 }
-  - { offset: 0x58BCE, size: 0x8, addend: 0x0, symName: _newSHA1String.cold.1, symObjAddr: 0x4FB8, symBinAddr: 0x6404, symSize: 0x28 }
-  - { offset: 0x58BE6, size: 0x8, addend: 0x0, symName: '-[NSString(RCTSRWebSocket) stringBySHA1ThenBase64Encoding]', symObjAddr: 0xD8, symBinAddr: 0xEE8, symSize: 0x38 }
-  - { offset: 0x58C2B, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket initWithURLRequest:protocols:]', symObjAddr: 0x110, symBinAddr: 0xF20, symSize: 0xD0 }
-  - { offset: 0x58C85, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket initWithURLRequest:]', symObjAddr: 0x1E0, symBinAddr: 0xFF0, symSize: 0x8 }
-  - { offset: 0x58CCA, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket initWithURL:]', symObjAddr: 0x1E8, symBinAddr: 0xFF8, symSize: 0x8 }
-  - { offset: 0x58D0F, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket initWithURL:protocols:]', symObjAddr: 0x1F0, symBinAddr: 0x1000, symSize: 0x198 }
-  - { offset: 0x58DAB, size: 0x8, addend: 0x0, symName: '+[RCTSRWebSocket RCTSR_publicKeySHA256ForCertificateData:]', symObjAddr: 0x388, symBinAddr: 0x1198, symSize: 0x54 }
-  - { offset: 0x58E4B, size: 0x8, addend: 0x0, symName: _RCTSRPublicKeySHA256, symObjAddr: 0x3DC, symBinAddr: 0x11EC, symSize: 0x200 }
-  - { offset: 0x590E0, size: 0x8, addend: 0x0, symName: _RCTSRReadDERHeader, symObjAddr: 0x4F20, symBinAddr: 0x5D30, symSize: 0x88 }
-  - { offset: 0x591D7, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _RCTSR_commonInit]', symObjAddr: 0x5DC, symBinAddr: 0x13EC, symSize: 0x254 }
-  - { offset: 0x59270, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket assertOnWorkQueue]', symObjAddr: 0x830, symBinAddr: 0x1640, symSize: 0x30 }
-  - { offset: 0x592B6, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _RCTSR_commonInit].cold.1', symObjAddr: 0x4FE0, symBinAddr: 0x642C, symSize: 0x28 }
-  - { offset: 0x592CE, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket assertOnWorkQueue]', symObjAddr: 0x830, symBinAddr: 0x1640, symSize: 0x30 }
-  - { offset: 0x5931C, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket dealloc]', symObjAddr: 0x860, symBinAddr: 0x1670, symSize: 0x78 }
-  - { offset: 0x5933A, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket assertOnWorkQueue].cold.1', symObjAddr: 0x5008, symBinAddr: 0x6454, symSize: 0x28 }
-  - { offset: 0x59352, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket dealloc]', symObjAddr: 0x860, symBinAddr: 0x1670, symSize: 0x78 }
-  - { offset: 0x593A3, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setReadyState:]', symObjAddr: 0x8D8, symBinAddr: 0x16E8, symSize: 0x4C }
-  - { offset: 0x593EB, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket open]', symObjAddr: 0x924, symBinAddr: 0x1734, symSize: 0x38 }
-  - { offset: 0x593F6, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setReadyState:].cold.1', symObjAddr: 0x5030, symBinAddr: 0x647C, symSize: 0x28 }
-  - { offset: 0x5940E, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket open]', symObjAddr: 0x924, symBinAddr: 0x1734, symSize: 0x38 }
-  - { offset: 0x59445, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _performDelegateBlock:]', symObjAddr: 0x95C, symBinAddr: 0x176C, symSize: 0x54 }
-  - { offset: 0x59450, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket open].cold.1', symObjAddr: 0x5058, symBinAddr: 0x64A4, symSize: 0x28 }
-  - { offset: 0x59468, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _performDelegateBlock:]', symObjAddr: 0x95C, symBinAddr: 0x176C, symSize: 0x54 }
-  - { offset: 0x594C6, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setDelegateDispatchQueue:]', symObjAddr: 0x9B0, symBinAddr: 0x17C0, symSize: 0xC }
-  - { offset: 0x594EA, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _performDelegateBlock:].cold.1', symObjAddr: 0x5080, symBinAddr: 0x64CC, symSize: 0x28 }
-  - { offset: 0x59502, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setDelegateDispatchQueue:]', symObjAddr: 0x9B0, symBinAddr: 0x17C0, symSize: 0xC }
-  - { offset: 0x59547, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _checkHandshake:]', symObjAddr: 0x9BC, symBinAddr: 0x17CC, symSize: 0x9C }
-  - { offset: 0x595F2, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _HTTPHeadersDidFinish]', symObjAddr: 0xA58, symBinAddr: 0x1868, symSize: 0x33C }
-  - { offset: 0x59677, size: 0x8, addend: 0x0, symName: '___39-[RCTSRWebSocket _HTTPHeadersDidFinish]_block_invoke', symObjAddr: 0xD94, symBinAddr: 0x1BA4, symSize: 0x84 }
-  - { offset: 0x596B9, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s, symObjAddr: 0xE18, symBinAddr: 0x1C28, symSize: 0x8 }
-  - { offset: 0x596E0, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s, symObjAddr: 0xE20, symBinAddr: 0x1C30, symSize: 0x8 }
-  - { offset: 0x596FF, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readHTTPHeader]', symObjAddr: 0xE28, symBinAddr: 0x1C38, symSize: 0x78 }
-  - { offset: 0x59766, size: 0x8, addend: 0x0, symName: '___33-[RCTSRWebSocket _readHTTPHeader]_block_invoke', symObjAddr: 0xEA0, symBinAddr: 0x1CB0, symSize: 0xB4 }
-  - { offset: 0x5982C, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket didConnect]', symObjAddr: 0xF54, symBinAddr: 0x1D64, symSize: 0x30C }
-  - { offset: 0x599E6, size: 0x8, addend: 0x0, symName: '___28-[RCTSRWebSocket didConnect]_block_invoke', symObjAddr: 0x1260, symBinAddr: 0x2070, symSize: 0x8 }
-  - { offset: 0x59A5A, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket didConnect].cold.1', symObjAddr: 0x50A8, symBinAddr: 0x64F4, symSize: 0x28 }
-  - { offset: 0x59A72, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket didConnect].cold.2', symObjAddr: 0x50D0, symBinAddr: 0x651C, symSize: 0x28 }
-  - { offset: 0x59A8A, size: 0x8, addend: 0x0, symName: '___28-[RCTSRWebSocket didConnect]_block_invoke', symObjAddr: 0x1260, symBinAddr: 0x2070, symSize: 0x8 }
-  - { offset: 0x59B12, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _initializeStreams]', symObjAddr: 0x1268, symBinAddr: 0x2078, symSize: 0x1A8 }
-  - { offset: 0x59C08, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _connect]', symObjAddr: 0x1410, symBinAddr: 0x2220, symSize: 0x6C }
-  - { offset: 0x59C3C, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket scheduleInRunLoop:forMode:]', symObjAddr: 0x147C, symBinAddr: 0x228C, symSize: 0xE4 }
-  - { offset: 0x59C92, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket unscheduleFromRunLoop:forMode:]', symObjAddr: 0x1560, symBinAddr: 0x2370, symSize: 0xE4 }
-  - { offset: 0x59CE8, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket close]', symObjAddr: 0x1644, symBinAddr: 0x2454, symSize: 0xC }
-  - { offset: 0x59D1A, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket closeWithCode:reason:]', symObjAddr: 0x1650, symBinAddr: 0x2460, symSize: 0x9C }
-  - { offset: 0x59D90, size: 0x8, addend: 0x0, symName: '___39-[RCTSRWebSocket closeWithCode:reason:]_block_invoke', symObjAddr: 0x16EC, symBinAddr: 0x24FC, symSize: 0x1A0 }
-  - { offset: 0x59D9B, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket closeWithCode:reason:].cold.1', symObjAddr: 0x50F8, symBinAddr: 0x6544, symSize: 0x28 }
-  - { offset: 0x59DE7, size: 0x8, addend: 0x0, symName: '___39-[RCTSRWebSocket closeWithCode:reason:]_block_invoke', symObjAddr: 0x16EC, symBinAddr: 0x24FC, symSize: 0x1A0 }
-  - { offset: 0x59F1D, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s, symObjAddr: 0x188C, symBinAddr: 0x269C, symSize: 0x28 }
-  - { offset: 0x59F28, size: 0x8, addend: 0x0, symName: '___39-[RCTSRWebSocket closeWithCode:reason:]_block_invoke.cold.1', symObjAddr: 0x5120, symBinAddr: 0x656C, symSize: 0x28 }
-  - { offset: 0x59F40, size: 0x8, addend: 0x0, symName: '___39-[RCTSRWebSocket closeWithCode:reason:]_block_invoke.cold.2', symObjAddr: 0x5148, symBinAddr: 0x6594, symSize: 0x28 }
-  - { offset: 0x59F58, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s, symObjAddr: 0x188C, symBinAddr: 0x269C, symSize: 0x28 }
-  - { offset: 0x59F81, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s, symObjAddr: 0x18B4, symBinAddr: 0x26C4, symSize: 0x28 }
-  - { offset: 0x59FA0, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _closeWithProtocolError:]', symObjAddr: 0x18DC, symBinAddr: 0x26EC, symSize: 0x80 }
-  - { offset: 0x59FE5, size: 0x8, addend: 0x0, symName: '___42-[RCTSRWebSocket _closeWithProtocolError:]_block_invoke', symObjAddr: 0x195C, symBinAddr: 0x276C, symSize: 0x74 }
-  - { offset: 0x5A04E, size: 0x8, addend: 0x0, symName: '___42-[RCTSRWebSocket _closeWithProtocolError:]_block_invoke_2', symObjAddr: 0x19D0, symBinAddr: 0x27E0, symSize: 0x8 }
-  - { offset: 0x5A090, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _failWithError:]', symObjAddr: 0x19D8, symBinAddr: 0x27E8, symSize: 0x84 }
-  - { offset: 0x5A0F2, size: 0x8, addend: 0x0, symName: '___33-[RCTSRWebSocket _failWithError:]_block_invoke', symObjAddr: 0x1A5C, symBinAddr: 0x286C, symSize: 0xAC }
-  - { offset: 0x5A145, size: 0x8, addend: 0x0, symName: '___33-[RCTSRWebSocket _failWithError:]_block_invoke_2', symObjAddr: 0x1B08, symBinAddr: 0x2918, symSize: 0x84 }
-  - { offset: 0x5A198, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _writeData:]', symObjAddr: 0x1B8C, symBinAddr: 0x299C, symSize: 0x50 }
-  - { offset: 0x5A1DD, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket send:]', symObjAddr: 0x1BDC, symBinAddr: 0x29EC, symSize: 0xA8 }
-  - { offset: 0x5A23F, size: 0x8, addend: 0x0, symName: '___23-[RCTSRWebSocket send:]_block_invoke', symObjAddr: 0x1C84, symBinAddr: 0x2A94, symSize: 0xA0 }
-  - { offset: 0x5A295, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket sendPing:]', symObjAddr: 0x1D24, symBinAddr: 0x2B34, symSize: 0xC4 }
-  - { offset: 0x5A2A0, size: 0x8, addend: 0x0, symName: '___23-[RCTSRWebSocket send:]_block_invoke.cold.1', symObjAddr: 0x5170, symBinAddr: 0x65BC, symSize: 0x28 }
-  - { offset: 0x5A2B8, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket sendPing:]', symObjAddr: 0x1D24, symBinAddr: 0x2B34, symSize: 0xC4 }
-  - { offset: 0x5A31A, size: 0x8, addend: 0x0, symName: '___27-[RCTSRWebSocket sendPing:]_block_invoke', symObjAddr: 0x1DE8, symBinAddr: 0x2BF8, symSize: 0x10 }
-  - { offset: 0x5A36D, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket handlePing:]', symObjAddr: 0x1DF8, symBinAddr: 0x2C08, symSize: 0x80 }
-  - { offset: 0x5A3B2, size: 0x8, addend: 0x0, symName: '___29-[RCTSRWebSocket handlePing:]_block_invoke', symObjAddr: 0x1E78, symBinAddr: 0x2C88, symSize: 0x74 }
-  - { offset: 0x5A422, size: 0x8, addend: 0x0, symName: '___29-[RCTSRWebSocket handlePing:]_block_invoke_2', symObjAddr: 0x1EEC, symBinAddr: 0x2CFC, symSize: 0x10 }
-  - { offset: 0x5A475, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket handlePong:]', symObjAddr: 0x1EFC, symBinAddr: 0x2D0C, symSize: 0x80 }
-  - { offset: 0x5A4BA, size: 0x8, addend: 0x0, symName: '___29-[RCTSRWebSocket handlePong:]_block_invoke', symObjAddr: 0x1F7C, symBinAddr: 0x2D8C, symSize: 0x84 }
-  - { offset: 0x5A50D, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _handleMessage:]', symObjAddr: 0x2000, symBinAddr: 0x2E10, symSize: 0x80 }
-  - { offset: 0x5A552, size: 0x8, addend: 0x0, symName: '___33-[RCTSRWebSocket _handleMessage:]_block_invoke', symObjAddr: 0x2080, symBinAddr: 0x2E90, symSize: 0x3C }
-  - { offset: 0x5A5C1, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket handleCloseWithData:]', symObjAddr: 0x20BC, symBinAddr: 0x2ECC, symSize: 0x1D8 }
-  - { offset: 0x5A694, size: 0x8, addend: 0x0, symName: '___38-[RCTSRWebSocket handleCloseWithData:]_block_invoke', symObjAddr: 0x2294, symBinAddr: 0x30A4, symSize: 0x8 }
-  - { offset: 0x5A6D6, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _disconnect]', symObjAddr: 0x229C, symBinAddr: 0x30AC, symSize: 0x2C }
-  - { offset: 0x5A70A, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _handleFrameWithData:opCode:]', symObjAddr: 0x22C8, symBinAddr: 0x30D8, symSize: 0x1C4 }
-  - { offset: 0x5A7B9, size: 0x8, addend: 0x0, symName: '___46-[RCTSRWebSocket _handleFrameWithData:opCode:]_block_invoke', symObjAddr: 0x248C, symBinAddr: 0x329C, symSize: 0x8 }
-  - { offset: 0x5A7FB, size: 0x8, addend: 0x0, symName: '___46-[RCTSRWebSocket _handleFrameWithData:opCode:]_block_invoke_2', symObjAddr: 0x2494, symBinAddr: 0x32A4, symSize: 0x8 }
-  - { offset: 0x5A83D, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _handleFrameHeader:curData:]', symObjAddr: 0x249C, symBinAddr: 0x32AC, symSize: 0x144 }
-  - { offset: 0x5A8A3, size: 0x8, addend: 0x0, symName: '___45-[RCTSRWebSocket _handleFrameHeader:curData:]_block_invoke', symObjAddr: 0x25E0, symBinAddr: 0x33F0, symSize: 0x90 }
-  - { offset: 0x5A8AE, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _handleFrameHeader:curData:].cold.1', symObjAddr: 0x5198, symBinAddr: 0x65E4, symSize: 0x28 }
-  - { offset: 0x5A8C6, size: 0x8, addend: 0x0, symName: '___45-[RCTSRWebSocket _handleFrameHeader:curData:]_block_invoke', symObjAddr: 0x25E0, symBinAddr: 0x33F0, symSize: 0x90 }
-  - { offset: 0x5A937, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readFrameContinue]', symObjAddr: 0x2670, symBinAddr: 0x3480, symSize: 0x44 }
-  - { offset: 0x5A96E, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke', symObjAddr: 0x26B4, symBinAddr: 0x34C4, symSize: 0x230 }
-  - { offset: 0x5A979, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readFrameContinue].cold.1', symObjAddr: 0x51C0, symBinAddr: 0x660C, symSize: 0x28 }
-  - { offset: 0x5A991, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke', symObjAddr: 0x26B4, symBinAddr: 0x34C4, symSize: 0x230 }
-  - { offset: 0x5AAA4, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke_2', symObjAddr: 0x28E4, symBinAddr: 0x36F4, symSize: 0x10C }
-  - { offset: 0x5AC01, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32r, symObjAddr: 0x29F0, symBinAddr: 0x3800, symSize: 0x10 }
-  - { offset: 0x5AC0C, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke_2.cold.3', symObjAddr: 0x5238, symBinAddr: 0x6684, symSize: 0x28 }
-  - { offset: 0x5AC24, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke_2.cold.2', symObjAddr: 0x5210, symBinAddr: 0x665C, symSize: 0x28 }
-  - { offset: 0x5AC3C, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke_2.cold.1', symObjAddr: 0x51E8, symBinAddr: 0x6634, symSize: 0x28 }
-  - { offset: 0x5AC54, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke_2.cold.4', symObjAddr: 0x5260, symBinAddr: 0x66AC, symSize: 0x28 }
-  - { offset: 0x5AC6C, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32r, symObjAddr: 0x29F0, symBinAddr: 0x3800, symSize: 0x10 }
-  - { offset: 0x5AC95, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32r, symObjAddr: 0x2A00, symBinAddr: 0x3810, symSize: 0xC }
-  - { offset: 0x5ACB4, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readFrameNew]', symObjAddr: 0x2A0C, symBinAddr: 0x381C, symSize: 0x58 }
-  - { offset: 0x5ACFE, size: 0x8, addend: 0x0, symName: '___31-[RCTSRWebSocket _readFrameNew]_block_invoke', symObjAddr: 0x2A64, symBinAddr: 0x3874, symSize: 0x50 }
-  - { offset: 0x5AD40, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _pumpWriting]', symObjAddr: 0x2AB4, symBinAddr: 0x38C4, symSize: 0x248 }
-  - { offset: 0x5AD9D, size: 0x8, addend: 0x0, symName: '___30-[RCTSRWebSocket _pumpWriting]_block_invoke', symObjAddr: 0x2CFC, symBinAddr: 0x3B0C, symSize: 0x90 }
-  - { offset: 0x5ADDF, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _addConsumerWithScanner:callback:]', symObjAddr: 0x2D8C, symBinAddr: 0x3B9C, symSize: 0x68 }
-  - { offset: 0x5AE35, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _addConsumerWithDataLength:callback:readToCurrentFrame:unmaskBytes:]', symObjAddr: 0x2DF4, symBinAddr: 0x3C04, symSize: 0xA0 }
-  - { offset: 0x5AEB0, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _addConsumerWithScanner:callback:dataLength:]', symObjAddr: 0x2E94, symBinAddr: 0x3CA4, symSize: 0xA8 }
-  - { offset: 0x5AEBB, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _addConsumerWithDataLength:callback:readToCurrentFrame:unmaskBytes:].cold.1', symObjAddr: 0x5288, symBinAddr: 0x66D4, symSize: 0x28 }
-  - { offset: 0x5AED3, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _addConsumerWithScanner:callback:dataLength:]', symObjAddr: 0x2E94, symBinAddr: 0x3CA4, symSize: 0xA8 }
-  - { offset: 0x5AF3A, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readUntilHeaderCompleteWithCallback:]', symObjAddr: 0x2F3C, symBinAddr: 0x3D4C, symSize: 0x14 }
-  - { offset: 0x5AF7D, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readUntilBytes:length:callback:]', symObjAddr: 0x2F50, symBinAddr: 0x3D60, symSize: 0x94 }
-  - { offset: 0x5AFF5, size: 0x8, addend: 0x0, symName: '___50-[RCTSRWebSocket _readUntilBytes:length:callback:]_block_invoke', symObjAddr: 0x2FE4, symBinAddr: 0x3DF4, symSize: 0xA0 }
-  - { offset: 0x5B0CC, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _innerPumpScanner]', symObjAddr: 0x3084, symBinAddr: 0x3E94, symSize: 0x3EC }
-  - { offset: 0x5B299, size: 0x8, addend: 0x0, symName: _validate_dispatch_data_partial_string, symObjAddr: 0x3470, symBinAddr: 0x4280, symSize: 0xB0 }
-  - { offset: 0x5B2A4, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _innerPumpScanner].cold.1', symObjAddr: 0x52B0, symBinAddr: 0x66FC, symSize: 0x28 }
-  - { offset: 0x5B2BC, size: 0x8, addend: 0x0, symName: '___35-[RCTSRWebSocket _innerPumpScanner]_block_invoke', symObjAddr: 0x3520, symBinAddr: 0x4330, symSize: 0x8 }
-  - { offset: 0x5B2FE, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _pumpScanner]', symObjAddr: 0x3528, symBinAddr: 0x4338, symSize: 0x40 }
-  - { offset: 0x5B332, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _sendFrameWithOpcode:data:]', symObjAddr: 0x3568, symBinAddr: 0x4378, symSize: 0x1AC }
-  - { offset: 0x5B4DE, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket stream:handleEvent:]', symObjAddr: 0x3714, symBinAddr: 0x4524, symSize: 0xCC }
-  - { offset: 0x5B4E9, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _sendFrameWithOpcode:data:].cold.1', symObjAddr: 0x52D8, symBinAddr: 0x6724, symSize: 0x28 }
-  - { offset: 0x5B501, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _sendFrameWithOpcode:data:].cold.2', symObjAddr: 0x5300, symBinAddr: 0x674C, symSize: 0x28 }
-  - { offset: 0x5B519, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket stream:handleEvent:]', symObjAddr: 0x3714, symBinAddr: 0x4524, symSize: 0xCC }
-  - { offset: 0x5B59D, size: 0x8, addend: 0x0, symName: '___37-[RCTSRWebSocket stream:handleEvent:]_block_invoke', symObjAddr: 0x37E0, symBinAddr: 0x45F0, symSize: 0x40 }
-  - { offset: 0x5B61D, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40w, symObjAddr: 0x3820, symBinAddr: 0x4630, symSize: 0x30 }
-  - { offset: 0x5B646, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40w, symObjAddr: 0x3850, symBinAddr: 0x4660, symSize: 0x28 }
-  - { offset: 0x5B665, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _serverTrustFailureReason:]', symObjAddr: 0x3878, symBinAddr: 0x4688, symSize: 0x424 }
-  - { offset: 0x5B909, size: 0x8, addend: 0x0, symName: _RCTSRCertificateChain, symObjAddr: 0x3C9C, symBinAddr: 0x4AAC, symSize: 0xC0 }
-  - { offset: 0x5BA92, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _ensureServerTrusted:]', symObjAddr: 0x3D5C, symBinAddr: 0x4B6C, symSize: 0x1B0 }
-  - { offset: 0x5BAFD, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket safeHandleEvent:stream:].cold.1', symObjAddr: 0x5328, symBinAddr: 0x6774, symSize: 0x28 }
-  - { offset: 0x5BB15, size: 0x8, addend: 0x0, symName: '___41-[RCTSRWebSocket safeHandleEvent:stream:]_block_invoke', symObjAddr: 0x4168, symBinAddr: 0x4F78, symSize: 0xA0 }
-  - { offset: 0x5BB57, size: 0x8, addend: 0x0, symName: '___41-[RCTSRWebSocket safeHandleEvent:stream:]_block_invoke_2', symObjAddr: 0x4208, symBinAddr: 0x5018, symSize: 0x94 }
-  - { offset: 0x5BB99, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _scheduleCleanup]', symObjAddr: 0x429C, symBinAddr: 0x50AC, symSize: 0x94 }
-  - { offset: 0x5BBDE, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _cleanupSelfReference:]', symObjAddr: 0x4330, symBinAddr: 0x5140, symSize: 0x1A8 }
-  - { offset: 0x5BC4D, size: 0x8, addend: 0x0, symName: '___40-[RCTSRWebSocket _cleanupSelfReference:]_block_invoke', symObjAddr: 0x44D8, symBinAddr: 0x52E8, symSize: 0x10 }
-  - { offset: 0x5BC8F, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket delegate]', symObjAddr: 0x44E8, symBinAddr: 0x52F8, symSize: 0x18 }
-  - { offset: 0x5BCC6, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setDelegate:]', symObjAddr: 0x4500, symBinAddr: 0x5310, symSize: 0xC }
-  - { offset: 0x5BD07, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket readyState]', symObjAddr: 0x450C, symBinAddr: 0x531C, symSize: 0x8 }
-  - { offset: 0x5BD3E, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket url]', symObjAddr: 0x4514, symBinAddr: 0x5324, symSize: 0x8 }
-  - { offset: 0x5BD75, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket protocol]', symObjAddr: 0x451C, symBinAddr: 0x532C, symSize: 0x8 }
-  - { offset: 0x5BDAC, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket delegateOperationQueue]', symObjAddr: 0x4524, symBinAddr: 0x5334, symSize: 0x8 }
-  - { offset: 0x5BDE4, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setDelegateOperationQueue:]', symObjAddr: 0x452C, symBinAddr: 0x533C, symSize: 0xC }
-  - { offset: 0x5BE27, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket delegateDispatchQueue]', symObjAddr: 0x4538, symBinAddr: 0x5348, symSize: 0x8 }
-  - { offset: 0x5BE5F, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket .cxx_destruct]', symObjAddr: 0x4540, symBinAddr: 0x5350, symSize: 0xF8 }
-  - { offset: 0x5BE93, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer setupWithScanner:handler:bytesNeeded:readToCurrentFrame:unmaskBytes:]', symObjAddr: 0x4638, symBinAddr: 0x5448, symSize: 0xAC }
-  - { offset: 0x5BF17, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer consumer]', symObjAddr: 0x46E4, symBinAddr: 0x54F4, symSize: 0x8 }
-  - { offset: 0x5BF22, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer setupWithScanner:handler:bytesNeeded:readToCurrentFrame:unmaskBytes:].cold.1', symObjAddr: 0x5350, symBinAddr: 0x679C, symSize: 0x28 }
-  - { offset: 0x5BF3A, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer consumer]', symObjAddr: 0x46E4, symBinAddr: 0x54F4, symSize: 0x8 }
-  - { offset: 0x5BF71, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer handler]', symObjAddr: 0x46EC, symBinAddr: 0x54FC, symSize: 0x8 }
-  - { offset: 0x5BFA8, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer bytesNeeded]', symObjAddr: 0x46F4, symBinAddr: 0x5504, symSize: 0x8 }
-  - { offset: 0x5BFDF, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer setBytesNeeded:]', symObjAddr: 0x46FC, symBinAddr: 0x550C, symSize: 0x8 }
-  - { offset: 0x5C01C, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer readToCurrentFrame]', symObjAddr: 0x4704, symBinAddr: 0x5514, symSize: 0x8 }
-  - { offset: 0x5C053, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer unmaskBytes]', symObjAddr: 0x470C, symBinAddr: 0x551C, symSize: 0x8 }
-  - { offset: 0x5C08A, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer .cxx_destruct]', symObjAddr: 0x4714, symBinAddr: 0x5524, symSize: 0x30 }
-  - { offset: 0x5C0BE, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumerPool initWithBufferCapacity:]', symObjAddr: 0x4744, symBinAddr: 0x5554, symSize: 0x74 }
-  - { offset: 0x5C107, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumerPool init]', symObjAddr: 0x47B8, symBinAddr: 0x55C8, symSize: 0x8 }
-  - { offset: 0x5C13D, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumerPool consumerWithScanner:handler:bytesNeeded:readToCurrentFrame:unmaskBytes:]', symObjAddr: 0x47C0, symBinAddr: 0x55D0, symSize: 0xCC }
-  - { offset: 0x5C1DB, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumerPool returnConsumer:]', symObjAddr: 0x488C, symBinAddr: 0x569C, symSize: 0x4C }
-  - { offset: 0x5C220, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumerPool .cxx_destruct]', symObjAddr: 0x48D8, symBinAddr: 0x56E8, symSize: 0xC }
-  - { offset: 0x5C254, size: 0x8, addend: 0x0, symName: '-[NSURLRequest(CertificateAdditions) RCTSR_SSLValidationMode]', symObjAddr: 0x48E4, symBinAddr: 0x56F4, symSize: 0x50 }
-  - { offset: 0x5C28C, size: 0x8, addend: 0x0, symName: '-[NSURLRequest(CertificateAdditions) RCTSR_SSLPinnedPublicKeyHashes]', symObjAddr: 0x4934, symBinAddr: 0x5744, symSize: 0x18 }
-  - { offset: 0x5C2C4, size: 0x8, addend: 0x0, symName: '-[NSURLRequest(CertificateAdditions) RCTSR_SSLTrustedRootCertificates]', symObjAddr: 0x494C, symBinAddr: 0x575C, symSize: 0x18 }
-  - { offset: 0x5C2FC, size: 0x8, addend: 0x0, symName: '-[NSMutableURLRequest(CertificateAdditions) setRCTSR_SSLValidationMode:]', symObjAddr: 0x4964, symBinAddr: 0x5774, symSize: 0x60 }
-  - { offset: 0x5C341, size: 0x8, addend: 0x0, symName: '-[NSMutableURLRequest(CertificateAdditions) setRCTSR_SSLPinnedPublicKeyHashes:]', symObjAddr: 0x49C4, symBinAddr: 0x57D4, symSize: 0x54 }
-  - { offset: 0x5C386, size: 0x8, addend: 0x0, symName: '-[NSMutableURLRequest(CertificateAdditions) setRCTSR_SSLTrustedRootCertificates:]', symObjAddr: 0x4A18, symBinAddr: 0x5828, symSize: 0x54 }
-  - { offset: 0x5C3CB, size: 0x8, addend: 0x0, symName: '-[NSURL(RCTSRWebSocket) RCTSR_origin]', symObjAddr: 0x4A6C, symBinAddr: 0x587C, symSize: 0x174 }
-  - { offset: 0x5C436, size: 0x8, addend: 0x0, symName: '-[NSURL(RCTSRWebSocket) RCTSR_hostForHeader]', symObjAddr: 0x4BE0, symBinAddr: 0x59F0, symSize: 0x90 }
-  - { offset: 0x5C4A6, size: 0x8, addend: 0x0, symName: '+[NSRunLoop(RCTSRWebSocket) RCTSR_networkRunLoop].cold.1', symObjAddr: 0x5378, symBinAddr: 0x67C4, symSize: 0x14 }
-  - { offset: 0x5C4C2, size: 0x8, addend: 0x0, symName: '+[NSRunLoop(RCTSRWebSocket) RCTSR_networkRunLoop].cold.1', symObjAddr: 0x5378, symBinAddr: 0x67C4, symSize: 0x14 }
-  - { offset: 0x5C4D5, size: 0x8, addend: 0x0, symName: '___49+[NSRunLoop(RCTSRWebSocket) RCTSR_networkRunLoop]_block_invoke', symObjAddr: 0x4CA0, symBinAddr: 0x5AB0, symSize: 0x70 }
-  - { offset: 0x5C4FE, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread init]', symObjAddr: 0x4D10, symBinAddr: 0x5B20, symSize: 0x6C }
-  - { offset: 0x5C56D, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread main]', symObjAddr: 0x4D7C, symBinAddr: 0x5B8C, symSize: 0x124 }
-  - { offset: 0x5C5D2, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread step]', symObjAddr: 0x4EA0, symBinAddr: 0x5CB0, symSize: 0x4 }
-  - { offset: 0x5C5F5, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread step]', symObjAddr: 0x4EA0, symBinAddr: 0x5CB0, symSize: 0x4 }
-  - { offset: 0x5C625, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread runLoop]', symObjAddr: 0x4EA4, symBinAddr: 0x5CB4, symSize: 0x3C }
-  - { offset: 0x5C682, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread .cxx_destruct]', symObjAddr: 0x4EE0, symBinAddr: 0x5CF0, symSize: 0x40 }
-  - { offset: 0x5D565, size: 0x8, addend: 0x0, symName: __RCTAssertFormat, symObjAddr: 0x0, symBinAddr: 0x5DB8, symSize: 0x128 }
-  - { offset: 0x5D573, size: 0x8, addend: 0x0, symName: __RCTAssertFormat, symObjAddr: 0x0, symBinAddr: 0x5DB8, symSize: 0x128 }
+  - { offset: 0x33, size: 0x8, addend: 0x0, symName: _NativeScriptWebSocketsVersionString, symObjAddr: 0x0, symBinAddr: 0x8908, symSize: 0x0 }
+  - { offset: 0x67, size: 0x8, addend: 0x0, symName: _NativeScriptWebSocketsVersionNumber, symObjAddr: 0x48, symBinAddr: 0x8950, symSize: 0x0 }
+  - { offset: 0x11F, size: 0x8, addend: 0x0, symName: _RCTSRWebSocketErrorDomain, symObjAddr: 0x9190, symBinAddr: 0xC088, symSize: 0x0 }
+  - { offset: 0x134, size: 0x8, addend: 0x0, symName: _RCTSRHTTPResponseErrorKey, symObjAddr: 0x9198, symBinAddr: 0xC090, symSize: 0x0 }
+  - { offset: 0x1F3, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket safeHandleEvent:stream:]', symObjAddr: 0x3F0C, symBinAddr: 0x4D2C, symSize: 0x25C }
+  - { offset: 0x2C3, size: 0x8, addend: 0x0, symName: _networkThread, symObjAddr: 0x27478, symBinAddr: 0x11930, symSize: 0x0 }
+  - { offset: 0x531, size: 0x8, addend: 0x0, symName: _networkRunLoop, symObjAddr: 0x27480, symBinAddr: 0x11938, symSize: 0x0 }
+  - { offset: 0x53A, size: 0x8, addend: 0x0, symName: '+[NSRunLoop(RCTSRWebSocket) RCTSR_networkRunLoop]', symObjAddr: 0x4C70, symBinAddr: 0x5A90, symSize: 0x30 }
+  - { offset: 0x565, size: 0x8, addend: 0x0, symName: _RCTSR_networkRunLoop.onceToken, symObjAddr: 0x27488, symBinAddr: 0x11940, symSize: 0x0 }
+  - { offset: 0x5C9, size: 0x8, addend: 0x0, symName: _CRLFCRLFBytes, symObjAddr: 0x95E0, symBinAddr: 0x8970, symSize: 0x0 }
+  - { offset: 0x5DE, size: 0x8, addend: 0x0, symName: _validate_dispatch_data_partial_string, symObjAddr: 0x3470, symBinAddr: 0x4290, symSize: 0xB0 }
+  - { offset: 0x1562, size: 0x8, addend: 0x0, symName: '-[NSData(RCTSRWebSocket) stringBySHA1ThenBase64Encoding]', symObjAddr: 0x0, symBinAddr: 0xE20, symSize: 0x38 }
+  - { offset: 0x15A3, size: 0x8, addend: 0x0, symName: _newSHA1String, symObjAddr: 0x38, symBinAddr: 0xE58, symSize: 0xA0 }
+  - { offset: 0x1639, size: 0x8, addend: 0x0, symName: _newSHA1String.cold.1, symObjAddr: 0x4FB8, symBinAddr: 0x6414, symSize: 0x28 }
+  - { offset: 0x1650, size: 0x8, addend: 0x0, symName: '-[NSString(RCTSRWebSocket) stringBySHA1ThenBase64Encoding]', symObjAddr: 0xD8, symBinAddr: 0xEF8, symSize: 0x38 }
+  - { offset: 0x1691, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket initWithURLRequest:protocols:]', symObjAddr: 0x110, symBinAddr: 0xF30, symSize: 0xD0 }
+  - { offset: 0x16E6, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket initWithURLRequest:]', symObjAddr: 0x1E0, symBinAddr: 0x1000, symSize: 0x8 }
+  - { offset: 0x1727, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket initWithURL:]', symObjAddr: 0x1E8, symBinAddr: 0x1008, symSize: 0x8 }
+  - { offset: 0x1768, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket initWithURL:protocols:]', symObjAddr: 0x1F0, symBinAddr: 0x1010, symSize: 0x198 }
+  - { offset: 0x17FB, size: 0x8, addend: 0x0, symName: '+[RCTSRWebSocket RCTSR_publicKeySHA256ForCertificateData:]', symObjAddr: 0x388, symBinAddr: 0x11A8, symSize: 0x54 }
+  - { offset: 0x18AB, size: 0x8, addend: 0x0, symName: _RCTSRPublicKeySHA256, symObjAddr: 0x3DC, symBinAddr: 0x11FC, symSize: 0x200 }
+  - { offset: 0x1B01, size: 0x8, addend: 0x0, symName: _RCTSRReadDERHeader, symObjAddr: 0x4F20, symBinAddr: 0x5D40, symSize: 0x88 }
+  - { offset: 0x1BE9, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _RCTSR_commonInit]', symObjAddr: 0x5DC, symBinAddr: 0x13FC, symSize: 0x254 }
+  - { offset: 0x1C77, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket assertOnWorkQueue]', symObjAddr: 0x830, symBinAddr: 0x1650, symSize: 0x30 }
+  - { offset: 0x1CD9, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _RCTSR_commonInit].cold.1', symObjAddr: 0x4FE0, symBinAddr: 0x643C, symSize: 0x28 }
+  - { offset: 0x1CF0, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket assertOnWorkQueue]', symObjAddr: 0x830, symBinAddr: 0x1650, symSize: 0x30 }
+  - { offset: 0x1D39, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket dealloc]', symObjAddr: 0x860, symBinAddr: 0x1680, symSize: 0x78 }
+  - { offset: 0x1D55, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket assertOnWorkQueue].cold.1', symObjAddr: 0x5008, symBinAddr: 0x6464, symSize: 0x28 }
+  - { offset: 0x1D6C, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket dealloc]', symObjAddr: 0x860, symBinAddr: 0x1680, symSize: 0x78 }
+  - { offset: 0x1DC4, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setReadyState:]', symObjAddr: 0x8D8, symBinAddr: 0x16F8, symSize: 0x4C }
+  - { offset: 0x1E08, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket open]', symObjAddr: 0x924, symBinAddr: 0x1744, symSize: 0x38 }
+  - { offset: 0x1E12, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setReadyState:].cold.1', symObjAddr: 0x5030, symBinAddr: 0x648C, symSize: 0x28 }
+  - { offset: 0x1E29, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket open]', symObjAddr: 0x924, symBinAddr: 0x1744, symSize: 0x38 }
+  - { offset: 0x1E5D, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _performDelegateBlock:]', symObjAddr: 0x95C, symBinAddr: 0x177C, symSize: 0x54 }
+  - { offset: 0x1E67, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket open].cold.1', symObjAddr: 0x5058, symBinAddr: 0x64B4, symSize: 0x28 }
+  - { offset: 0x1E7E, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _performDelegateBlock:]', symObjAddr: 0x95C, symBinAddr: 0x177C, symSize: 0x54 }
+  - { offset: 0x1ED6, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setDelegateDispatchQueue:]', symObjAddr: 0x9B0, symBinAddr: 0x17D0, symSize: 0xC }
+  - { offset: 0x1EFD, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _performDelegateBlock:].cold.1', symObjAddr: 0x5080, symBinAddr: 0x64DC, symSize: 0x28 }
+  - { offset: 0x1F14, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setDelegateDispatchQueue:]', symObjAddr: 0x9B0, symBinAddr: 0x17D0, symSize: 0xC }
+  - { offset: 0x1F55, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _checkHandshake:]', symObjAddr: 0x9BC, symBinAddr: 0x17DC, symSize: 0x9C }
+  - { offset: 0x1FF6, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _HTTPHeadersDidFinish]', symObjAddr: 0xA58, symBinAddr: 0x1878, symSize: 0x33C }
+  - { offset: 0x207F, size: 0x8, addend: 0x0, symName: '___39-[RCTSRWebSocket _HTTPHeadersDidFinish]_block_invoke', symObjAddr: 0xD94, symBinAddr: 0x1BB4, symSize: 0x84 }
+  - { offset: 0x20BE, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s, symObjAddr: 0xE18, symBinAddr: 0x1C38, symSize: 0x8 }
+  - { offset: 0x20E2, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s, symObjAddr: 0xE20, symBinAddr: 0x1C40, symSize: 0x8 }
+  - { offset: 0x20FF, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readHTTPHeader]', symObjAddr: 0xE28, symBinAddr: 0x1C48, symSize: 0x78 }
+  - { offset: 0x216B, size: 0x8, addend: 0x0, symName: '___33-[RCTSRWebSocket _readHTTPHeader]_block_invoke', symObjAddr: 0xEA0, symBinAddr: 0x1CC0, symSize: 0xB4 }
+  - { offset: 0x2225, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket didConnect]', symObjAddr: 0xF54, symBinAddr: 0x1D74, symSize: 0x30C }
+  - { offset: 0x23B9, size: 0x8, addend: 0x0, symName: '___28-[RCTSRWebSocket didConnect]_block_invoke', symObjAddr: 0x1260, symBinAddr: 0x2080, symSize: 0x8 }
+  - { offset: 0x2442, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket didConnect].cold.1', symObjAddr: 0x50A8, symBinAddr: 0x6504, symSize: 0x28 }
+  - { offset: 0x2459, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket didConnect].cold.2', symObjAddr: 0x50D0, symBinAddr: 0x652C, symSize: 0x28 }
+  - { offset: 0x2470, size: 0x8, addend: 0x0, symName: '___28-[RCTSRWebSocket didConnect]_block_invoke', symObjAddr: 0x1260, symBinAddr: 0x2080, symSize: 0x8 }
+  - { offset: 0x24EF, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _initializeStreams]', symObjAddr: 0x1268, symBinAddr: 0x2088, symSize: 0x1A8 }
+  - { offset: 0x260A, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _connect]', symObjAddr: 0x1410, symBinAddr: 0x2230, symSize: 0x6C }
+  - { offset: 0x263B, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket scheduleInRunLoop:forMode:]', symObjAddr: 0x147C, symBinAddr: 0x229C, symSize: 0xE4 }
+  - { offset: 0x268C, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket unscheduleFromRunLoop:forMode:]', symObjAddr: 0x1560, symBinAddr: 0x2380, symSize: 0xE4 }
+  - { offset: 0x26DD, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket close]', symObjAddr: 0x1644, symBinAddr: 0x2464, symSize: 0xC }
+  - { offset: 0x270C, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket closeWithCode:reason:]', symObjAddr: 0x1650, symBinAddr: 0x2470, symSize: 0x9C }
+  - { offset: 0x277A, size: 0x8, addend: 0x0, symName: '___39-[RCTSRWebSocket closeWithCode:reason:]_block_invoke', symObjAddr: 0x16EC, symBinAddr: 0x250C, symSize: 0x1A0 }
+  - { offset: 0x2784, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket closeWithCode:reason:].cold.1', symObjAddr: 0x50F8, symBinAddr: 0x6554, symSize: 0x28 }
+  - { offset: 0x27CB, size: 0x8, addend: 0x0, symName: '___39-[RCTSRWebSocket closeWithCode:reason:]_block_invoke', symObjAddr: 0x16EC, symBinAddr: 0x250C, symSize: 0x1A0 }
+  - { offset: 0x28EE, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s, symObjAddr: 0x188C, symBinAddr: 0x26AC, symSize: 0x28 }
+  - { offset: 0x28F8, size: 0x8, addend: 0x0, symName: '___39-[RCTSRWebSocket closeWithCode:reason:]_block_invoke.cold.1', symObjAddr: 0x5120, symBinAddr: 0x657C, symSize: 0x28 }
+  - { offset: 0x290F, size: 0x8, addend: 0x0, symName: '___39-[RCTSRWebSocket closeWithCode:reason:]_block_invoke.cold.2', symObjAddr: 0x5148, symBinAddr: 0x65A4, symSize: 0x28 }
+  - { offset: 0x2926, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s, symObjAddr: 0x188C, symBinAddr: 0x26AC, symSize: 0x28 }
+  - { offset: 0x294C, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s, symObjAddr: 0x18B4, symBinAddr: 0x26D4, symSize: 0x28 }
+  - { offset: 0x2969, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _closeWithProtocolError:]', symObjAddr: 0x18DC, symBinAddr: 0x26FC, symSize: 0x80 }
+  - { offset: 0x29AA, size: 0x8, addend: 0x0, symName: '___42-[RCTSRWebSocket _closeWithProtocolError:]_block_invoke', symObjAddr: 0x195C, symBinAddr: 0x277C, symSize: 0x74 }
+  - { offset: 0x2A0D, size: 0x8, addend: 0x0, symName: '___42-[RCTSRWebSocket _closeWithProtocolError:]_block_invoke_2', symObjAddr: 0x19D0, symBinAddr: 0x27F0, symSize: 0x8 }
+  - { offset: 0x2A4C, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _failWithError:]', symObjAddr: 0x19D8, symBinAddr: 0x27F8, symSize: 0x84 }
+  - { offset: 0x2AA7, size: 0x8, addend: 0x0, symName: '___33-[RCTSRWebSocket _failWithError:]_block_invoke', symObjAddr: 0x1A5C, symBinAddr: 0x287C, symSize: 0xAC }
+  - { offset: 0x2AF6, size: 0x8, addend: 0x0, symName: '___33-[RCTSRWebSocket _failWithError:]_block_invoke_2', symObjAddr: 0x1B08, symBinAddr: 0x2928, symSize: 0x84 }
+  - { offset: 0x2B45, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _writeData:]', symObjAddr: 0x1B8C, symBinAddr: 0x29AC, symSize: 0x50 }
+  - { offset: 0x2B86, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket send:]', symObjAddr: 0x1BDC, symBinAddr: 0x29FC, symSize: 0xA8 }
+  - { offset: 0x2BE1, size: 0x8, addend: 0x0, symName: '___23-[RCTSRWebSocket send:]_block_invoke', symObjAddr: 0x1C84, symBinAddr: 0x2AA4, symSize: 0xA0 }
+  - { offset: 0x2C33, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket sendPing:]', symObjAddr: 0x1D24, symBinAddr: 0x2B44, symSize: 0xC4 }
+  - { offset: 0x2C3D, size: 0x8, addend: 0x0, symName: '___23-[RCTSRWebSocket send:]_block_invoke.cold.1', symObjAddr: 0x5170, symBinAddr: 0x65CC, symSize: 0x28 }
+  - { offset: 0x2C54, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket sendPing:]', symObjAddr: 0x1D24, symBinAddr: 0x2B44, symSize: 0xC4 }
+  - { offset: 0x2CAF, size: 0x8, addend: 0x0, symName: '___27-[RCTSRWebSocket sendPing:]_block_invoke', symObjAddr: 0x1DE8, symBinAddr: 0x2C08, symSize: 0x10 }
+  - { offset: 0x2CFE, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket handlePing:]', symObjAddr: 0x1DF8, symBinAddr: 0x2C18, symSize: 0x80 }
+  - { offset: 0x2D3F, size: 0x8, addend: 0x0, symName: '___29-[RCTSRWebSocket handlePing:]_block_invoke', symObjAddr: 0x1E78, symBinAddr: 0x2C98, symSize: 0x74 }
+  - { offset: 0x2DA8, size: 0x8, addend: 0x0, symName: '___29-[RCTSRWebSocket handlePing:]_block_invoke_2', symObjAddr: 0x1EEC, symBinAddr: 0x2D0C, symSize: 0x10 }
+  - { offset: 0x2DF7, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket handlePong:]', symObjAddr: 0x1EFC, symBinAddr: 0x2D1C, symSize: 0x80 }
+  - { offset: 0x2E38, size: 0x8, addend: 0x0, symName: '___29-[RCTSRWebSocket handlePong:]_block_invoke', symObjAddr: 0x1F7C, symBinAddr: 0x2D9C, symSize: 0x84 }
+  - { offset: 0x2E87, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _handleMessage:]', symObjAddr: 0x2000, symBinAddr: 0x2E20, symSize: 0x80 }
+  - { offset: 0x2EC8, size: 0x8, addend: 0x0, symName: '___33-[RCTSRWebSocket _handleMessage:]_block_invoke', symObjAddr: 0x2080, symBinAddr: 0x2EA0, symSize: 0x3C }
+  - { offset: 0x2F31, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket handleCloseWithData:]', symObjAddr: 0x20BC, symBinAddr: 0x2EDC, symSize: 0x1D8 }
+  - { offset: 0x2FF6, size: 0x8, addend: 0x0, symName: '___38-[RCTSRWebSocket handleCloseWithData:]_block_invoke', symObjAddr: 0x2294, symBinAddr: 0x30B4, symSize: 0x8 }
+  - { offset: 0x3035, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _disconnect]', symObjAddr: 0x229C, symBinAddr: 0x30BC, symSize: 0x2C }
+  - { offset: 0x3066, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _handleFrameWithData:opCode:]', symObjAddr: 0x22C8, symBinAddr: 0x30E8, symSize: 0x1C4 }
+  - { offset: 0x3109, size: 0x8, addend: 0x0, symName: '___46-[RCTSRWebSocket _handleFrameWithData:opCode:]_block_invoke', symObjAddr: 0x248C, symBinAddr: 0x32AC, symSize: 0x8 }
+  - { offset: 0x3148, size: 0x8, addend: 0x0, symName: '___46-[RCTSRWebSocket _handleFrameWithData:opCode:]_block_invoke_2', symObjAddr: 0x2494, symBinAddr: 0x32B4, symSize: 0x8 }
+  - { offset: 0x3187, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _handleFrameHeader:curData:]', symObjAddr: 0x249C, symBinAddr: 0x32BC, symSize: 0x144 }
+  - { offset: 0x31E7, size: 0x8, addend: 0x0, symName: '___45-[RCTSRWebSocket _handleFrameHeader:curData:]_block_invoke', symObjAddr: 0x25E0, symBinAddr: 0x3400, symSize: 0x90 }
+  - { offset: 0x31F1, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _handleFrameHeader:curData:].cold.1', symObjAddr: 0x5198, symBinAddr: 0x65F4, symSize: 0x28 }
+  - { offset: 0x3208, size: 0x8, addend: 0x0, symName: '___45-[RCTSRWebSocket _handleFrameHeader:curData:]_block_invoke', symObjAddr: 0x25E0, symBinAddr: 0x3400, symSize: 0x90 }
+  - { offset: 0x3273, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readFrameContinue]', symObjAddr: 0x2670, symBinAddr: 0x3490, symSize: 0x44 }
+  - { offset: 0x32A7, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke', symObjAddr: 0x26B4, symBinAddr: 0x34D4, symSize: 0x230 }
+  - { offset: 0x32B1, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readFrameContinue].cold.1', symObjAddr: 0x51C0, symBinAddr: 0x661C, symSize: 0x28 }
+  - { offset: 0x32C8, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke', symObjAddr: 0x26B4, symBinAddr: 0x34D4, symSize: 0x230 }
+  - { offset: 0x33CA, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke_2', symObjAddr: 0x28E4, symBinAddr: 0x3704, symSize: 0x10C }
+  - { offset: 0x3511, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32r, symObjAddr: 0x29F0, symBinAddr: 0x3810, symSize: 0x10 }
+  - { offset: 0x351B, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke_2.cold.3', symObjAddr: 0x5238, symBinAddr: 0x6694, symSize: 0x28 }
+  - { offset: 0x3532, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke_2.cold.2', symObjAddr: 0x5210, symBinAddr: 0x666C, symSize: 0x28 }
+  - { offset: 0x3549, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke_2.cold.1', symObjAddr: 0x51E8, symBinAddr: 0x6644, symSize: 0x28 }
+  - { offset: 0x3560, size: 0x8, addend: 0x0, symName: '___36-[RCTSRWebSocket _readFrameContinue]_block_invoke_2.cold.4', symObjAddr: 0x5260, symBinAddr: 0x66BC, symSize: 0x28 }
+  - { offset: 0x3577, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32r, symObjAddr: 0x29F0, symBinAddr: 0x3810, symSize: 0x10 }
+  - { offset: 0x359D, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32r, symObjAddr: 0x2A00, symBinAddr: 0x3820, symSize: 0xC }
+  - { offset: 0x35BA, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readFrameNew]', symObjAddr: 0x2A0C, symBinAddr: 0x382C, symSize: 0x58 }
+  - { offset: 0x35FF, size: 0x8, addend: 0x0, symName: '___31-[RCTSRWebSocket _readFrameNew]_block_invoke', symObjAddr: 0x2A64, symBinAddr: 0x3884, symSize: 0x50 }
+  - { offset: 0x363E, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _pumpWriting]', symObjAddr: 0x2AB4, symBinAddr: 0x38D4, symSize: 0x248 }
+  - { offset: 0x3695, size: 0x8, addend: 0x0, symName: '___30-[RCTSRWebSocket _pumpWriting]_block_invoke', symObjAddr: 0x2CFC, symBinAddr: 0x3B1C, symSize: 0x90 }
+  - { offset: 0x36D4, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _addConsumerWithScanner:callback:]', symObjAddr: 0x2D8C, symBinAddr: 0x3BAC, symSize: 0x68 }
+  - { offset: 0x3725, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _addConsumerWithDataLength:callback:readToCurrentFrame:unmaskBytes:]', symObjAddr: 0x2DF4, symBinAddr: 0x3C14, symSize: 0xA0 }
+  - { offset: 0x3799, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _addConsumerWithScanner:callback:dataLength:]', symObjAddr: 0x2E94, symBinAddr: 0x3CB4, symSize: 0xA8 }
+  - { offset: 0x37A3, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _addConsumerWithDataLength:callback:readToCurrentFrame:unmaskBytes:].cold.1', symObjAddr: 0x5288, symBinAddr: 0x66E4, symSize: 0x28 }
+  - { offset: 0x37BA, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _addConsumerWithScanner:callback:dataLength:]', symObjAddr: 0x2E94, symBinAddr: 0x3CB4, symSize: 0xA8 }
+  - { offset: 0x381B, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readUntilHeaderCompleteWithCallback:]', symObjAddr: 0x2F3C, symBinAddr: 0x3D5C, symSize: 0x14 }
+  - { offset: 0x385A, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _readUntilBytes:length:callback:]', symObjAddr: 0x2F50, symBinAddr: 0x3D70, symSize: 0x94 }
+  - { offset: 0x38CB, size: 0x8, addend: 0x0, symName: '___50-[RCTSRWebSocket _readUntilBytes:length:callback:]_block_invoke', symObjAddr: 0x2FE4, symBinAddr: 0x3E04, symSize: 0xA0 }
+  - { offset: 0x3996, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _innerPumpScanner]', symObjAddr: 0x3084, symBinAddr: 0x3EA4, symSize: 0x3EC }
+  - { offset: 0x3B44, size: 0x8, addend: 0x0, symName: _validate_dispatch_data_partial_string, symObjAddr: 0x3470, symBinAddr: 0x4290, symSize: 0xB0 }
+  - { offset: 0x3B4E, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _innerPumpScanner].cold.1', symObjAddr: 0x52B0, symBinAddr: 0x670C, symSize: 0x28 }
+  - { offset: 0x3B65, size: 0x8, addend: 0x0, symName: '___35-[RCTSRWebSocket _innerPumpScanner]_block_invoke', symObjAddr: 0x3520, symBinAddr: 0x4340, symSize: 0x8 }
+  - { offset: 0x3BA4, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _pumpScanner]', symObjAddr: 0x3528, symBinAddr: 0x4348, symSize: 0x40 }
+  - { offset: 0x3BD5, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _sendFrameWithOpcode:data:]', symObjAddr: 0x3568, symBinAddr: 0x4388, symSize: 0x1AC }
+  - { offset: 0x3D65, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket stream:handleEvent:]', symObjAddr: 0x3714, symBinAddr: 0x4534, symSize: 0xCC }
+  - { offset: 0x3D6F, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _sendFrameWithOpcode:data:].cold.1', symObjAddr: 0x52D8, symBinAddr: 0x6734, symSize: 0x28 }
+  - { offset: 0x3D86, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _sendFrameWithOpcode:data:].cold.2', symObjAddr: 0x5300, symBinAddr: 0x675C, symSize: 0x28 }
+  - { offset: 0x3D9D, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket stream:handleEvent:]', symObjAddr: 0x3714, symBinAddr: 0x4534, symSize: 0xCC }
+  - { offset: 0x3E18, size: 0x8, addend: 0x0, symName: '___37-[RCTSRWebSocket stream:handleEvent:]_block_invoke', symObjAddr: 0x37E0, symBinAddr: 0x4600, symSize: 0x40 }
+  - { offset: 0x3E91, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40w, symObjAddr: 0x3820, symBinAddr: 0x4640, symSize: 0x30 }
+  - { offset: 0x3EB7, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40w, symObjAddr: 0x3850, symBinAddr: 0x4670, symSize: 0x28 }
+  - { offset: 0x3ED4, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _serverTrustFailureReason:]', symObjAddr: 0x3878, symBinAddr: 0x4698, symSize: 0x424 }
+  - { offset: 0x4141, size: 0x8, addend: 0x0, symName: _RCTSRCertificateChain, symObjAddr: 0x3C9C, symBinAddr: 0x4ABC, symSize: 0xC0 }
+  - { offset: 0x42E9, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _ensureServerTrusted:]', symObjAddr: 0x3D5C, symBinAddr: 0x4B7C, symSize: 0x1B0 }
+  - { offset: 0x434E, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket safeHandleEvent:stream:].cold.1', symObjAddr: 0x5328, symBinAddr: 0x6784, symSize: 0x28 }
+  - { offset: 0x4365, size: 0x8, addend: 0x0, symName: '___41-[RCTSRWebSocket safeHandleEvent:stream:]_block_invoke', symObjAddr: 0x4168, symBinAddr: 0x4F88, symSize: 0xA0 }
+  - { offset: 0x43A4, size: 0x8, addend: 0x0, symName: '___41-[RCTSRWebSocket safeHandleEvent:stream:]_block_invoke_2', symObjAddr: 0x4208, symBinAddr: 0x5028, symSize: 0x94 }
+  - { offset: 0x43E3, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _scheduleCleanup]', symObjAddr: 0x429C, symBinAddr: 0x50BC, symSize: 0x94 }
+  - { offset: 0x4424, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket _cleanupSelfReference:]', symObjAddr: 0x4330, symBinAddr: 0x5150, symSize: 0x1A8 }
+  - { offset: 0x448B, size: 0x8, addend: 0x0, symName: '___40-[RCTSRWebSocket _cleanupSelfReference:]_block_invoke', symObjAddr: 0x44D8, symBinAddr: 0x52F8, symSize: 0x10 }
+  - { offset: 0x44CA, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket delegate]', symObjAddr: 0x44E8, symBinAddr: 0x5308, symSize: 0x18 }
+  - { offset: 0x44FE, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setDelegate:]', symObjAddr: 0x4500, symBinAddr: 0x5320, symSize: 0xC }
+  - { offset: 0x453B, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket readyState]', symObjAddr: 0x450C, symBinAddr: 0x532C, symSize: 0x8 }
+  - { offset: 0x456F, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket url]', symObjAddr: 0x4514, symBinAddr: 0x5334, symSize: 0x8 }
+  - { offset: 0x45A3, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket protocol]', symObjAddr: 0x451C, symBinAddr: 0x533C, symSize: 0x8 }
+  - { offset: 0x45D7, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket delegateOperationQueue]', symObjAddr: 0x4524, symBinAddr: 0x5344, symSize: 0x8 }
+  - { offset: 0x460C, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket setDelegateOperationQueue:]', symObjAddr: 0x452C, symBinAddr: 0x534C, symSize: 0xC }
+  - { offset: 0x464B, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket delegateDispatchQueue]', symObjAddr: 0x4538, symBinAddr: 0x5358, symSize: 0x8 }
+  - { offset: 0x4680, size: 0x8, addend: 0x0, symName: '-[RCTSRWebSocket .cxx_destruct]', symObjAddr: 0x4540, symBinAddr: 0x5360, symSize: 0xF8 }
+  - { offset: 0x46B1, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer setupWithScanner:handler:bytesNeeded:readToCurrentFrame:unmaskBytes:]', symObjAddr: 0x4638, symBinAddr: 0x5458, symSize: 0xAC }
+  - { offset: 0x472D, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer consumer]', symObjAddr: 0x46E4, symBinAddr: 0x5504, symSize: 0x8 }
+  - { offset: 0x4737, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer setupWithScanner:handler:bytesNeeded:readToCurrentFrame:unmaskBytes:].cold.1', symObjAddr: 0x5350, symBinAddr: 0x67AC, symSize: 0x28 }
+  - { offset: 0x474E, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer consumer]', symObjAddr: 0x46E4, symBinAddr: 0x5504, symSize: 0x8 }
+  - { offset: 0x4782, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer handler]', symObjAddr: 0x46EC, symBinAddr: 0x550C, symSize: 0x8 }
+  - { offset: 0x47B6, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer bytesNeeded]', symObjAddr: 0x46F4, symBinAddr: 0x5514, symSize: 0x8 }
+  - { offset: 0x47EA, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer setBytesNeeded:]', symObjAddr: 0x46FC, symBinAddr: 0x551C, symSize: 0x8 }
+  - { offset: 0x4823, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer readToCurrentFrame]', symObjAddr: 0x4704, symBinAddr: 0x5524, symSize: 0x8 }
+  - { offset: 0x4857, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer unmaskBytes]', symObjAddr: 0x470C, symBinAddr: 0x552C, symSize: 0x8 }
+  - { offset: 0x488B, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumer .cxx_destruct]', symObjAddr: 0x4714, symBinAddr: 0x5534, symSize: 0x30 }
+  - { offset: 0x48BC, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumerPool initWithBufferCapacity:]', symObjAddr: 0x4744, symBinAddr: 0x5564, symSize: 0x74 }
+  - { offset: 0x4901, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumerPool init]', symObjAddr: 0x47B8, symBinAddr: 0x55D8, symSize: 0x8 }
+  - { offset: 0x4934, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumerPool consumerWithScanner:handler:bytesNeeded:readToCurrentFrame:unmaskBytes:]', symObjAddr: 0x47C0, symBinAddr: 0x55E0, symSize: 0xCC }
+  - { offset: 0x49C9, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumerPool returnConsumer:]', symObjAddr: 0x488C, symBinAddr: 0x56AC, symSize: 0x4C }
+  - { offset: 0x4A0A, size: 0x8, addend: 0x0, symName: '-[RCTSRIOConsumerPool .cxx_destruct]', symObjAddr: 0x48D8, symBinAddr: 0x56F8, symSize: 0xC }
+  - { offset: 0x4A3B, size: 0x8, addend: 0x0, symName: '-[NSURLRequest(CertificateAdditions) RCTSR_SSLValidationMode]', symObjAddr: 0x48E4, symBinAddr: 0x5704, symSize: 0x50 }
+  - { offset: 0x4A70, size: 0x8, addend: 0x0, symName: '-[NSURLRequest(CertificateAdditions) RCTSR_SSLPinnedPublicKeyHashes]', symObjAddr: 0x4934, symBinAddr: 0x5754, symSize: 0x18 }
+  - { offset: 0x4AA5, size: 0x8, addend: 0x0, symName: '-[NSURLRequest(CertificateAdditions) RCTSR_SSLTrustedRootCertificates]', symObjAddr: 0x494C, symBinAddr: 0x576C, symSize: 0x18 }
+  - { offset: 0x4ADA, size: 0x8, addend: 0x0, symName: '-[NSMutableURLRequest(CertificateAdditions) setRCTSR_SSLValidationMode:]', symObjAddr: 0x4964, symBinAddr: 0x5784, symSize: 0x60 }
+  - { offset: 0x4B1B, size: 0x8, addend: 0x0, symName: '-[NSMutableURLRequest(CertificateAdditions) setRCTSR_SSLPinnedPublicKeyHashes:]', symObjAddr: 0x49C4, symBinAddr: 0x57E4, symSize: 0x54 }
+  - { offset: 0x4B5C, size: 0x8, addend: 0x0, symName: '-[NSMutableURLRequest(CertificateAdditions) setRCTSR_SSLTrustedRootCertificates:]', symObjAddr: 0x4A18, symBinAddr: 0x5838, symSize: 0x54 }
+  - { offset: 0x4B9D, size: 0x8, addend: 0x0, symName: '-[NSURL(RCTSRWebSocket) RCTSR_origin]', symObjAddr: 0x4A6C, symBinAddr: 0x588C, symSize: 0x174 }
+  - { offset: 0x4C02, size: 0x8, addend: 0x0, symName: '-[NSURL(RCTSRWebSocket) RCTSR_hostForHeader]', symObjAddr: 0x4BE0, symBinAddr: 0x5A00, symSize: 0x90 }
+  - { offset: 0x4C6B, size: 0x8, addend: 0x0, symName: '+[NSRunLoop(RCTSRWebSocket) RCTSR_networkRunLoop].cold.1', symObjAddr: 0x5378, symBinAddr: 0x67D4, symSize: 0x14 }
+  - { offset: 0x4C86, size: 0x8, addend: 0x0, symName: '+[NSRunLoop(RCTSRWebSocket) RCTSR_networkRunLoop].cold.1', symObjAddr: 0x5378, symBinAddr: 0x67D4, symSize: 0x14 }
+  - { offset: 0x4C98, size: 0x8, addend: 0x0, symName: '___49+[NSRunLoop(RCTSRWebSocket) RCTSR_networkRunLoop]_block_invoke', symObjAddr: 0x4CA0, symBinAddr: 0x5AC0, symSize: 0x70 }
+  - { offset: 0x4CBF, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread init]', symObjAddr: 0x4D10, symBinAddr: 0x5B30, symSize: 0x6C }
+  - { offset: 0x4D27, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread main]', symObjAddr: 0x4D7C, symBinAddr: 0x5B9C, symSize: 0x124 }
+  - { offset: 0x4D86, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread step]', symObjAddr: 0x4EA0, symBinAddr: 0x5CC0, symSize: 0x4 }
+  - { offset: 0x4DA6, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread step]', symObjAddr: 0x4EA0, symBinAddr: 0x5CC0, symSize: 0x4 }
+  - { offset: 0x4DD3, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread runLoop]', symObjAddr: 0x4EA4, symBinAddr: 0x5CC4, symSize: 0x3C }
+  - { offset: 0x4E36, size: 0x8, addend: 0x0, symName: '-[_RCTSRRunLoopThread .cxx_destruct]', symObjAddr: 0x4EE0, symBinAddr: 0x5D00, symSize: 0x40 }
+  - { offset: 0x5FC9, size: 0x8, addend: 0x0, symName: __RCTAssertFormat, symObjAddr: 0x0, symBinAddr: 0x5DC8, symSize: 0x128 }
+  - { offset: 0x5FD7, size: 0x8, addend: 0x0, symName: __RCTAssertFormat, symObjAddr: 0x0, symBinAddr: 0x5DC8, symSize: 0x128 }
 ...
