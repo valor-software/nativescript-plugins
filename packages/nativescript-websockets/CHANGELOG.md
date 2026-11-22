@@ -1,3 +1,17 @@
+## 2.0.4 (2026-11-22)
+
+### 🚀 Features
+
+- **websockets:** ssl pinning, custom CAs and configurable validation ([#21](https://github.com/valor-software/nativescript-plugins/pull/21))
+
+### 🩹 Fixes
+
+- **websockets:** bracket IPv6 hosts in the iOS handshake ([#27](https://github.com/valor-software/nativescript-plugins/pull/27))
+
+### ❤️ Thank You
+
+- Eduardo Speroni @edusperoni
+
 ## 2.0.3 (2026-02-19)
 
 ### 🚀 Features
