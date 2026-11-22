@@ -26,12 +26,12 @@
     },
     "build.native": {
       "executor": "nx:run-commands",
-      "inputs": ["{projectRoot}/native-src/ios/**/*"],
+      "inputs": ["{projectRoot}/native-src/ios/**/*", "{projectRoot}/xcrepro.config.json"],
       "outputs": ["{projectRoot}/platforms/ios"],
       "options": {
-        "commands": ["./build.sh"],
+        "commands": ["xcrepro build"],
         "parallel": false,
-        "cwd": "packages/nativescript-websockets/native-src/ios"
+        "cwd": "packages/nativescript-websockets"
       }
     },
     "build.all": {

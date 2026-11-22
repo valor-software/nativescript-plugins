@@ -1,5 +1,5 @@
-import { HeaderType } from './common';
-import { NativeBridgeDefinition } from './websocket.definition';
+import { ResolvedSslOptions } from './common';
+import { NativeBridgeDefinition, WebSocketBridgeConnectOptions } from './websocket.definition';
 
 interface ExtendedArrayBuffer extends ArrayBuffer {
   from?(nativeBuffer: java.nio.ByteBuffer): ArrayBuffer;
@@ -66,6 +66,91 @@ function getDefaultOrigin(uri: string) {
   }
 }
 
+function certificateFromBase64(der: string): java.security.cert.X509Certificate {
+  try {
+    const bytes = android.util.Base64.decode(der, android.util.Base64.DEFAULT);
+    return java.security.cert.CertificateFactory.getInstance('X.509').generateCertificate(new java.io.ByteArrayInputStream(bytes)) as java.security.cert.X509Certificate;
+  } catch {
+    throw new TypeError('Invalid certificate');
+  }
+}
+
+function sslSocketFactory(trustManager: javax.net.ssl.X509TrustManager): javax.net.ssl.SSLSocketFactory {
+  const trustManagers = Array.create(javax.net.ssl.TrustManager, 1);
+  trustManagers[0] = trustManager;
+  const context = javax.net.ssl.SSLContext.getInstance('TLS');
+  context.init(null as never, trustManagers, null as never);
+  return context.getSocketFactory();
+}
+
+function trustManagerForRoots(roots: java.security.cert.X509Certificate[]): javax.net.ssl.X509TrustManager {
+  const keyStore = java.security.KeyStore.getInstance(java.security.KeyStore.getDefaultType());
+  keyStore.load(null as never, null as never);
+  roots.forEach((root, i) => keyStore.setCertificateEntry(`ca${i}`, root));
+  const factory = javax.net.ssl.TrustManagerFactory.getInstance(javax.net.ssl.TrustManagerFactory.getDefaultAlgorithm());
+  factory.init(keyStore);
+  return factory.getTrustManagers()[0] as javax.net.ssl.X509TrustManager;
+}
+
+// NativeScript runs these callbacks on the main thread, where a thrown exception crashes the app instead of
+// failing the handshake. So nothing here throws: the trust manager accepts every chain and the decision is made
+// by the hostname verifier, which OkHttp calls right after the handshake and before any request is written.
+const acceptAnyChain = new javax.net.ssl.X509TrustManager({
+  checkClientTrusted() {
+    // server-side only
+  },
+  checkServerTrusted() {
+    // see the comment above
+  },
+  getAcceptedIssuers() {
+    // OkHttp needs a non-null array
+    return Array.create(java.security.cert.X509Certificate, 0);
+  },
+});
+
+function hostnameVerifier(accept: (leaf: java.security.cert.Certificate) => boolean): javax.net.ssl.HostnameVerifier {
+  return new javax.net.ssl.HostnameVerifier({
+    verify(hostname: string, session: javax.net.ssl.SSLSession) {
+      try {
+        const chain = session.getPeerCertificates();
+        return chain.length > 0 && accept(chain[0]);
+      } catch {
+        return false;
+      }
+    },
+  });
+}
+
+function configureSsl(builder: okhttp3.OkHttpClient.Builder, host: string, ssl: ResolvedSslOptions) {
+  // CertificatePinner's 'sha256/<base64 SPKI hash>' format
+  const pins = new Set([...ssl.pinHashes.map((hash) => `sha256/${hash}`), ...ssl.pinCertificates.map((der) => okhttp3.CertificatePinner.pin(certificateFromBase64(der)))]);
+  const roots = ssl.ca.map(certificateFromBase64);
+
+  switch (ssl.validation) {
+    case 'system': {
+      if (roots.length) {
+        const trustManager = trustManagerForRoots(roots);
+        builder.sslSocketFactory(sslSocketFactory(trustManager), trustManager);
+      }
+      if (pins.size) {
+        const pinArray = Array.create(java.lang.String, pins.size);
+        Array.from(pins).forEach((pin, i) => (pinArray[i] = pin));
+        builder.certificatePinner(new okhttp3.CertificatePinner.Builder().add(host, pinArray).build());
+      }
+      break;
+    }
+    case 'pins-only':
+      builder.sslSocketFactory(sslSocketFactory(acceptAnyChain), acceptAnyChain);
+      // Only the leaf is bound to the handshake; any other certificate in the presented chain is attacker-controlled.
+      builder.hostnameVerifier(hostnameVerifier((leaf) => pins.has(okhttp3.CertificatePinner.pin(leaf))));
+      break;
+    case 'none':
+      builder.sslSocketFactory(sslSocketFactory(acceptAnyChain), acceptAnyChain);
+      builder.hostnameVerifier(hostnameVerifier(() => true));
+      break;
+  }
+}
+
 export class NativeBridge extends NativeBridgeDefinition {
   client!: okhttp3.OkHttpClient;
   listener!: WebSocketListenerImpl;
@@ -73,15 +158,10 @@ export class NativeBridge extends NativeBridgeDefinition {
   startLooper?: android.os.Looper;
   handler?: android.os.Handler;
   private _restrictedCodes = new Set([1004, 1005, 1006, 1015]);
-  connect(url: string, protocols: string[], headers: HeaderType): void {
+  connect({ url, protocols, headers, ssl }: WebSocketBridgeConnectOptions): void {
     this.startLooper = android.os.Looper.myLooper();
     this.handler = new android.os.Handler(this.startLooper);
     protocols = protocols || [];
-    this.client = new okhttp3.OkHttpClient.Builder()
-      .connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
-      .writeTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
-      .readTimeout(0, java.util.concurrent.TimeUnit.MINUTES) // Disable timeouts for read
-      .build();
     const requestBuilder = new okhttp3.Request.Builder();
     requestBuilder.url(url);
 
@@ -97,8 +177,16 @@ export class NativeBridge extends NativeBridgeDefinition {
     }
     // TODO: cookies? There isn't a default cookie jar in android/nativescript
 
+    const request = requestBuilder.build();
+    // readTimeout 0 disables read timeouts
+    const clientBuilder = new okhttp3.OkHttpClient.Builder().connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS).writeTimeout(10, java.util.concurrent.TimeUnit.SECONDS).readTimeout(0, java.util.concurrent.TimeUnit.MINUTES);
+    if (ssl) {
+      configureSsl(clientBuilder, request.url().host(), ssl);
+    }
+    this.client = clientBuilder.build();
+
     this.listener = new WebSocketListenerImpl(this);
-    this.nativeWs = this.client.newWebSocket(requestBuilder.build(), this.listener);
+    this.nativeWs = this.client.newWebSocket(request, this.listener);
   }
   send(data: string | ArrayBuffer | ArrayBufferView | Blob): void {
     if (data instanceof ArrayBuffer || ArrayBuffer.isView(data)) {

@@ -8,8 +8,42 @@
  * @flow
  */
 
-import { HeaderType } from './common';
-import { NativeBridgeDefinition } from './websocket.definition';
+import { ResolvedSslOptions } from './common';
+import { NativeBridgeDefinition, WebSocketBridgeConnectOptions } from './websocket.definition';
+
+// RCTSRSSLValidationMode
+const VALIDATION_MODE = { system: 0, 'pins-only': 1, none: 2 } as const;
+
+function dataFromBase64(base64: string): NSData {
+  return NSData.alloc().initWithBase64EncodedStringOptions(base64, 0 as NSDataBase64DecodingOptions);
+}
+
+/** Returns the certificate's public key hash; throws if the data isn't a valid certificate. */
+function certificatePublicKeyHash(der: string): NSData {
+  const hash = RCTSRWebSocket.RCTSR_publicKeySHA256ForCertificateData(dataFromBase64(der));
+  if (!hash) {
+    throw new TypeError('Invalid certificate');
+  }
+  return hash;
+}
+
+function configureSsl(request: NSMutableURLRequest, ssl: ResolvedSslOptions) {
+  const pins = NSMutableArray.new<NSData>();
+  for (const hash of ssl.pinHashes) {
+    pins.addObject(dataFromBase64(hash));
+  }
+  for (const der of ssl.pinCertificates) {
+    pins.addObject(certificatePublicKeyHash(der));
+  }
+  const roots = NSMutableArray.new<NSData>();
+  for (const der of ssl.ca) {
+    certificatePublicKeyHash(der);
+    roots.addObject(dataFromBase64(der));
+  }
+  request.RCTSR_SSLValidationMode = VALIDATION_MODE[ssl.validation];
+  request.RCTSR_SSLPinnedPublicKeyHashes = pins;
+  request.RCTSR_SSLTrustedRootCertificates = roots;
+}
 
 @NativeClass
 class RCTSRWebSocketDelegateImpl extends NSObject implements RCTSRWebSocketDelegate {
@@ -41,7 +75,7 @@ export class NativeBridge extends NativeBridgeDefinition {
   // store the delegate so it isn't garbage collected
   // TODO: fix the iOS runtime so we don't need this
   delegate!: RCTSRWebSocketDelegateImpl;
-  connect(url: string, protocols: string[], headers: HeaderType) {
+  connect({ url, protocols, headers, ssl }: WebSocketBridgeConnectOptions): void {
     const nativeUrl = NSURL.URLWithString(url);
     const request = NSMutableURLRequest.requestWithURL(nativeUrl);
     // NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
@@ -62,6 +96,9 @@ export class NativeBridge extends NativeBridgeDefinition {
     // Load supplied headers
     for (const k of Object.keys(headers.headers)) {
       request.addValueForHTTPHeaderField(`${headers.headers[k]}`, k);
+    }
+    if (ssl) {
+      configureSsl(request, ssl);
     }
 
     const webSocket = RCTSRWebSocket.alloc().initWithURLRequestProtocols(request, protocols);
